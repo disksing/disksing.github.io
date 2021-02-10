@@ -28,8 +28,3 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
-
-- name: Setup Hugo
-  uses: peaceiris/actions-hugo@latest
-  with:
-    hugo-version: 'latest'
