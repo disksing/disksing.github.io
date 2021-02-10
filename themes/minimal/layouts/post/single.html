@@ -3,12 +3,20 @@
 <main>
 
     <div>
-        <h2>{{ .Title }}</h2>
+        <h1>{{ .Title }}</h1>
         <h5>{{ .Date.Format (.Site.Params.dateFormat | default "2006-01-02") }}</h5>
         {{ partial "tags" . }}
     </div>
 
     <div align="start" class="content">{{ .Content }}</div>
+
+    {{ partial "article-foot" . }}
+
+    <!-- Disquis comments -->
+    {{ if and .Site.DisqusShortname (not .Params.disableComments) }}
+        <h4 class="page-header">Comments</h4>
+        {{ template "_internal/disqus.html" . }}
+    {{ end }}
 
     <!-- Related posts -->
     {{ $related := first 3 (where (where (where .Site.Pages.ByDate.Reverse ".Type" "==" "post") ".Params.tags" "intersect" .Params.tags) "Permalink" "!=" .Permalink) }}
@@ -17,11 +25,6 @@
         {{ range $related }} {{ partial "list-item" . }} {{ end }}
     {{ end }}
 
-    <!-- Disquis comments -->
-    {{ if and .Site.DisqusShortname (not .Params.disableComments) }}
-        <h4 class="page-header">Comments</h4>
-        {{ template "_internal/disqus.html" . }}
-    {{ end }}
 
 </main>
 

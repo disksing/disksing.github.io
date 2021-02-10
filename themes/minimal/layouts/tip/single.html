@@ -1,0 +1,31 @@
+{{ partial "header" . }}
+
+<main>
+
+    <div>
+        <h1>{{ .Title }}</h1>
+        <h5>{{ .Date.Format (.Site.Params.dateFormat | default "2006-01-02") }}</h5>
+        {{ partial "tags" . }}
+    </div>
+
+    <div align="start" class="content">{{ .Content }}</div>
+
+    {{ partial "article-foot" . }}
+
+    <!-- Disquis comments -->
+    {{ if and .Site.DisqusShortname (not .Params.disableComments) }}
+        <h4 class="page-header">Comments</h4>
+        {{ template "_internal/disqus.html" . }}
+    {{ end }}
+
+    <!-- Related posts -->
+    {{ $related := first 10 (where (where (where .Site.Pages.ByDate.Reverse ".Type" "==" "tip") ".Params.tags" "intersect" .Params.tags) "Permalink" "!=" .Permalink) }}
+    {{ if $related }}
+        <h4 class="page-header">Related</h4>
+        {{ range $related }} {{ partial "list-item" . }} {{ end }}
+    {{ end }}
+
+
+</main>
+
+{{ partial "footer" . }}

@@ -1,0 +1,10 @@
+{{ partial "header" . }}
+
+<main>
+
+    {{ range (.Paginator 10).Pages }} {{ partial "activity-list-item" . }} {{ end }}
+
+</main>
+
+{{ partial "paginator" . }}
+{{ partial "footer" . }}

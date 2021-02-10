@@ -10,7 +10,7 @@ description: "任意可以附加于玩家的金币、经验、道具、体力等
 ## 数据结构
 这个东西说白了其实就是一个 union，里面包含了可能的各种数值和数据，当然了因为是 unoin 嘛，其中只有一部分会起作用。这里给出我们项目中使用 protocol buffers 定义的数据结构。
 
-```proto
+```protobuf
 message CommonItem {
 	enum Type {
 		Property = 1; //数值

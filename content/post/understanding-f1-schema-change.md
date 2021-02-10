@@ -1,7 +1,7 @@
 ---
 title: "理解 Google F1: Schema 变更算法"
 date: "2015-11-18"
-tags: ["数据库"]
+tags: ["数据库", "TiDB"]
 ---
 
 *注：本文已被[《从零开始写分布式数据库》](https://github.com/ngaut/builddatabase)一书收录。*

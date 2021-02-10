@@ -54,7 +54,7 @@ TaskController：完成任务
 
 所以我们的同步思路是当客户端向服务器发起一个请求时，服务器将所有变化的数据同步给客户端，客户端收到服务器的返回后再更新数据，绝不私自改动数据。在这个指导思想下，我们消息包结构是这样的（以物品卖出举例）：
 
-```proto
+```protobuf
 message BagItemSellCG {
     optional int32 id = 1;
     opitnoal int32 count = 2;
@@ -127,7 +127,7 @@ sync 是一个比较复杂的 message，包含了所有需要更新的 Model 的
 我们的做法是删除物品后记录物品 id，生成同步数据时如果发现对应 id 的物品不存在，则同步一个数量为 0 的物品信息，客户端收到数量为 0 的物品后做删除操作。
 有的模块没有一个代表删除的特殊“零值”，比如任务。我们的做法是将新增/更新与删除分开同步：
 
-```proto
+```protobuf
 message TaskSync {
 	repeated Task update = 1;
 	repeated int32 delete = 2;

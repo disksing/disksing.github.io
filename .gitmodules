@@ -1,0 +1,4 @@
+[submodule "public"]
+	path = public
+	url = https://github.com/disksing/disksing.github.io.git
+	branch = master
