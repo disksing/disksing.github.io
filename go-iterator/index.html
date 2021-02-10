@@ -1,0 +1,115 @@
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Go 语言设计模式：迭代器</title><link rel=icon href=http://disksing.com/favicon.png><style>html body{font-family:noto serif sc,sans-serif;background-color:#fff}:root{--accent: red;--border-width:  5px }</style><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Noto%20Serif%20SC"><link rel=stylesheet href=https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css integrity=sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u crossorigin=anonymous><link rel=stylesheet href=https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css integrity=sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN crossorigin=anonymous><link rel=stylesheet href=/css/main.css><script src=https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js></script><script src=https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js integrity=sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa crossorigin=anonymous></script><script>$(document).on('click',function(){$('.collapse').collapse('hide');})</script><meta name=generator content="Hugo 0.80.0"><script async src="https://www.googletagmanager.com/gtag/js?id=UA-154774927-1"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)};gtag('js',new Date());gtag('config','UA-154774927-1');</script><script type=text/javascript async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script data-ad-client=ca-pub-8963356574249468 async src=https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script></head><body><nav class="navbar navbar-default navbar-fixed-top"><div class=container><div class=navbar-header><a class="navbar-brand visible-xs" href=#>Go 语言设计模式：迭代器</a>
+<button class=navbar-toggle data-target=.navbar-collapse data-toggle=collapse>
+<span class=icon-bar></span><span class=icon-bar></span><span class=icon-bar></span></button></div><div class="collapse navbar-collapse"><ul class="nav navbar-nav"><li><a href=/>主页</a></li><li><a href=/post/>文章</a></li><li><a href=/tip/>知识点</a></li><li><a href=/project/>开源项目</a></li><li><a href=/activity/>动态</a></li><li><a href=/about/>关于</a></li></ul><ul class="nav navbar-nav navbar-right"><li class=navbar-icon><a href=mailto:i@disksing.com><i class="fa fa-envelope-o"></i></a></li><li class=navbar-icon><a href=https://github.com/disksing/><i class="fa fa-github"></i></a></li><li class=navbar-icon><a href=http://weibo.com/539523448><i class="fa fa-weibo"></i></a></li><li class=navbar-icon><a href="http://shang.qq.com/wpa/qunwpa?idkey=ade2895067e4105ce59e0c56863d650543b4448245f179574c6684fe1cb7b5d5"><i class="fa fa-qq"></i></a></li><li class=navbar-icon><a href=https://space.bilibili.com/2207710><i class="fa fa-tv"></i></a></li><li class=navbar-icon><a href=https://twitter.com/disksing/><i class="fa fa-twitter"></i></a></li></ul></div></div></nav><main><div><h1>Go 语言设计模式：迭代器</h1><h5>2014-10-30</h5><a href=http://disksing.com/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80><kbd class=item-tag>编程语言</kbd></a></div><div align=start class=content><h2 id=关于-go-语言设计模式-系列>关于 “Go 语言设计模式” 系列</h2><p>这个系列首先是关于 Go 语言实践的。在项目中实际使用 Go 语言也有段时间了，一个体会就是不论是官方文档、图书还是网络资料，关于 Go 语言惯用法（idiom）的介绍都比较少，基本只能靠看标准库源代码自己琢磨，所以我特别想在这方面有一些收集和总结。</p><p>然后这个系列也是关于设计模式的。虽然 Go 语言不是一门面向对象编程语言，但是很多面向对象设计模式所要解决的问题是在程序设计中客观存在的。不管用什么语言，总是要面对和解决这些问题的，只是解决的思路和途径会有所不同。所以我想就以经典的设计模式作为切入点来展开这个系列，毕竟大家对设计模式都很熟悉了，可以避免无中生有想出一些蹩脚的应用场景。</p><p>本系列的具体主题会比较灵活，计划主要包括这些方面的话题：</p><ol><li>Go 语言惯用法。</li><li>设计模式的实现。特别是引入了闭包，协程，DuckType 等语言特性后带来的变化。</li><li>设计模式思想的探讨。会有一些吐槽。</li></ol><hr><h2 id=不使用迭代器的方案>不使用迭代器的方案</h2><p>**首先要指出的是，绝大多数情况下 Go 程序是不需要用迭代器的。**因为内置的 slice 和 map 两种容器都可以通过 range 进行遍历，并且这两种容器在性能方面做了足够的优化。只要没有特殊的需求，通常是直接用这两种容器解决问题。即使不得不写了一个自定义容器，我们几乎总是可以实现一个函数，把所有元素（的引用）拷贝到一个 slice 之后返回，这样调用者又可以直接用 range 进行遍历了。</p><p>当然某些特殊场合迭代器还是有用武之地。比如迭代器的 Next() 是个耗时操作，不能一口气拷贝所有元素；再比如某些条件下需要中断遍历。</p><h2 id=经典实现>经典实现</h2><p>经典实现完全采用面向对象的思路。为了简化问题，下面的例子中容器就是简单的<code>[]int</code>，我们在 <code>main</code> 函数中使用迭代器进行遍历操作并打印取到的值，迭代器的接口设计参考 java。</p><div class=highlight><pre style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span><span style=color:#080;font-weight:700>package</span> main
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span><span style=color:#080;font-weight:700>import</span> <span style=background-color:#fff0f0>&#34;fmt&#34;</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span><span style=color:#080;font-weight:700>type</span> Ints []<span style=color:#339;font-weight:700>int</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span><span style=color:#080;font-weight:700>func</span> (i Ints) <span style=color:#06b;font-weight:700>Iterator</span>() <span style=color:#333>*</span>Iterator {
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span>	<span style=color:#080;font-weight:700>return</span> <span style=color:#333>&amp;</span>Iterator{
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span>		data:  i,
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span>		index: <span style=color:#00d;font-weight:700>0</span>,
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span>	}
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span>}
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14</span><span style=color:#080;font-weight:700>type</span> Iterator <span style=color:#080;font-weight:700>struct</span> {
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15</span>	data  Ints
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16</span>	index <span style=color:#339;font-weight:700>int</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17</span>}
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19</span><span style=color:#080;font-weight:700>func</span> (i <span style=color:#333>*</span>Iterator) <span style=color:#06b;font-weight:700>HasNext</span>() <span style=color:#339;font-weight:700>bool</span> {
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20</span>	<span style=color:#080;font-weight:700>return</span> i.index &lt; <span style=color:#007020>len</span>(i.data)
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21</span>}
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23</span><span style=color:#080;font-weight:700>func</span> (i <span style=color:#333>*</span>Iterator) <span style=color:#06b;font-weight:700>Next</span>() (v <span style=color:#339;font-weight:700>int</span>) {
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24</span>	v = i.data[i.index]
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25</span>	i.index<span style=color:#333>++</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26</span>	<span style=color:#080;font-weight:700>return</span> v
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">27</span>}
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">28</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">29</span><span style=color:#080;font-weight:700>func</span> <span style=color:#06b;font-weight:700>main</span>() {
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">30</span>	ints <span style=color:#333>:=</span> Ints{<span style=color:#00d;font-weight:700>1</span>, <span style=color:#00d;font-weight:700>2</span>, <span style=color:#00d;font-weight:700>3</span>}
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">31</span>	<span style=color:#080;font-weight:700>for</span> it <span style=color:#333>:=</span> ints.<span style=color:#06b;font-weight:700>Iterator</span>(); it.<span style=color:#06b;font-weight:700>HasNext</span>(); {
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">32</span>		fmt.<span style=color:#06b;font-weight:700>Println</span>(it.<span style=color:#06b;font-weight:700>Next</span>())
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">33</span>	}
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">34</span>}
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">35</span>
+</code></pre></div><h2 id=闭包实现>闭包实现</h2><p>Go 语言支持 first class functions、高阶函数、闭包、多返回值函数。用上这些特性可以换种方式实现迭代器。</p><p>初看之下闭包实现与经典实现完全不同，其实从本质上来看，二者区别不大。经典实现中把迭代器需要的数据存在 struct 中，<code>HasNext()</code> <code>Next()</code> 两个函数定义为 <code>Iterator</code> 的方法从而和数据绑定了起来；闭包实现中迭代器是一个匿名函数，它所需要的数据 <code>i Ints</code> 和 <code>index</code> 以闭包 upvalue 的形式绑定了起来，匿名函数返回的两个值正好对应经典实现中的 <code>Next()</code> 和 <code>HasNext()</code>。</p><div class=highlight><pre style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span><span style=color:#080;font-weight:700>package</span> main
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span><span style=color:#080;font-weight:700>import</span> <span style=background-color:#fff0f0>&#34;fmt&#34;</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span><span style=color:#080;font-weight:700>type</span> Ints []<span style=color:#339;font-weight:700>int</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span><span style=color:#080;font-weight:700>func</span> (i Ints) <span style=color:#06b;font-weight:700>Iterator</span>() <span style=color:#080;font-weight:700>func</span>() (<span style=color:#339;font-weight:700>int</span>, <span style=color:#339;font-weight:700>bool</span>) {
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span>	index <span style=color:#333>:=</span> <span style=color:#00d;font-weight:700>0</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span>	<span style=color:#080;font-weight:700>return</span> <span style=color:#080;font-weight:700>func</span>() (val <span style=color:#339;font-weight:700>int</span>, ok <span style=color:#339;font-weight:700>bool</span>) {
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span>		<span style=color:#080;font-weight:700>if</span> index <span style=color:#333>&gt;=</span> <span style=color:#007020>len</span>(i) {
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span>			<span style=color:#080;font-weight:700>return</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span>		}
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14</span>		val, ok = i[index], <span style=color:#080;font-weight:700>true</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15</span>		index<span style=color:#333>++</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16</span>		<span style=color:#080;font-weight:700>return</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17</span>	}
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18</span>}
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20</span><span style=color:#080;font-weight:700>func</span> <span style=color:#06b;font-weight:700>main</span>() {
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21</span>	ints <span style=color:#333>:=</span> Ints{<span style=color:#00d;font-weight:700>1</span>, <span style=color:#00d;font-weight:700>2</span>, <span style=color:#00d;font-weight:700>3</span>}
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22</span>	it <span style=color:#333>:=</span> ints.<span style=color:#06b;font-weight:700>Iterator</span>()
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23</span>	<span style=color:#080;font-weight:700>for</span> {
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24</span>		val, ok <span style=color:#333>:=</span> <span style=color:#06b;font-weight:700>it</span>()
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25</span>		<span style=color:#080;font-weight:700>if</span> !ok {
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26</span>			<span style=color:#080;font-weight:700>break</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">27</span>		}
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">28</span>		fmt.<span style=color:#06b;font-weight:700>Println</span>(val)
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">29</span>	}
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">30</span>}
+</code></pre></div><h2 id=channel-实现>channel 实现</h2><p>这份实现是最 go way 的，使用了一个 channel 在新的 goroutine 中将容器内的元素依次输出。优点是 channel 是可以用 range 接收的，所以调用方代码很简洁；缺点是 goroutine 上下文切换会有开销，这份实现无疑是最低效的，另外调用方必须接收完所有数据，如果只接收一半就中断掉发送方将永远阻塞。</p><p>依稀记得在邮件列表里看到说标准库里有这个用法的例子，刚才去翻了下没找到原帖了:-)</p><p>顺便说一下，<strong>“在函数中创建一个 channel 返回，同时创建一个 goroutine 往 channel 中塞数据”这是一个重要的惯用法</strong>（Channel Factory pattern，见 the way to go 18.8 节），可以用来做<a href=http://codereview.stackexchange.com/questions/28386/fibonacci-generator-with-golang>序列发生器</a>、<a href=http://blog.golang.org/pipelines#TOC_4.>fan-out、fan-in</a>等。</p><div class=highlight><pre style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span><span style=color:#080;font-weight:700>package</span> main
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span><span style=color:#080;font-weight:700>import</span> <span style=background-color:#fff0f0>&#34;fmt&#34;</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span><span style=color:#080;font-weight:700>type</span> Ints []<span style=color:#339;font-weight:700>int</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span><span style=color:#080;font-weight:700>func</span> (i Ints) <span style=color:#06b;font-weight:700>Iterator</span>() <span style=color:#333>&lt;-</span><span style=color:#080;font-weight:700>chan</span> <span style=color:#339;font-weight:700>int</span> {
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span>	c <span style=color:#333>:=</span> <span style=color:#007020>make</span>(<span style=color:#080;font-weight:700>chan</span> <span style=color:#339;font-weight:700>int</span>)
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span>	<span style=color:#080;font-weight:700>go</span> <span style=color:#080;font-weight:700>func</span>() {
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span>		<span style=color:#080;font-weight:700>for</span> _, v <span style=color:#333>:=</span> <span style=color:#080;font-weight:700>range</span> i {
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span>			c <span style=color:#333>&lt;-</span> v
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span>		}
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span>		<span style=color:#007020>close</span>(c)
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14</span>	}()
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15</span>	<span style=color:#080;font-weight:700>return</span> c
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16</span>}
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18</span><span style=color:#080;font-weight:700>func</span> <span style=color:#06b;font-weight:700>main</span>() {
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19</span>	ints <span style=color:#333>:=</span> Ints{<span style=color:#00d;font-weight:700>1</span>, <span style=color:#00d;font-weight:700>2</span>, <span style=color:#00d;font-weight:700>3</span>}
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20</span>	<span style=color:#080;font-weight:700>for</span> v <span style=color:#333>:=</span> <span style=color:#080;font-weight:700>range</span> ints.<span style=color:#06b;font-weight:700>Iterator</span>() {
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21</span>		fmt.<span style=color:#06b;font-weight:700>Println</span>(v)
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22</span>	}
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23</span>}
+</code></pre></div><h2 id=do-实现>Do 实现</h2><p>这份迭代器实现是最简洁的，代码也很直白，无须多言。如果想加上中断迭代的功能，可以将<code>func(int)</code> 改为<code> func(int)bool</code>，Do 中根据返回值决定是否退出迭代。</p><p>标准库中的 <code>container/ring</code> 中有 Do() 用法的例子。</p><div class=highlight><pre style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span><span style=color:#080;font-weight:700>package</span> main
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span><span style=color:#080;font-weight:700>import</span> <span style=background-color:#fff0f0>&#34;fmt&#34;</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span><span style=color:#080;font-weight:700>type</span> Ints []<span style=color:#339;font-weight:700>int</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span><span style=color:#080;font-weight:700>func</span> (i Ints) <span style=color:#06b;font-weight:700>Do</span>(fn <span style=color:#080;font-weight:700>func</span>(<span style=color:#339;font-weight:700>int</span>)) {
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span>	<span style=color:#080;font-weight:700>for</span> _, v <span style=color:#333>:=</span> <span style=color:#080;font-weight:700>range</span> i {
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span>		<span style=color:#06b;font-weight:700>fn</span>(v)
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span>	}
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span>}
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span><span style=color:#080;font-weight:700>func</span> <span style=color:#06b;font-weight:700>main</span>() {
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14</span>	ints <span style=color:#333>:=</span> Ints{<span style=color:#00d;font-weight:700>1</span>, <span style=color:#00d;font-weight:700>2</span>, <span style=color:#00d;font-weight:700>3</span>}
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15</span>	ints.<span style=color:#06b;font-weight:700>Do</span>(<span style=color:#080;font-weight:700>func</span>(v <span style=color:#339;font-weight:700>int</span>) {
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16</span>		fmt.<span style=color:#06b;font-weight:700>Println</span>(v)
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17</span>	})
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18</span>}
+</code></pre></div><h2 id=总结>总结</h2><ol><li>Go 语言中没有 class 和继承，不具备完整表达面向对象的能力，不是一门通常意义上的面向对象语言。但是这不妨碍 Go 语言实现面向对象的思想，利用其语言特性，实现封装、组合、多态都没有问题。</li><li>设计模式的精髓在于思想而不在于类图。编程语言是在不断进步的，类图却一直用几十年前那一张，抛开类图重新审视问题，合理利用语言新特性可以得到更简洁的设计模式实现。</li></ol></div><hr><b>欢迎加入技术讨论 QQ 群：</b> 481269635 （硬盘在歌唱）<h4 class=page-header>Comments</h4><div id=disqus_thread></div><script type=application/javascript>var disqus_config=function(){};(function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById('disqus_thread').innerHTML='Disqus comments not available by default when the website is previewed locally.';return;}
+var d=document,s=d.createElement('script');s.async=true;s.src='//'+"disksing"+'.disqus.com/embed.js';s.setAttribute('data-timestamp',+new Date());(d.head||d.body).appendChild(s);})();</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a><h4 class=page-header>Related</h4><div class=item><h4><a href=/understanding-rust-ownership/>五句话理解 Rust 所有权</a></h4><h5>2020-02-08</h5><a href=http://disksing.com/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80><kbd class=item-tag>编程语言</kbd></a>
+<a href=http://disksing.com/tags/rust><kbd class=item-tag>rust</kbd></a></div><div class=item><h4><a href=/go-singleton/>Go 语言设计模式：单例</a></h4><h5>最没意思的设计模式，Go 语言能玩出花样吗？</h5><a href=http://disksing.com/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80><kbd class=item-tag>编程语言</kbd></a></div><div class=item><h4><a href=/cpp-hidden-features/>十个 C++ 隐藏特性</a></h4><h5>2015-04-11</h5><a href=http://disksing.com/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80><kbd class=item-tag>编程语言</kbd></a></div></main><footer></footer><p class="copyright text-muted">&copy; 2014-2021 ALL RIGHTS RESERVED
+|
+本站由 <a href=https://gohugo.io>Hugo</a> 和 <a href=https://github.com/calintat/minimal>Minimal</a> 强力驱动
+|
+<a href=http://disksing.com/post/index.xml target=_blank><i class="fa fa-rss-square"></i>订阅本站文章</a> <a href=http://github.com/disksing/disksing.github.io/issues/new target=_blank><i class="fa fa-bug"></i>反馈问题</a><br>若无特别说明，本站文章采用 <a rel=license href=http://creativecommons.org/licenses/by/4.0/>CC BY 4.0</a> 进行许可，文中涉及代码采用 <a rel=license href=http://creativecommons.org/publicdomain/zero/1.0/>CC0 1.0 Universal</a> 进行许可</p><script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script><script type=text/javascript id=MathJax-script async src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js></script></body></html>

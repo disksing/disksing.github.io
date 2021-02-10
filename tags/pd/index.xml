@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>PD on 硬盘在歌唱</title><link>http://disksing.com/tags/pd/</link><description>Recent content in PD on 硬盘在歌唱</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Wed, 27 May 2020 00:00:00 +0000</lastBuildDate><atom:link href="http://disksing.com/tags/pd/index.xml" rel="self" type="application/rss+xml"/><item><title>消除 TSO 单点</title><link>http://disksing.com/tso/</link><pubDate>Wed, 27 May 2020 00:00:00 +0000</pubDate><guid>http://disksing.com/tso/</guid><description>在 TiDB 中，分布式事务的一致性需要依赖 PD 作为 TSO (Timestamp Oracle，时间戳分配器) 分配的严格单调递增的 ts。这里一个很显然的问题就是，作为一个分布式系统，唯独 TSO 是单点的，看上去总让人觉得哪里不对。
+好在大多数情况下，这里的担心是多余的。比如 TSO 在实现上做了大量的并发和 batch 优化，几乎不会遇到性能问题（出了问题往往是因为客户端并发太高，Go runtime 调度不过来）。另外，PD 虽然只有一个在工作，但是也有多个 PD 作为 standby，出了状况随时顶替上来，实际上也没有高可用的问题。
+有一种情况确实是受制于 TSO 单点的，就是在跨数据中心的场景。很多时候，本地事务只会访问本地数据，但是由于要去远程获取 ts，这会导致延迟降不下来。因此在这种场景下，消除 TSO 单点还是有意义的。
+问题范围界定 单一 TiDB 集群部署在多个数据中心，每个数据中心承载不同的业务，大多数情况下，业务都只访问对应数据中心的数据，另有一些跨多个数据中心的业务。
+要求：
+只涉及单个数据中心的事务，不用付出跨数据中心取 ts 的代价。 跨数据中心的事务，可以接受较高的延迟，但是必须要保证事务一致性，特别是外部一致性（参阅数据库的外部一致性）。 使用 RPC 同步 ts 要满足第一条，显然我们要赋予每个 PD 节点分配 ts 的能力，每个数据中心各自维护一个 ts。
+真正棘手的是第二条，为了满足外部一致性，全局事务所拿到的 ts 需要满足：
+大于所有数据中心曾经分配过的最大 ts（足够大） 小于所有数据中心未来将分配的最小 ts（足够小） 不难看出，取全局 ts 时涉及到与所有数据中心的 PD 进行同步的过程，鉴于全局事务本身没那么在乎延迟（无论如何都要跨数据中心读写数据了），可以直接通过发 RPC 的方式完成同步。
+比如最直接的，类似逻辑时钟的两阶段方案：
+client 从所有 PD 取一个最新 ts 收到所有回复后，client 取所有回复中最大的值 Tmax client 把 Tmax 发送给所有 PD PD 收到 Tmax 后，更新自己的内存状态保证后续分配的 ts 一定大于 Tmax client 收到所有 PD 的回复后，把 Tmax 返回 其中，2 保证了 Tmax 足够大，4 保证了 Tmax 足够小，故而返回的 Tmax 是能满足外部一致性的。</description></item></channel></rss>

@@ -1,0 +1,211 @@
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>使用 Docker+Seafile 搭建私有云存储</title><link rel=icon href=http://disksing.com/favicon.png><style>html body{font-family:noto serif sc,sans-serif;background-color:#fff}:root{--accent: red;--border-width:  5px }</style><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Noto%20Serif%20SC"><link rel=stylesheet href=https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css integrity=sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u crossorigin=anonymous><link rel=stylesheet href=https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css integrity=sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN crossorigin=anonymous><link rel=stylesheet href=/css/main.css><script src=https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js></script><script src=https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js integrity=sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa crossorigin=anonymous></script><script>$(document).on('click',function(){$('.collapse').collapse('hide');})</script><meta name=generator content="Hugo 0.80.0"><script async src="https://www.googletagmanager.com/gtag/js?id=UA-154774927-1"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)};gtag('js',new Date());gtag('config','UA-154774927-1');</script><script type=text/javascript async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script data-ad-client=ca-pub-8963356574249468 async src=https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script></head><body><nav class="navbar navbar-default navbar-fixed-top"><div class=container><div class=navbar-header><a class="navbar-brand visible-xs" href=#>使用 Docker+Seafile 搭建私有云存储</a>
+<button class=navbar-toggle data-target=.navbar-collapse data-toggle=collapse>
+<span class=icon-bar></span><span class=icon-bar></span><span class=icon-bar></span></button></div><div class="collapse navbar-collapse"><ul class="nav navbar-nav"><li><a href=/>主页</a></li><li><a href=/post/>文章</a></li><li><a href=/tip/>知识点</a></li><li><a href=/project/>开源项目</a></li><li><a href=/activity/>动态</a></li><li><a href=/about/>关于</a></li></ul><ul class="nav navbar-nav navbar-right"><li class=navbar-icon><a href=mailto:i@disksing.com><i class="fa fa-envelope-o"></i></a></li><li class=navbar-icon><a href=https://github.com/disksing/><i class="fa fa-github"></i></a></li><li class=navbar-icon><a href=http://weibo.com/539523448><i class="fa fa-weibo"></i></a></li><li class=navbar-icon><a href="http://shang.qq.com/wpa/qunwpa?idkey=ade2895067e4105ce59e0c56863d650543b4448245f179574c6684fe1cb7b5d5"><i class="fa fa-qq"></i></a></li><li class=navbar-icon><a href=https://space.bilibili.com/2207710><i class="fa fa-tv"></i></a></li><li class=navbar-icon><a href=https://twitter.com/disksing/><i class="fa fa-twitter"></i></a></li></ul></div></div></nav><main><div><h1>使用 Docker+Seafile 搭建私有云存储</h1><h5>2015-05-10</h5><a href=http://disksing.com/tags/%E6%95%99%E7%A8%8B><kbd class=item-tag>教程</kbd></a></div><div align=start class=content><h2 id=缘起>缘起</h2><p>现如今各种云存储服务其实挺多的，国外有经典的 DropBox、Google Drive、微软的 OneDrive 等，国内也有可以免费使用的各种云。</p><p>那么为什么想要搭建私有云存储呢？主要是本着“自己的数据自己管理”的原则。</p><p>其一是防止数据被窃取。这些云存储服务往往是和自己的某些平台账号绑定在一起的，或者至少是跟自己的某个邮箱绑定在一起的（密码重设），一旦平台账号或邮箱被黑客获取，所有的数据就一览无余了。再加之网络上社工库泛滥，很多人喜欢在各种网络服务上使用相同 的密码，往往是某一个账号失窃，所有数据全部暴露。</p><p>其二是防止数据被主动泄漏。Google 退出中国事件之后，我们知道运营在国内的产品数据都是对政府公开的，你一定不想把私密照片传到百度云或是 360 云盘上去。而“棱镜门”之后，我们知道诸如 Google 等号称“不作恶”的企业，其数据也是对政府公开的，老大哥时刻盯着你……</p><p>其三是防止数据遗失。有些人贪图更便宜的价格或是更大的空间选择不知名的云存储服务，说不定哪天就停止服务了，到时候悔之晚矣。另外貌似诸如百度云如果判定你的视频文件有色情内容，会主动将其清除掉。</p><p>这么一看自己搭建私有云存储太有必要性了。至少能保证自己的私人数据与其他互联网账号无关，不被搜索引擎索引，不被政府监视。保证服务器运行并做好数据备份就不会丢失。如果仅在家庭或公司内部使用可以部署在内网，安全系数更高。</p><h2 id=docker-和-seafile-介绍>Docker 和 Seafile 介绍</h2><blockquote><p>Docker 是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的容器中，然后发布到任何流行的 Linux 机器上，也可以实现虚拟化。容器是完全使用沙箱机制，相互之间不会有任何接口（类似 iPhone 的 app）。几乎没有性能开销,可以很容易地在机器和数据中心中运行。最重要的是,他们不依赖于任何语言、框架或包装系统。</p><p>摘自<a href=http://www.oschina.net/p/docker>开源中国</a></p></blockquote><p>Docker 能简化我们的云存储搭建过程，还能使其更安全地运行，更方便的维护。</p><blockquote><p>Seafile 是新一代的开源云存储软件。它提供更丰富的文件同步和管理功能，以及更好的数据隐私保护和群组协作功能。Seafile 支持 Mac、Linux、Windows 三个桌面平台，支持 Android 和 iOS 两个移动平台。</p><p>Seafile 是由国内团队开发的国际型项目，目前已有 10 万左右的用户，以欧洲用户为多。典型的机构用户包括比利时的皇家自然科学博物馆，德国的 Wuppertal 气候、能源研究所。</p><p>摘自<a href=http://www.oschina.net/p/seafile>开源中国</a></p></blockquote><p>开源的云存储软件其实不少，我也先后测试了好几款，最后确认 Seafile 是目前性能最佳、功能较全、安装最方便的。感谢<a href=http://seafile.com/about/>海文互知团队</a>令人钦佩的工作成果！</p><h2 id=搭建指南>搭建指南</h2><h3 id=1-docker-环境>1. Docker 环境</h3><p>Docker 运行的基本需求是 Linux x64，内核版本 2.6.32-431 或更高版本。具体请按照你的系统参考<a href=https://docs.docker.com/installation/#installation>官方文档</a>。</p><p>本例中我使用的 Docker 版本是 1.6.1，<code>docker version</code> 运行结果如下。</p><pre><code>root@iZ255y3f595Z:/home# docker version
+Client version: 1.6.0
+Client API version: 1.18
+Go version (client): go1.4.2
+Git commit (client): 4749651
+OS/Arch (client): linux/amd64
+Server version: 1.6.0
+Server API version: 1.18
+Go version (server): go1.4.2
+Git commit (server): 4749651
+OS/Arch (server): linux/amd64
+</code></pre><h3 id=2-拉取-jenseratseafile-镜像>2. 拉取 jenserat/seafile 镜像</h3><p><code>jenserat/seafile</code> 镜像（<a href=https://registry.hub.docker.com/u/jenserat/seafile/>查看详情</a>）包含了 Seafile 运行的依赖环境和一些方便的脚本，使用 <code>docker pull jenserat/seafile:latest</code> 拉取该镜像的最新版本。下载完成后输入 <code>docker images</code> 命令可以查看下载到的镜像：</p><pre><code>root@iZ255y3f595Z:/home# docker images
+REPOSITORY          TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
+jenserat/seafile    latest              8ef4348733ff        5 weeks ago         325.3 MB
+</code></pre><h3 id=3-下载-seafile>3. 下载 Seafile</h3><p><code>jenserat/seafile</code> 镜像中包含了下载 Seafile 的脚本，可惜其文件托管在 Amazon ECS 上，国内无法正常访问。</p><p>所以我们需要从<a href=http://www.seafile.com/download/>官方网站</a>上手动下载，撰写本文时最高版本是 <a href=http://download-cn.seafile.com/seafile-server_4.1.2_x86-64.tar.gz>4.1.2</a>。存放进一个目录并将 Seafile 解压缩，注意保证此目录所在分区有足够空间（其实也不用太在意，之后空间不足后可以很方便的迁移）。本例中我们把 Seafile 存放在 <code>/home/app/seafile</code>。</p><pre><code>root@iZ255y3f595Z:/home/app/seafile# ls -l
+total 19836
+-rw-r--r-- 1 root root 20308273 May  5 17:17 seafile-server_4.1.2_x86-64.tar.gz
+root@iZ255y3f595Z:/home/app/seafile# tar -zxf seafile-server_4.1.2_x86-64.tar.gz
+root@iZ255y3f595Z:/home/app/seafile# ls -l
+total 19840
+drwxrwxr-x 6  500  500     4096 Mar 29 08:35 seafile-server-4.1.2
+-rw-r--r-- 1 root root 20308273 May  5 17:17 seafile-server_4.1.2_x86-64.tar.gz
+</code></pre><h3 id=4-配置>4. 配置</h3><p>使用如下命令启动一个 Docker 容器来配置 Seafile，<strong>注意将 <code>/home/app/seafile</code> 换成你的目录</strong>。</p><pre><code>docker run -t -i --rm -p 10001:10001 -p 12001:12001 -p 8000:8000 -p 8080:8080 -p 8082:8082 -v /home/app/seafile:/opt/seafile jenserat/seafile -- /bin/bash
+</code></pre><p>容器启动后看到如下输出：</p><pre><code>*** Running /etc/my_init.d/00_regen_ssh_host_keys.sh...
+*** Running /etc/rc.local...
+*** Booting runit daemon...
+*** Runit started as PID 9
+*** Running /bin/bash...
+root@635064a090b9:/# May 10 08:37:40 635064a090b9 syslog-ng[20]: syslog-ng starting up; version='3.5.3'
+</code></pre><p>下面我们在容器中运行 <code>setup-seafile.sh</code> 脚本后按提示进行配置，本例中我们配置为通过域名 <code>sf.disksing.com</code> 访问，各种端口一路回车用默认的就行，因为我们可以在启动 Docker 容器时设置端口映射。</p><pre><code>root@635064a090b9:/# cd /opt/seafile/seafile-server-4.1.2/
+root@635064a090b9:/opt/seafile/seafile-server-4.1.2# ./setup-seafile.sh
+
+You are running this script as ROOT. Are you sure to continue?
+[yes|no] yes
+
+-----------------------------------------------------------------
+This script will guide you to config and setup your seafile server.
+
+Make sure you have read seafile server manual at
+
+        https://github.com/haiwen/seafile/wiki
+
+Note: This script will guide your to setup seafile server using sqlite3,
+which may have problems if your disk is on a NFS/CIFS/USB.
+In these cases, we sugguest you setup seafile server using MySQL.
+
+Press [ENTER] to continue
+-----------------------------------------------------------------
+
+
+Checking packages needed by seafile ...
+
+Checking python on this machine ...
+Find python: python2.7
+
+  Checking python module: setuptools ... Done.
+  Checking python module: python-imaging ... Done.
+  Checking python module: python-sqlite3 ... Done.
+
+Checking for sqlite3 ...Done.
+
+Checking Done.
+
+
+What would you like to use as the name of this seafile server?
+Your seafile users will be able to see the name in their seafile client.
+You can use a-z, A-Z, 0-9, _ and -, and the length should be 3 ~ 15
+[server name]: disksing
+
+What is the ip or domain of this server?
+For example, www.mycompany.com, or, 192.168.1.101
+
+[This server's ip or domain] : sf.disksing.com
+
+What tcp port do you want to use for ccnet server?
+10001 is the recommended port.
+[default: 10001 ]
+
+Where would you like to store your seafile data?
+Note: Please use a volume with enough free space.
+[default: /opt/seafile/seafile-data ]
+
+What tcp port would you like to use for seafile server?
+12001 is the recommended port.
+[default: 12001 ]
+
+What tcp port do you want to use for seafile fileserver?
+8082 is the recommended port.
+[default: 8082 ]
+
+
+This is your config information:
+
+server name:        disksing
+server ip/domain:   sf.disksing.com
+server port:        10001
+seafile data dir:   /opt/seafile/seafile-data
+seafile port:       12001
+fileserver port:    8082
+
+If you are OK with the configuration, press [ENTER] to continue.
+
+Generating ccnet configuration in /opt/seafile/ccnet...
+
+done
+Successly create configuration dir /opt/seafile/ccnet.
+
+Generating seafile configuration in /opt/seafile/seafile-data ...
+
+Done.
+
+-----------------------------------------------------------------
+Seahub is the web interface for seafile server.
+Now let's setup seahub configuration. Press [ENTER] to continue
+-----------------------------------------------------------------
+
+
+Creating seahub database now, it may take one minute, please wait...
+
+
+Done.
+
+creating seafile-server-latest symbolic link ... done
+
+
+-----------------------------------------------------------------
+Your seafile server configuration has been completed successfully.
+-----------------------------------------------------------------
+
+run seafile server:     ./seafile.sh { start | stop | restart }
+run seahub  server:     ./seahub.sh  { start &lt;port&gt; | stop | restart &lt;port&gt; }
+
+-----------------------------------------------------------------
+If the server is behind a firewall, remember to open these tcp ports:
+-----------------------------------------------------------------
+
+port of ccnet server:         10001
+port of seafile server:       12001
+port of seafile fileserver:   8082
+port of seahub:               8000
+
+When problems occur, refer to
+
+      https://github.com/haiwen/seafile/wiki
+
+for more information.
+
+</code></pre><p>配置完成后启动 Seafile 的两个服务测试，seafile 是文件管理引擎，seahub 提供网页访问服务。seahub 首次启动时会要求提供管理员邮箱及密码：</p><pre><code>root@635064a090b9:/opt/seafile/seafile-server-4.1.2# ./seafile.sh start
+
+Starting seafile server, please wait ...
+Seafile server started
+
+Done.
+root@635064a090b9:/opt/seafile/seafile-server-4.1.2# ./seahub.sh start
+
+Starting seahub at port 8000 ...
+
+----------------------------------------
+It's the first time you start the seafile server. Now let's create the admin account
+----------------------------------------
+
+What is the email for the admin account?
+[ admin email ] admin@disksing.com
+
+What is the password for the admin account?
+[ admin password ]
+
+Enter the password again:
+[ admin password again ]
+
+
+
+----------------------------------------
+Successfully created seafile admin
+----------------------------------------
+
+
+
+Loading ccnet config from /opt/seafile/ccnet
+Loading seafile config from /opt/seafile/seafile-data
+
+Seahub is started
+
+Done.
+
+</code></pre><p>现在用浏览器打开 <code>http://&lt;youdomain_or_ip>:8000</code>，看到登录页面说明配置完成了。输入 <code>exit</code> 退出并关闭当前容器。</p><pre><code>root@635064a090b9:/# exit
+exit
+*** /bin/bash exited with status 0.
+*** Shutting down runit daemon (PID 12)...
+*** Killing all processes...
+</code></pre><h3 id=5-启动-seafile>5. 启动 Seafile</h3><p>刚才我们已经在容器内正常启动了 Seafile，只是如果每次都要手动操作略显麻烦，所幸 <code>jenserat/seafile</code> 提供了自动调用启动脚本的机制，创建容器时定义 <code>autostart=true</code> 即可。</p><p>这次我们给容器取一个有意义的名字 <code>seafile</code>，如果你想让通过 80 端口访问，将 <code>-p 8000:8000</code> 改为 <code>-p 80:8000</code> 就可以了。</p><pre><code>docker run -d \
+  --name seafile \
+  -p 10001:10001 \
+  -p 12001:12001 \
+  -p 8000:8000 \
+  -p 8080:8080 \
+  -p 8082:8082 \
+  -v /home/app/seafile:/opt/seafile \
+  -e autostart=true \
+  jenserat/seafile
+</code></pre><p>这份指南到这里就结束了，祝玩得开心！</p></div><hr><b>欢迎加入技术讨论 QQ 群：</b> 481269635 （硬盘在歌唱）<h4 class=page-header>Comments</h4><div id=disqus_thread></div><script type=application/javascript>var disqus_config=function(){};(function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById('disqus_thread').innerHTML='Disqus comments not available by default when the website is previewed locally.';return;}
+var d=document,s=d.createElement('script');s.async=true;s.src='//'+"disksing"+'.disqus.com/embed.js';s.setAttribute('data-timestamp',+new Date());(d.head||d.body).appendChild(s);})();</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a><h4 class=page-header>Related</h4><div class=item><h4><a href=/tag-github-gmail/>自动给 Gmail 中 GitHub 的邮件打标签</a></h4><h5>2020-01-15</h5><a href=http://disksing.com/tags/%E6%95%99%E7%A8%8B><kbd class=item-tag>教程</kbd></a>
+<a href=http://disksing.com/tags/app-script><kbd class=item-tag>App Script</kbd></a></div><div class=item><h4><a href=/review-recorder/>追踪 GitHub PR review 记录</a></h4><h5>使用 chrome 插件追踪 GitHub PR review 记录，并把数据存放在 Google Spreadsheet。</h5><a href=http://disksing.com/tags/%E6%95%99%E7%A8%8B><kbd class=item-tag>教程</kbd></a>
+<a href=http://disksing.com/tags/app-script><kbd class=item-tag>App Script</kbd></a></div><div class=item><h4><a href=/make-auto-dep/>GNU make 自动依赖生成</a></h4><h5>2015-04-11</h5><a href=http://disksing.com/tags/%E7%BF%BB%E8%AF%91><kbd class=item-tag>翻译</kbd></a>
+<a href=http://disksing.com/tags/%E6%95%99%E7%A8%8B><kbd class=item-tag>教程</kbd></a></div></main><footer></footer><p class="copyright text-muted">&copy; 2014-2021 ALL RIGHTS RESERVED
+|
+本站由 <a href=https://gohugo.io>Hugo</a> 和 <a href=https://github.com/calintat/minimal>Minimal</a> 强力驱动
+|
+<a href=http://disksing.com/post/index.xml target=_blank><i class="fa fa-rss-square"></i>订阅本站文章</a> <a href=http://github.com/disksing/disksing.github.io/issues/new target=_blank><i class="fa fa-bug"></i>反馈问题</a><br>若无特别说明，本站文章采用 <a rel=license href=http://creativecommons.org/licenses/by/4.0/>CC BY 4.0</a> 进行许可，文中涉及代码采用 <a rel=license href=http://creativecommons.org/publicdomain/zero/1.0/>CC0 1.0 Universal</a> 进行许可</p><script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script><script type=text/javascript id=MathJax-script async src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js></script></body></html>
