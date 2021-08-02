@@ -1,8 +1,108 @@
-<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>GNU make 自动依赖生成</title><link rel=icon href=http://disksing.com/favicon.png><style>html body{font-family:noto serif sc,sans-serif;background-color:#fff}:root{--accent: red;--border-width:  5px }</style><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Noto%20Serif%20SC"><link rel=stylesheet href=https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css integrity=sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u crossorigin=anonymous><link rel=stylesheet href=https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css integrity=sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN crossorigin=anonymous><link rel=stylesheet href=/css/main.css><script src=https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js></script><script src=https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js integrity=sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa crossorigin=anonymous></script><script>$(document).on('click',function(){$('.collapse').collapse('hide');})</script><meta name=generator content="Hugo 0.80.0"><script async src="https://www.googletagmanager.com/gtag/js?id=UA-154774927-1"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)};gtag('js',new Date());gtag('config','UA-154774927-1');</script><script type=text/javascript async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script data-ad-client=ca-pub-8963356574249468 async src=https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script></head><body><nav class="navbar navbar-default navbar-fixed-top"><div class=container><div class=navbar-header><a class="navbar-brand visible-xs" href=#>GNU make 自动依赖生成</a>
+<!doctype html><html lang=zh-cn>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<title>GNU make 自动依赖生成</title>
+<link rel=icon href=http://disksing.com/favicon.png>
+<style>html body{font-family:noto serif sc,sans-serif;background-color:#fff}:root{--accent:red;--border-width:5px}</style>
+<link rel=stylesheet href="https://fonts.googleapis.com/css?family=Noto%20Serif%20SC">
+<link rel=stylesheet href=https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css integrity=sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u crossorigin=anonymous>
+<link rel=stylesheet href=https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css integrity=sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN crossorigin=anonymous>
+<link rel=stylesheet href=/css/main.css>
+<script src=https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js></script>
+<script src=https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js integrity=sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa crossorigin=anonymous></script>
+<script>$(document).on('click',function(){$('.collapse').collapse('hide')})</script>
+<meta name=generator content="Hugo 0.86.1">
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154774927-1"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','UA-154774927-1')</script>
+<script type=text/javascript async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script data-ad-client=ca-pub-8963356574249468 async src=https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
+</head>
+<body>
+<nav class="navbar navbar-default navbar-fixed-top">
+<div class=container>
+<div class=navbar-header>
+<a class="navbar-brand visible-xs" href=#>GNU make 自动依赖生成</a>
 <button class=navbar-toggle data-target=.navbar-collapse data-toggle=collapse>
-<span class=icon-bar></span><span class=icon-bar></span><span class=icon-bar></span></button></div><div class="collapse navbar-collapse"><ul class="nav navbar-nav"><li><a href=/>主页</a></li><li><a href=/post/>文章</a></li><li><a href=/tip/>知识点</a></li><li><a href=/project/>开源项目</a></li><li><a href=/activity/>动态</a></li><li><a href=/about/>关于</a></li></ul><ul class="nav navbar-nav navbar-right"><li class=navbar-icon><a href=mailto:i@disksing.com><i class="fa fa-envelope-o"></i></a></li><li class=navbar-icon><a href=https://github.com/disksing/><i class="fa fa-github"></i></a></li><li class=navbar-icon><a href=http://weibo.com/539523448><i class="fa fa-weibo"></i></a></li><li class=navbar-icon><a href="http://shang.qq.com/wpa/qunwpa?idkey=ade2895067e4105ce59e0c56863d650543b4448245f179574c6684fe1cb7b5d5"><i class="fa fa-qq"></i></a></li><li class=navbar-icon><a href=https://space.bilibili.com/2207710><i class="fa fa-tv"></i></a></li><li class=navbar-icon><a href=https://twitter.com/disksing/><i class="fa fa-twitter"></i></a></li></ul></div></div></nav><main><div><h1>GNU make 自动依赖生成</h1><h5>2015-04-11</h5><a href=http://disksing.com/tags/%E7%BF%BB%E8%AF%91><kbd class=item-tag>翻译</kbd></a>
-<a href=http://disksing.com/tags/%E6%95%99%E7%A8%8B><kbd class=item-tag>教程</kbd></a></div><div align=start class=content><p>原文：<a href=http://make.mad-scientist.net/papers/advanced-auto-dependency-generation/>Auto-Dependency Generation</a><br>作者：Paul D.Smith <a href=mailto:psmith@gnu.org>&lt;psmith@gnu.org></a></p><hr><p><em>在基于 make 的编译环境中，正确列出 makefile文 件中所有的依赖项，是一个特别重要，却又时常令人沮丧的任务。</em><br><em>本文档将给出一种能让 make 自动生成并维护依赖的有效方法。</em><br><em>这个方法的发明人是 Tom Tromey <a href=mailto:tromey@cygnus.com>&lt;tromey@cygnus.com></a>，我仅在这里提一次。方法的所有权归他；解释不妥之处都由我（Paul D.Smith）负责。</em></p><hr><ul><li><a href=#p1>传统的 <code>make depend</code> 方法</a></li><li><a href=#p2>使用 GNU make 的 <code>include</code></a></li><li><a href=#p3>简单自动依赖生成</a></li><li><a href=#p4>高级自动依赖生成</a><ul><li><a href=#p4.1>避免重复执行 <code>make</code></a></li><li><a href=#p4.2>避免 <code>No rule to make target …</code> 错误</a></li></ul></li><li><a href=#p5>放置输出文件</a></li><li><a href=#p6>定义 <code>MAKEDEPEND</code></a><ul><li><a href=#p6.1><code>MAKEDEPEND = /usr/lib/cpp</code></a></li><li><a href=#p6.2><code>MAKEDEPEND = makedepend</code></a></li><li><a href=#p6.3><code>MAKEDEPEND = gcc -M</code></a></li><li><a href=#p6.4>将编译和依赖合在一起</a></li><li><a href=#p6.5>非 C 文件的依赖生成</a></li></ul></li></ul><p>为了确保在必须的时候一定会编译（且仅在必须的时候才进行编译），所有的 <code>make</code> 程序都必须精确地知晓目标文件的依赖。</p><p>手动更新这个列表不仅繁琐，而且很容易出错。任何初具规模的系统，都倾向于提供自动提取信息的工具。可能最常用的工具就是 <code>makedepend</code> 程序，它能读取 c 源码并生成格式化的目标项依赖列表，可以插入或被包含进 makefile 文件中。</p><p>另一种流行的方案，是使用合适的编译器或预处理器（譬如 GCC）来生成依赖信息。</p><p>本文的主要目的不是要讨论如何生成依赖信息，虽然我会在最后一节中提及一些方法。
-这里主要想介绍如何把这些工具的调用和输出整合进 GNU <code>make</code> 中，使依赖信息保持准确和实时，并尽可能做到无缝和高效。</p><p>如上所述，这些方法只适用于 GNU <code>make</code>。适当的修改后应该也可以用于任何包含了 <code>include</code> 功能的其它版本 make 程序；这可以当作留给读者的练习。不过在做练习之前，请先阅读 <a href=http://make.mad-scientist.net/papers/advanced-auto-dependency-generation/rules.html#rule1>Paul 的 Makefile 第一法则</a>:)。</p><p>一个历史悠久的方法是在 makefile 文件中加入特殊目标项，通常使用 <code>depend</code>，用来创建依赖信息。主要思路是启动某个依赖跟踪工具来更新目录中的相关文件。</p><p>对于功能较弱的 make 程序，通常还需要借助 shell 脚本的帮助将生成的依赖追加至 makefile 自身。当然在 GNU <code>make</code> 中，我们可以用 <code>include</code> 指令完成。</p><p>这个方法虽然简单，却常带来严重问题。首先，只有在用户显式指明的时候依赖才会重新生成；如果用户不定期运行 <code>make depend</code>，很快会因为依赖过期而不能正确生成目标。基于此，我们不能认为这个方法是无缝和精确的。</p><p>另一个问题是，这种方法的第二次以及以后每次运行都是相对低效的。因为它修改 makefile 文件，你就必须添加一个独立的编译步骤，这就意味着在每个子目录都产生了调用开销，还得要加上依赖生成工具本身的开销。同时，即使文件没有改变，它也会检查每一个文件。</p><p>那么，我们来瞧瞧如何做得更好。</p><p>下文涉及的方法依赖于 GNU <code>make</code> 的 <code>include</code> 预处理语句。正如它的名字，<code>include</code> 语句使得 makefile 文件可以包含其他 makefile 文件，效果就如同文件是在那儿输入的一样。</p><p>我们马上就能找到它的用处，即用来避免用前面提到的方法追加依赖信息。并且 GNU <code>make</code> 在处理 <code>include</code> 时有一个有趣的特性：如同生成普通文件，GNU <code>make</code> 会尝试生成被包含的 makefile 文件。如果被包含的 makefile 被重建，<code>make</code> 将重新运行，读取新版本的 makefile 文件。</p><p>我们可以利用这个自动重建的特性来避免独立的 <code>make depend</code> 步骤，而是在正常的生成应用之前生成依赖。例如，如果你定义依赖输出文件依赖于所有的源文件，那么它将在每一次有代码改变时重建。因此依赖信息将永远保持最新，而不需要用户显式指明来生成依赖文件。当然，不幸的是，任何文件有任何变化都会导致依赖文件的重建。</p><p>关于 GNU <code>make</code> 自动重建特性的详情，请参阅 GNU <code>make</code> 用户手册， <em><code>How Makefiles Are Remade</code></em> 一节。</p><p>GNU <code>make</code> 用户手册中介绍了一种处理自动生成依赖的方法，参见 <em><code>Generating Dependencies Automatically</code></em> 一节。</p><p>在此方法中，对每个源文件创建一个“依赖”文件（在我们的例子中使用后缀<code>.P</code>来标识）。依赖文件中包含的是一个源文件的依赖信息声明。</p><p>随后 makefile 程序 include 所有的依赖文件并从中获取依赖信息。一个隐含的规则用来描述依赖文件是如何生成的。类似于这样的形式：</p><pre><code>SRCS = foo.c bar.c ...
+<span class=icon-bar></span>
+<span class=icon-bar></span>
+<span class=icon-bar></span>
+</button>
+</div>
+<div class="collapse navbar-collapse">
+<ul class="nav navbar-nav">
+<li><a href=/>主页</a></li>
+<li><a href=/post/>文章</a></li>
+<li><a href=/tip/>知识点</a></li>
+<li><a href=/project/>开源项目</a></li>
+<li><a href=/activity/>动态</a></li>
+<li><a href=/about/>关于</a></li>
+</ul>
+<ul class="nav navbar-nav navbar-right">
+<li class=navbar-icon><a href=mailto:i@disksing.com><i class="fa fa-envelope-o"></i></a></li>
+<li class=navbar-icon><a href=https://github.com/disksing/><i class="fa fa-github"></i></a></li>
+<li class=navbar-icon><a href=http://weibo.com/539523448><i class="fa fa-weibo"></i></a></li>
+<li class=navbar-icon><a href="http://shang.qq.com/wpa/qunwpa?idkey=ade2895067e4105ce59e0c56863d650543b4448245f179574c6684fe1cb7b5d5"><i class="fa fa-qq"></i></a></li>
+<li class=navbar-icon><a href=https://space.bilibili.com/2207710><i class="fa fa-tv"></i></a></li>
+<li class=navbar-icon><a href=https://twitter.com/disksing/><i class="fa fa-twitter"></i></a></li>
+</ul>
+</div>
+</div>
+</nav>
+<main>
+<div>
+<h1>GNU make 自动依赖生成</h1>
+<h5>2015-04-11</h5>
+<a href=http://disksing.com/tags/%E7%BF%BB%E8%AF%91><kbd class=item-tag>翻译</kbd></a>
+<a href=http://disksing.com/tags/%E6%95%99%E7%A8%8B><kbd class=item-tag>教程</kbd></a>
+</div>
+<div align=start class=content><p>原文：<a href=http://make.mad-scientist.net/papers/advanced-auto-dependency-generation/>Auto-Dependency Generation</a><br>
+作者：Paul D.Smith <a href=mailto:psmith@gnu.org>&lt;psmith@gnu.org></a></p>
+<hr>
+<p><em>在基于 make 的编译环境中，正确列出 makefile文 件中所有的依赖项，是一个特别重要，却又时常令人沮丧的任务。</em><br>
+<em>本文档将给出一种能让 make 自动生成并维护依赖的有效方法。</em><br>
+<em>这个方法的发明人是 Tom Tromey <a href=mailto:tromey@cygnus.com>&lt;tromey@cygnus.com></a>，我仅在这里提一次。方法的所有权归他；解释不妥之处都由我（Paul D.Smith）负责。</em></p>
+<hr>
+<ul>
+<li><a href=#p1>传统的 <code>make depend</code> 方法</a></li>
+<li><a href=#p2>使用 GNU make 的 <code>include</code></a></li>
+<li><a href=#p3>简单自动依赖生成</a></li>
+<li><a href=#p4>高级自动依赖生成</a>
+<ul>
+<li><a href=#p4.1>避免重复执行 <code>make</code></a></li>
+<li><a href=#p4.2>避免 <code>No rule to make target …</code> 错误</a></li>
+</ul>
+</li>
+<li><a href=#p5>放置输出文件</a></li>
+<li><a href=#p6>定义 <code>MAKEDEPEND</code></a>
+<ul>
+<li><a href=#p6.1><code>MAKEDEPEND = /usr/lib/cpp</code></a></li>
+<li><a href=#p6.2><code>MAKEDEPEND = makedepend</code></a></li>
+<li><a href=#p6.3><code>MAKEDEPEND = gcc -M</code></a></li>
+<li><a href=#p6.4>将编译和依赖合在一起</a></li>
+<li><a href=#p6.5>非 C 文件的依赖生成</a></li>
+</ul>
+</li>
+</ul>
+<p>为了确保在必须的时候一定会编译（且仅在必须的时候才进行编译），所有的 <code>make</code> 程序都必须精确地知晓目标文件的依赖。</p>
+<p>手动更新这个列表不仅繁琐，而且很容易出错。任何初具规模的系统，都倾向于提供自动提取信息的工具。可能最常用的工具就是 <code>makedepend</code> 程序，它能读取 c 源码并生成格式化的目标项依赖列表，可以插入或被包含进 makefile 文件中。</p>
+<p>另一种流行的方案，是使用合适的编译器或预处理器（譬如 GCC）来生成依赖信息。</p>
+<p>本文的主要目的不是要讨论如何生成依赖信息，虽然我会在最后一节中提及一些方法。
+这里主要想介绍如何把这些工具的调用和输出整合进 GNU <code>make</code> 中，使依赖信息保持准确和实时，并尽可能做到无缝和高效。</p>
+<p>如上所述，这些方法只适用于 GNU <code>make</code>。适当的修改后应该也可以用于任何包含了 <code>include</code> 功能的其它版本 make 程序；这可以当作留给读者的练习。不过在做练习之前，请先阅读 <a href=http://make.mad-scientist.net/papers/advanced-auto-dependency-generation/rules.html#rule1>Paul 的 Makefile 第一法则</a>:)。</p>
+<p>一个历史悠久的方法是在 makefile 文件中加入特殊目标项，通常使用 <code>depend</code>，用来创建依赖信息。主要思路是启动某个依赖跟踪工具来更新目录中的相关文件。</p>
+<p>对于功能较弱的 make 程序，通常还需要借助 shell 脚本的帮助将生成的依赖追加至 makefile 自身。当然在 GNU <code>make</code> 中，我们可以用 <code>include</code> 指令完成。</p>
+<p>这个方法虽然简单，却常带来严重问题。首先，只有在用户显式指明的时候依赖才会重新生成；如果用户不定期运行 <code>make depend</code>，很快会因为依赖过期而不能正确生成目标。基于此，我们不能认为这个方法是无缝和精确的。</p>
+<p>另一个问题是，这种方法的第二次以及以后每次运行都是相对低效的。因为它修改 makefile 文件，你就必须添加一个独立的编译步骤，这就意味着在每个子目录都产生了调用开销，还得要加上依赖生成工具本身的开销。同时，即使文件没有改变，它也会检查每一个文件。</p>
+<p>那么，我们来瞧瞧如何做得更好。</p>
+<p>下文涉及的方法依赖于 GNU <code>make</code> 的 <code>include</code> 预处理语句。正如它的名字，<code>include</code> 语句使得 makefile 文件可以包含其他 makefile 文件，效果就如同文件是在那儿输入的一样。</p>
+<p>我们马上就能找到它的用处，即用来避免用前面提到的方法追加依赖信息。并且 GNU <code>make</code> 在处理 <code>include</code> 时有一个有趣的特性：如同生成普通文件，GNU <code>make</code> 会尝试生成被包含的 makefile 文件。如果被包含的 makefile 被重建，<code>make</code> 将重新运行，读取新版本的 makefile 文件。</p>
+<p>我们可以利用这个自动重建的特性来避免独立的 <code>make depend</code> 步骤，而是在正常的生成应用之前生成依赖。例如，如果你定义依赖输出文件依赖于所有的源文件，那么它将在每一次有代码改变时重建。因此依赖信息将永远保持最新，而不需要用户显式指明来生成依赖文件。当然，不幸的是，任何文件有任何变化都会导致依赖文件的重建。</p>
+<p>关于 GNU <code>make</code> 自动重建特性的详情，请参阅 GNU <code>make</code> 用户手册， <em><code>How Makefiles Are Remade</code></em> 一节。</p>
+<p>GNU <code>make</code> 用户手册中介绍了一种处理自动生成依赖的方法，参见 <em><code>Generating Dependencies Automatically</code></em> 一节。</p>
+<p>在此方法中，对每个源文件创建一个“依赖”文件（在我们的例子中使用后缀<code>.P</code>来标识）。依赖文件中包含的是一个源文件的依赖信息声明。</p>
+<p>随后 makefile 程序 include 所有的依赖文件并从中获取依赖信息。一个隐含的规则用来描述依赖文件是如何生成的。类似于这样的形式：</p>
+<pre><code>SRCS = foo.c bar.c ...
 
 %.P : %.c
 	$(MAKEDEPEND)
@@ -11,18 +111,38 @@
 
 include $(SRCS:.c=.P)
 </code></pre><p>这些例子中我将简单使用 <code>$(MAKEDEPEND)</code> 来代表你选择的生成依赖的任意方式。几种可能的实现会在稍后介绍。
-在这里，输出先被写入一个临时文件，接着被后续处理改变了正常的格式：</p><pre><code>foo.o: foo.c foo.h bar.h baz.h
-</code></pre><p>将也包含 .P 文件自身，类似这样：</p><pre><code>foo.o foo.P: foo.c foo.h bar.h baz.h
-</code></pre><p>每当 GNU <code>make</code> 读取 makefile 后，在执行任何操作之前，它会检查并重建每个包含的 makefile 文件，在这里就是 .P 文件。我们有创建他们的规则，也有它们的依赖项（在本例中与 .o 文件相同）。如果有任何可能导致 .o 文件需要重建的修改，都会导致 .P 文件重建。</p><p>也就是说，当源文件或其包含的文件变化后，<code>make</code> 会重建 .P 文件，重启自身，读取新版 makefile，再用常规方法生成目标，这时读到的就是更新过的准确的依赖列表。</p><p>这里我们解决了旧方法的两个问题。第一，用户不必使用特殊命令来确保依赖列表的准确性。第二，只有真正变化的依赖才会被更新，而不是更新目录中的所有文件。</p><p>但是，这种方法带来了三个新问题。首先仍然是效率问题。虽然我们只重新检查了发生变化的文件，但是任何文件修改都会导致 <code>make</code> 重启，在大型的编译系统中可能会很慢。</p><p>第二个问题只是一个小烦恼。当你添加一个新文件，或是第一次编译时，.P 文件不存在。当 <code>make</code> 试图包含它却发现它不在，会产生一个警告。这不是致命的，因为 make 会接着重建 .P 文件并自行重启；只是有些难看而已。</p><p>第三个问题就相对严重了：如果你删除或是重命名了被依赖文件（比如 C 的 .h 文件），make 将停止并报怨找不到目标：</p><pre><code>make: *** No rule to make target `bar.h', needed by `foo.P'. Stop.
-</code></pre><p>这是因为 .P 文件依赖于一个无法找到的文件。<code>make</code> 无法重建 .P 文件，除非找到它依赖的所有文件，但是在重建 .P 文件之前，make 无法知道正确的依赖。这是铁律。</p><p>唯一的解决办法是手动删除与丢失文件相关的 .P 文件——简单的做法是直接全部都删掉而不必去查找相关文件。你甚至可以创建一个 <code>clean-deps</code> 目标来让它自动化（需要根据 <code>MAKECMDGOALS</code> 环境变量的具体情况来实现以避免重建 .P 文件）。毫无疑问这是令人烦恼的，但鉴于在典型环境中不会经常有文件改名或删除的操作，这个问题也许不那么严重。</p><p>这里介绍的方法由 Tom Tromey <a href=mailto:tromey@cygnus.com>&lt;tromey@cygnus.com></a>发明，同时也是 <a href=http://www.gnu.org/>FSF</a> 的 <a href=http://www.gnu.org/software/automake/automake.html>automake</a> 工具所使用的标准方法。我认为它极为巧妙。</p><p>让我们再来审视上面提及的第一个问题：重新执行 <code>make</code>。如果你认为重新调用真的很没有必要。因为目标项的依赖被更改这点我们是已经知道的，实际上我们在<em>此次</em>生成时不需要最新的依赖列表。我们已经知道目标需要重新生成了，而最新的依赖列表对这点毫无影响。我们真正需要确保的是在下次执行 <code>make</code>，判断目标是否需要重新生成时，依赖列表是已更新的。</p><p>因为我们在本次生成时不需要最新的依赖列表，避免重新执行 make 就是完全可行的：我们可以在生成目标的<em>同时</em>生成依赖列表。换句话说，我们可以修改目标的生成规则，在其命令中加入生成依赖列表。此外，在这种情况下，我们必须小心不要再提供自动生成依赖的规则了：如果那样，<code>make</code> 会重新生成它们并重启：这不是我们所希望的。</p><p>现在我们不再关心依赖文件的存在与否，解决第二个问题（画蛇添足的警告）就很简单了：我们可以使用 GNU <code>make</code> 的 <code>-include</code> 指令来包含它们，这样它们不存在时就不会有任何提示了。</p><p>让我们来看看到目前为止的一个例子：</p><pre><code>SRCS = foo.c bar.c ...
+在这里，输出先被写入一个临时文件，接着被后续处理改变了正常的格式：</p>
+<pre><code>foo.o: foo.c foo.h bar.h baz.h
+</code></pre><p>将也包含 .P 文件自身，类似这样：</p>
+<pre><code>foo.o foo.P: foo.c foo.h bar.h baz.h
+</code></pre><p>每当 GNU <code>make</code> 读取 makefile 后，在执行任何操作之前，它会检查并重建每个包含的 makefile 文件，在这里就是 .P 文件。我们有创建他们的规则，也有它们的依赖项（在本例中与 .o 文件相同）。如果有任何可能导致 .o 文件需要重建的修改，都会导致 .P 文件重建。</p>
+<p>也就是说，当源文件或其包含的文件变化后，<code>make</code> 会重建 .P 文件，重启自身，读取新版 makefile，再用常规方法生成目标，这时读到的就是更新过的准确的依赖列表。</p>
+<p>这里我们解决了旧方法的两个问题。第一，用户不必使用特殊命令来确保依赖列表的准确性。第二，只有真正变化的依赖才会被更新，而不是更新目录中的所有文件。</p>
+<p>但是，这种方法带来了三个新问题。首先仍然是效率问题。虽然我们只重新检查了发生变化的文件，但是任何文件修改都会导致 <code>make</code> 重启，在大型的编译系统中可能会很慢。</p>
+<p>第二个问题只是一个小烦恼。当你添加一个新文件，或是第一次编译时，.P 文件不存在。当 <code>make</code> 试图包含它却发现它不在，会产生一个警告。这不是致命的，因为 make 会接着重建 .P 文件并自行重启；只是有些难看而已。</p>
+<p>第三个问题就相对严重了：如果你删除或是重命名了被依赖文件（比如 C 的 .h 文件），make 将停止并报怨找不到目标：</p>
+<pre><code>make: *** No rule to make target `bar.h', needed by `foo.P'. Stop.
+</code></pre><p>这是因为 .P 文件依赖于一个无法找到的文件。<code>make</code> 无法重建 .P 文件，除非找到它依赖的所有文件，但是在重建 .P 文件之前，make 无法知道正确的依赖。这是铁律。</p>
+<p>唯一的解决办法是手动删除与丢失文件相关的 .P 文件——简单的做法是直接全部都删掉而不必去查找相关文件。你甚至可以创建一个 <code>clean-deps</code> 目标来让它自动化（需要根据 <code>MAKECMDGOALS</code> 环境变量的具体情况来实现以避免重建 .P 文件）。毫无疑问这是令人烦恼的，但鉴于在典型环境中不会经常有文件改名或删除的操作，这个问题也许不那么严重。</p>
+<p>这里介绍的方法由 Tom Tromey <a href=mailto:tromey@cygnus.com>&lt;tromey@cygnus.com></a>发明，同时也是 <a href=http://www.gnu.org/>FSF</a> 的 <a href=http://www.gnu.org/software/automake/automake.html>automake</a> 工具所使用的标准方法。我认为它极为巧妙。</p>
+<p>让我们再来审视上面提及的第一个问题：重新执行 <code>make</code>。如果你认为重新调用真的很没有必要。因为目标项的依赖被更改这点我们是已经知道的，实际上我们在<em>此次</em>生成时不需要最新的依赖列表。我们已经知道目标需要重新生成了，而最新的依赖列表对这点毫无影响。我们真正需要确保的是在下次执行 <code>make</code>，判断目标是否需要重新生成时，依赖列表是已更新的。</p>
+<p>因为我们在本次生成时不需要最新的依赖列表，避免重新执行 make 就是完全可行的：我们可以在生成目标的<em>同时</em>生成依赖列表。换句话说，我们可以修改目标的生成规则，在其命令中加入生成依赖列表。此外，在这种情况下，我们必须小心不要再提供自动生成依赖的规则了：如果那样，<code>make</code> 会重新生成它们并重启：这不是我们所希望的。</p>
+<p>现在我们不再关心依赖文件的存在与否，解决第二个问题（画蛇添足的警告）就很简单了：我们可以使用 GNU <code>make</code> 的 <code>-include</code> 指令来包含它们，这样它们不存在时就不会有任何提示了。</p>
+<p>让我们来看看到目前为止的一个例子：</p>
+<pre><code>SRCS = foo.c bar.c ...
 
 %.o : %.c
 	@$(MAKEDEPEND)
 	$(COMPILE.c) -o $@ $&lt;
 
 -include $(SRCS:.c=.P)
-</code></pre><p>这个问题有些棘手。事实上，我们可以通过显式在目标中指明文件来说服 <code>make</code> 不要报错退出。如果存在目标项，却不包含命令（无论是显式或隐式）或任何依赖项，则 make 简单地认为目标项是最新的。这是合情合理的，并且也正是我们所期待的。</p><p>对于上述发生错误的情况，目标项不存在。根据 GNU <code>make</code> 用户手册 <em>没有命令或依赖项的规则</em> ：</p><pre><code>如果规则不包含任何依赖项或命令，而且目标文件不存在，那么 make 会认为目标项总是已更改的。这意味着其他依赖于此目标项的命令一定会被执行。
-</code></pre><p>完美。这条规则保证了 <code>make</code> 在处理不存在的文件时不会抛出异常，而且保证了任何依赖于目标项的文件都会被重新生成，这正是我们想要的。</p><p>因此，我们要做的就是在生成完原来的依赖文件后，将所有的依赖项放到目标项中，不给它添加命令或依赖项。类似于这样的 <a href=#ref>[1]</a>:</p><pre><code>SRCS = foo.c bar.c ...
+</code></pre>
+<p>这个问题有些棘手。事实上，我们可以通过显式在目标中指明文件来说服 <code>make</code> 不要报错退出。如果存在目标项，却不包含命令（无论是显式或隐式）或任何依赖项，则 make 简单地认为目标项是最新的。这是合情合理的，并且也正是我们所期待的。</p>
+<p>对于上述发生错误的情况，目标项不存在。根据 GNU <code>make</code> 用户手册 <em>没有命令或依赖项的规则</em> ：</p>
+<pre><code>如果规则不包含任何依赖项或命令，而且目标文件不存在，那么 make 会认为目标项总是已更改的。这意味着其他依赖于此目标项的命令一定会被执行。
+</code></pre><p>完美。这条规则保证了 <code>make</code> 在处理不存在的文件时不会抛出异常，而且保证了任何依赖于目标项的文件都会被重新生成，这正是我们想要的。</p>
+<p>因此，我们要做的就是在生成完原来的依赖文件后，将所有的依赖项放到目标项中，不给它添加命令或依赖项。类似于这样的 <a href=#ref>[1]</a>:</p>
+<pre><code>SRCS = foo.c bar.c ...
 
 %.o : %.c
 	@$(MAKEDEPEND); \
@@ -33,7 +153,9 @@ include $(SRCS:.c=.P)
 	$(COMPILE.c) -o $@ $&lt;
 
 -include $(SRCS:.c=.P)
-</code></pre><p>简单解释一下，这里首先创建原始的依赖列表，然后对依赖文件中的每一行作如下处理后追加至依赖列表：去掉原来的目标顶和所有的行继续符（\），在末尾追加依赖分隔符（:）。这个方法在下文的几种 <code>MAKEDEPEND</code> 实现时工作正常；如果你用了其他依赖生成工具，或许需要作些修改。</p><p>也许你不喜欢让 .P 文件塞满你的源码目录。你可以很容易让 makefile 将它们放到别的地方。这里有一个针对进阶方法的例子，你可以依理应用到其他方法：</p><pre><code>DEPDIR = .deps
+</code></pre><p>简单解释一下，这里首先创建原始的依赖列表，然后对依赖文件中的每一行作如下处理后追加至依赖列表：去掉原来的目标顶和所有的行继续符（\），在末尾追加依赖分隔符（:）。这个方法在下文的几种 <code>MAKEDEPEND</code> 实现时工作正常；如果你用了其他依赖生成工具，或许需要作些修改。</p>
+<p>也许你不喜欢让 .P 文件塞满你的源码目录。你可以很容易让 makefile 将它们放到别的地方。这里有一个针对进阶方法的例子，你可以依理应用到其他方法：</p>
+<pre><code>DEPDIR = .deps
 df = $(DEPDIR)/$( *F)
 
 SRCS = foo.c bar.c ...
@@ -47,23 +169,73 @@ SRCS = foo.c bar.c ...
 	$(COMPILE.c) -o $@ $&lt;
 
 -include $(SRCS:%.c=$(DEPDIR)/%.P)
-</code></pre><p>注意你需要把所有 <code>MAKEDEPEND</code> 脚本中的所有 <code>$*.d</code> 都替换成 <code>$(df).d</code>。</p><p>我在上文中无所顾忌地使用了 <code>MAKEDEPEND</code> 这个变量，下面将讨论几种可能的实现。</p><p>生成依赖最简单的方法是使用 C 预处理器本身。这需要对你的预处理器的输出格式有一定了解——幸运的是对我们的目的而言，大部分 UNIX 预处理器都有类似的输出。为了维护在输出错误或调试信息时所要的行号信息，预处理器必须在每次进入或跳出 <code>#include</code> 文件时提供行号及文件名信息。这些信息可以被用作分析哪些文件被包含了。</p><p>大多数 UNIX 系统会输出这种格式的特殊行：</p><pre><code>#lineno &quot;filename&quot; extra
-</code></pre><p>我们只关心 <code>filename</code>。如果你的预处理器产生上面的输出，像这样定义 <code>MAKEDEPEND</code> 应该是可行的：</p><pre><code>MAKEDEPEND = $(CPP) $(CPPFLAGS) $&lt; \
+</code></pre><p>注意你需要把所有 <code>MAKEDEPEND</code> 脚本中的所有 <code>$*.d</code> 都替换成 <code>$(df).d</code>。</p>
+<p>我在上文中无所顾忌地使用了 <code>MAKEDEPEND</code> 这个变量，下面将讨论几种可能的实现。</p>
+<p>生成依赖最简单的方法是使用 C 预处理器本身。这需要对你的预处理器的输出格式有一定了解——幸运的是对我们的目的而言，大部分 UNIX 预处理器都有类似的输出。为了维护在输出错误或调试信息时所要的行号信息，预处理器必须在每次进入或跳出 <code>#include</code> 文件时提供行号及文件名信息。这些信息可以被用作分析哪些文件被包含了。</p>
+<p>大多数 UNIX 系统会输出这种格式的特殊行：</p>
+<pre><code>#lineno &quot;filename&quot; extra
+</code></pre><p>我们只关心 <code>filename</code>。如果你的预处理器产生上面的输出，像这样定义 <code>MAKEDEPEND</code> 应该是可行的：</p>
+<pre><code>MAKEDEPEND = $(CPP) $(CPPFLAGS) $&lt; \
 	| sed -n 's/^\# *[0-9][0-9]* *&quot;\([^&quot;]*\)&quot;.*/$*.o: \1/p' \
 	| sort | uniq &gt; $*.d
-</code></pre><p>如果你使用的是进阶方法，你可以在 sed 脚本中将 <code>$*.o</code> 替换成 <code>$@</code>。如果你使用了现代版本的 <code>sort</code>，你也可以把 <code>sort | uniq</code> 用 <code>sort -u</code> 替换。</p><p>当然了，如果你走这条路，你也可以把你要添加的后期处理加入脚本中。</p><p>X window 系统的源代码树提供了一个 <code>makedepend</code> 程序。它检查 C 源文件及头文件生成依赖列表。它默认设计是将依赖列表追加至 makefile 文件的尾部，因此想用我们自己的方式来使用它需要使用一点小伎俩。例如某些版本会在输出文件不存在时报错。</p><p>这样做应该是可行的：</p><pre><code>MAKEDEPEND = touch $*.d &amp;&amp; makedepend $(CPPFLAGS) -f $*.d $&lt;
-</code></pre><p>GCC 包含了一个可生成依赖文件的预处理器。这样做应该是可行的：</p><pre><code>MAKEDEPEND = gcc -M $(CPPFLAGS) -o $*.d $&lt;
-</code></pre><p>如果你使用 GCC，你可以在编译时同时生成依赖，从而节省大量的时间。如果你有一个 GCC 的最新版本，你可以使用 <code>-MD</code> 选项使之生成依赖信息。这个选项始终把依赖信息输出到 .d 文件中。因此，你可以在进阶方法的基础上稍作修改，得到一个快一些的版本：</p><pre><code>%.o : %.c
+</code></pre><p>如果你使用的是进阶方法，你可以在 sed 脚本中将 <code>$*.o</code> 替换成 <code>$@</code>。如果你使用了现代版本的 <code>sort</code>，你也可以把 <code>sort | uniq</code> 用 <code>sort -u</code> 替换。</p>
+<p>当然了，如果你走这条路，你也可以把你要添加的后期处理加入脚本中。</p>
+<p>X window 系统的源代码树提供了一个 <code>makedepend</code> 程序。它检查 C 源文件及头文件生成依赖列表。它默认设计是将依赖列表追加至 makefile 文件的尾部，因此想用我们自己的方式来使用它需要使用一点小伎俩。例如某些版本会在输出文件不存在时报错。</p>
+<p>这样做应该是可行的：</p>
+<pre><code>MAKEDEPEND = touch $*.d &amp;&amp; makedepend $(CPPFLAGS) -f $*.d $&lt;
+</code></pre>
+<p>GCC 包含了一个可生成依赖文件的预处理器。这样做应该是可行的：</p>
+<pre><code>MAKEDEPEND = gcc -M $(CPPFLAGS) -o $*.d $&lt;
+</code></pre>
+<p>如果你使用 GCC，你可以在编译时同时生成依赖，从而节省大量的时间。如果你有一个 GCC 的最新版本，你可以使用 <code>-MD</code> 选项使之生成依赖信息。这个选项始终把依赖信息输出到 .d 文件中。因此，你可以在进阶方法的基础上稍作修改，得到一个快一些的版本：</p>
+<pre><code>%.o : %.c
 	$(COMPILE.c) -MD -o $@ $&lt;
 	@cp $*.d $*.P; \
 		sed -e 's/#.*//' -e 's/^[^:]*: *//' -e 's/ *\\$$//' \
 			-e '/^$$/ d' -e 's/$$/ :/' &lt; $*.d &gt;&gt; $*.P; \
 		rm -f $*.d
-</code></pre><p>在一些旧版的 GCC 上使用环境变量也能做到。你还可以向 GCC 传递一个选项序列，类似于 <code>-Wp</code>,<code>-MD</code>,<code>$*.xx</code>，来用指定的文件名替换 GCC 的默认输出。这在你想输出依赖文件到不同的目录时特别有用。查阅你的编译器/预处理器以得到更多信息。</p><p>一般来说，你需要用某种方式生成依赖文件，以使用这些方法。如果你的工作不是基于 C 文件的，你需要找到或写自己的方法。只要能生成依赖文件就行。这通常不会太难。</p><p>Han-Wen Nienhuys <a href=mailto:hanwen@cs.uu.nl>&lt;hanwen@cs.uu.nl></a>提出了一个有趣的方案，并有一个“用于验证”的<a href=http://make.mad-scientist.net/gendep-0.1.tar.gz>实现</a>，尽管它目前只在 Linux 上工作。他提出使用 <code>LD_PRELOAD</code> 环境变量来插入特殊的共享库替换 <code>open(2)</code> 系统调用。新版本的 <code>open()</code> 会输出命令执行时读过的所有文件。于是不用任何特殊扩展工具就能得到可信赖的依赖信息。在他用于验证的实现在，你可以控制输出文件来排除一些类型文件（也许是共享库）。</p><hr></div><hr><b>欢迎加入技术讨论 QQ 群：</b> 481269635 （硬盘在歌唱）<h4 class=page-header>Comments</h4><div id=disqus_thread></div><script type=application/javascript>var disqus_config=function(){};(function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById('disqus_thread').innerHTML='Disqus comments not available by default when the website is previewed locally.';return;}
-var d=document,s=d.createElement('script');s.async=true;s.src='//'+"disksing"+'.disqus.com/embed.js';s.setAttribute('data-timestamp',+new Date());(d.head||d.body).appendChild(s);})();</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a><h4 class=page-header>Related</h4><div class=item><h4><a href=/tag-github-gmail/>自动给 Gmail 中 GitHub 的邮件打标签</a></h4><h5>2020-01-15</h5><a href=http://disksing.com/tags/%E6%95%99%E7%A8%8B><kbd class=item-tag>教程</kbd></a>
-<a href=http://disksing.com/tags/app-script><kbd class=item-tag>App Script</kbd></a></div><div class=item><h4><a href=/review-recorder/>追踪 GitHub PR review 记录</a></h4><h5>使用 chrome 插件追踪 GitHub PR review 记录，并把数据存放在 Google Spreadsheet。</h5><a href=http://disksing.com/tags/%E6%95%99%E7%A8%8B><kbd class=item-tag>教程</kbd></a>
-<a href=http://disksing.com/tags/app-script><kbd class=item-tag>App Script</kbd></a></div><div class=item><h4><a href=/docker-seafile/>使用 Docker+Seafile 搭建私有云存储</a></h4><h5>2015-05-10</h5><a href=http://disksing.com/tags/%E6%95%99%E7%A8%8B><kbd class=item-tag>教程</kbd></a></div></main><footer></footer><p class="copyright text-muted">&copy; 2014-2021 ALL RIGHTS RESERVED
+</code></pre><p>在一些旧版的 GCC 上使用环境变量也能做到。你还可以向 GCC 传递一个选项序列，类似于 <code>-Wp</code>,<code>-MD</code>,<code>$*.xx</code>，来用指定的文件名替换 GCC 的默认输出。这在你想输出依赖文件到不同的目录时特别有用。查阅你的编译器/预处理器以得到更多信息。</p>
+<p>一般来说，你需要用某种方式生成依赖文件，以使用这些方法。如果你的工作不是基于 C 文件的，你需要找到或写自己的方法。只要能生成依赖文件就行。这通常不会太难。</p>
+<p>Han-Wen Nienhuys <a href=mailto:hanwen@cs.uu.nl>&lt;hanwen@cs.uu.nl></a>提出了一个有趣的方案，并有一个“用于验证”的<a href=http://make.mad-scientist.net/gendep-0.1.tar.gz>实现</a>，尽管它目前只在 Linux 上工作。他提出使用 <code>LD_PRELOAD</code> 环境变量来插入特殊的共享库替换 <code>open(2)</code> 系统调用。新版本的 <code>open()</code> 会输出命令执行时读过的所有文件。于是不用任何特殊扩展工具就能得到可信赖的依赖信息。在他用于验证的实现在，你可以控制输出文件来排除一些类型文件（也许是共享库）。</p>
+<hr>
+</div>
+<hr>
+<b>欢迎加入技术讨论 QQ 群： </b> 481269635 （硬盘在歌唱）
+<h4 class=page-header>Comments</h4>
+<div id=disqus_thread></div>
+<script type=application/javascript>var disqus_config=function(){};(function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById('disqus_thread').innerHTML='Disqus comments not available by default when the website is previewed locally.';return}var b=document,a=b.createElement('script');a.async=!0,a.src='//disksing.disqus.com/embed.js',a.setAttribute('data-timestamp',+new Date),(b.head||b.body).appendChild(a)})()</script>
+<noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript>
+<a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a>
+<h4 class=page-header>Related</h4>
+<div class=item>
+<h4><a href=/tag-github-gmail/>自动给 Gmail 中 GitHub 的邮件打标签</a></h4>
+<h5>2020-01-15</h5>
+<a href=http://disksing.com/tags/%E6%95%99%E7%A8%8B><kbd class=item-tag>教程</kbd></a>
+<a href=http://disksing.com/tags/app-script><kbd class=item-tag>App Script</kbd></a>
+</div>
+<div class=item>
+<h4><a href=/review-recorder/>追踪 GitHub PR review 记录</a></h4>
+<h5>使用 chrome 插件追踪 GitHub PR review 记录，并把数据存放在 Google Spreadsheet。</h5>
+<a href=http://disksing.com/tags/%E6%95%99%E7%A8%8B><kbd class=item-tag>教程</kbd></a>
+<a href=http://disksing.com/tags/app-script><kbd class=item-tag>App Script</kbd></a>
+</div>
+<div class=item>
+<h4><a href=/docker-seafile/>使用 Docker+Seafile 搭建私有云存储</a></h4>
+<h5>2015-05-10</h5>
+<a href=http://disksing.com/tags/%E6%95%99%E7%A8%8B><kbd class=item-tag>教程</kbd></a>
+</div>
+</main>
+<footer>
+</footer>
+<p class="copyright text-muted">
+&copy; 2014-2021 ALL RIGHTS RESERVED
 |
 本站由 <a href=https://gohugo.io>Hugo</a> 和 <a href=https://github.com/calintat/minimal>Minimal</a> 强力驱动
 |
-<a href=http://disksing.com/post/index.xml target=_blank><i class="fa fa-rss-square"></i>订阅本站文章</a> <a href=http://github.com/disksing/disksing.github.io/issues/new target=_blank><i class="fa fa-bug"></i>反馈问题</a><br>若无特别说明，本站文章采用 <a rel=license href=http://creativecommons.org/licenses/by/4.0/>CC BY 4.0</a> 进行许可，文中涉及代码采用 <a rel=license href=http://creativecommons.org/publicdomain/zero/1.0/>CC0 1.0 Universal</a> 进行许可</p><script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script><script type=text/javascript id=MathJax-script async src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js></script></body></html>
+<a href=http://disksing.com/post/index.xml target=_blank><i class="fa fa-rss-square"></i>订阅本站文章</a> <a href=http://github.com/disksing/disksing.github.io/issues/new target=_blank><i class="fa fa-bug"></i>反馈问题</a>
+<br>
+若无特别说明，本站文章采用 <a rel=license href=http://creativecommons.org/licenses/by/4.0/>CC BY 4.0</a> 进行许可，文中涉及代码采用 <a rel=license href=http://creativecommons.org/publicdomain/zero/1.0/>CC0 1.0 Universal</a> 进行许可
+</p><script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}}</script>
+<script type=text/javascript id=MathJax-script async src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js></script>
+</body>
+</html>
