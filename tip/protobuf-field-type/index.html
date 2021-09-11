@@ -12,7 +12,7 @@
 <script src=https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js></script>
 <script src=https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js integrity=sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa crossorigin=anonymous></script>
 <script>$(document).on('click',function(){$('.collapse').collapse('hide')})</script>
-<meta name=generator content="Hugo 0.86.1">
+<meta name=generator content="Hugo 0.88.1">
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154774927-1"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','UA-154774927-1')</script>
 <script type=text/javascript async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
@@ -59,7 +59,7 @@
 <p>那么，字段的类型能不能修改呢？其实也是可以的，只要两种类型的 wire type 是相同的，那么就可以互相兼容，比如 int32, int64, uint32, bool, enum 互相都兼容。详见<a href=https://developers.google.com/protocol-buffers/docs/proto3#updating>官方文档</a>。</p>
 <p>具体有啥用呢？</p>
 <p>比如我们一开始有个字段只能取 true, false 两种值，很自然地，我们会用 bool。之后发现其实还有 unknown 这种情况，这时就不用再加一个字段，直接定义一个这样的 enum：</p>
-<pre><code>enum State {
+<pre tabindex=0><code>enum State {
     False = 0;
     True = 1;
     Unknown = 2;

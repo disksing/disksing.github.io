@@ -12,7 +12,7 @@
 <script src=https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js></script>
 <script src=https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js integrity=sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa crossorigin=anonymous></script>
 <script>$(document).on('click',function(){$('.collapse').collapse('hide')})</script>
-<meta name=generator content="Hugo 0.86.1">
+<meta name=generator content="Hugo 0.88.1">
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154774927-1"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','UA-154774927-1')</script>
 <script type=text/javascript async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
@@ -70,7 +70,7 @@
 <p><strong>2. PD leader lease 过期</strong></p>
 <p>PD 竞选 leader 的机制是抢占式地往 etcd 的特定的 leader key 写入自己的 member id，并向 etcd 注册 lease。只要 leader 在线，会不断地更新 lease，也就能维持自己的 leader 角色。一旦发生故障或者隔离，etcd 的 LeaseManager 会在 lease 过期后删除这个 key，其他 PD 节点 watch 到 leader key 被删除之后会尝试把自己注册成新的 leader。</p>
 <p>etcd 所管理的 lease 是在内存中倒计时的，不会实时地把剩余时间写入 raft 状态机，而是只存放了 TTL 信息。这带来一个问题，当 etcd leader 故障，新的节点成为 leader 后，无法得知之前的 lease 消耗了多少了，只能从头开始倒计时。而且 etcd 要恢复 leasor 时还会<a href=https://github.com/etcd-io/etcd/blob/d6a3c995cf86b479cb5a44b48d000feb33e3d8f8/etcdserver/server.go#L1976-L1980>多加一个 Election timeout</a>，（这里不太理解，可能是出于某种安全性的考虑？）</p>
-<pre><code>// promote lessor when the local member is leader and finished
+<pre tabindex=0><code>// promote lessor when the local member is leader and finished
 // applying all entries from the last term.
 if s.isLeader() {
     s.lessor.Promote(s.Cfg.electionTimeout())

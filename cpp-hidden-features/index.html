@@ -12,7 +12,7 @@
 <script src=https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js></script>
 <script src=https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js integrity=sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa crossorigin=anonymous></script>
 <script>$(document).on('click',function(){$('.collapse').collapse('hide')})</script>
-<meta name=generator content="Hugo 0.86.1">
+<meta name=generator content="Hugo 0.88.1">
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154774927-1"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','UA-154774927-1')</script>
 <script type=text/javascript async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
@@ -57,13 +57,13 @@
 </div>
 <div align=start class=content><h2 id=1-运算符的真相>1. []运算符的真相</h2>
 <p>因为<code>a[8]</code>是<code>*(a+8)</code>的同义表达，<code>*(a+8)</code>又等于<code>*(8+a)</code>，所以<code>a[8]</code>可以写成……<code>8[a]</code>。</p>
-<pre><code>int a[3] = {0};
+<pre tabindex=0><code>int a[3] = {0};
 2[a] = 1;
 2[a][a] = 2;
 // a = {0,2,1}
 </code></pre><h2 id=2-三元运算符的返回值>2. 三元运算符的返回值</h2>
 <p>三元运算:前后的表达式并不要求类型相同，只需要是同一类型种类(category)，最后的返回值是二者中最为通用的类型。</p>
-<pre><code>void foo (int) {}
+<pre tabindex=0><code>void foo (int) {}
 void foo (double) {}
 struct X {
   X (double d = 0.0) {}
@@ -77,19 +77,19 @@ int main(void) {
   foo(i ? 0.0 : x);  // 调用foo(X)
 }
 </code></pre><h2 id=3-函数里面可以直接写-url>3. 函数里面可以直接写 URL</h2>
-<pre><code>void foo() {
+<pre tabindex=0><code>void foo() {
     http://disksing.com/
     ...
 }
 </code></pre><p>可以编译过不报错的。好吧，这个其实比较囧。</p>
 <h2 id=4-不用-memset-初始化结构体>4. 不用 memset 初始化结构体</h2>
-<pre><code>struct A {
+<pre tabindex=0><code>struct A {
    int x;
    int y;
 };
 A a = {0};   // 或者A a = {};
 </code></pre><h2 id=5-不用-memset-初始化成员数组>5. 不用 memset 初始化成员数组</h2>
-<pre><code>class A
+<pre tabindex=0><code>class A
 {
 public:
      A():m_a(),m_c(){}
@@ -98,7 +98,7 @@ public:
      char m_c[10];
 };
 </code></pre><h2 id=6-规避前置声明>6. 规避前置声明</h2>
-<pre><code>struct global
+<pre tabindex=0><code>struct global
 {
     void main()
     {
@@ -110,31 +110,31 @@ public:
 } singleton;
 </code></pre><h2 id=7-三元运算符>7. 三元运算符</h2>
 <p>大部分书上讲三元运算符都是这么用的：</p>
-<pre><code>x = (y &lt; 0) ? -1 : 1;
+<pre tabindex=0><code>x = (y &lt; 0) ? -1 : 1;
 </code></pre><p>其实左值也可以是<code>?:</code>表达式：</p>
-<pre><code>(a &lt; b ? a : b) = 10;
+<pre tabindex=0><code>(a &lt; b ? a : b) = 10;
 </code></pre><p>等价于：</p>
-<pre><code>if (a &lt; b)
+<pre tabindex=0><code>if (a &lt; b)
     a = 10;
 else
     b = 10;
 </code></pre><p>可以左值右值都是三元运算符：</p>
-<pre><code>(a &lt; b ? a : b) = (y &lt; 0) ? -1 : 1;
+<pre tabindex=0><code>(a &lt; b ? a : b) = (y &lt; 0) ? -1 : 1;
 </code></pre><p>还可以用来调用函数的：</p>
-<pre><code>void even(int x) {printf(&quot;%d is even.&quot;, x);}
+<pre tabindex=0><code>void even(int x) {printf(&quot;%d is even.&quot;, x);}
 void odd(int x) {printf(&quot;%d is odd.&quot;, x);}
 (x%2==0 ? even : odd)(x);
 </code></pre><h2 id=8-namespace-可以用当变量用>8. namespace 可以用当变量用</h2>
-<pre><code>namespace fs = boost::filesystem;
+<pre tabindex=0><code>namespace fs = boost::filesystem;
 fs::path myPath( strPath, fs::native );
 </code></pre><p>在超大型的项目中，或者需要在不同的命名空间切换时比较有用。</p>
 <h2 id=9-for-循环中可以定义-struct-或-class>9. for 循环中可以定义 struct 或 class</h2>
-<pre><code>for(struct {int x; int y;} point = {0,0}; ...; ...) {
+<pre tabindex=0><code>for(struct {int x; int y;} point = {0,0}; ...; ...) {
     ...
 }
 </code></pre><h2 id=10-函数默认参数的值可以修改>10. 函数默认参数的值可以修改</h2>
 <p>这是因为 C++ 支持用静态变量当参数的默认值(不一定要是 const 的)</p>
-<pre><code>static int d = 1;
+<pre tabindex=0><code>static int d = 1;
 
 int foo(int x = d)
 {
