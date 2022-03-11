@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Go on 硬盘在歌唱</title><link>http://disksing.com/tags/go/</link><description>Recent content in Go on 硬盘在歌唱</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Fri, 11 Mar 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://disksing.com/tags/go/index.xml" rel="self" type="application/rss+xml"/><item><title>Go语言泛型初体验</title><link>http://disksing.com/try-go-generics/</link><pubDate>Fri, 11 Mar 2022 00:00:00 +0000</pubDate><guid>http://disksing.com/try-go-generics/</guid><description>Go1.18rc1 放出来也有一段时间了，我们期待了多年了泛型的支持终于是要实装了，毕竟已经是RC，后面语法应该不会再大动了，所以决定提前来学习一下。
+前几年曾经用Go语言移植了C++ STL的迭代器和算法库（disksing/iter），因为当时没有泛型，所以基本上是 interface{} 和 type assertion 满天飞的状态。这次我就用它来学习泛型，试着改个泛型版本出来。在C++里面，迭代器和算法这块可以说是泛型应用的典中典，所以我觉得要是能把它给改完，应该能说明这一版泛型的实用程度是很高的了。
+先说结论吧，我觉得至少可以打85分。中间确实也遇到一些障碍和小的体验问题，但是瑕不掩瑜，我觉得这一版泛型在“保持简洁”和“提供更完善的功能”间保持了非常好的平衡。几乎不需要了解什么额外的概念和实现原理，就凭着自己对泛型朴素的理解，就能比较顺利地上手了。
+最简单的基础用法这里就不多说了，有兴趣的话可以参考下官方blog的那篇文章。这里仅挑我遇到的几个问题分享一下。
+自指 有时候我们需要在 interface 中定义与具体类型相关的方法，比如 Copy() 用于复制一个同类型的对象，或者 Next() 用于返回指向下一个位置的迭代器，又或者 Equal() 用来和同类型的对象进行比较。
+在 Rust 里面有一个 Self 来解决这个种问题。在 impl 的时候，你的具体类型是啥，就返回啥。
+1traitCopyable{2fn copy(&amp;amp;self)-&amp;gt; Self3}在 Go 里面，没有泛型之前，我们一般是这么干的：
+1type Copyable interface { 2 Copy() Copyable 3} 不过这不是泛型，只是一个常规的 interface。我们在实现具体 struct 的时候，Copy() 只能返回 Copyable 而不能用具体类型，在使用的时候还需要强转一下。
+1type myType struct{} 2 3func (t myType) Copy() Copyable { 4 return myType{} 5} 6 7func main() { 8 x := myType{} 9 y := x.</description></item></channel></rss>
