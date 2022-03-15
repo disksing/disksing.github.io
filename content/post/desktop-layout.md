@@ -46,7 +46,7 @@ end)
 这个切换窗口的 HammerSpoon 脚本也分享一下：
 
 ```lua
-hs.timer.doEvery(120, function()
+local myTimer = hs.timer.new(120, function()
     local sf = hs.screen.primaryScreen():frame()
     local windows = hs.window.orderedWindows()
     local bottom_win = nil
@@ -61,4 +61,5 @@ hs.timer.doEvery(120, function()
     end
     if bottom_win ~= nil then bottom_win:raise() end
 end)
+myTimer:start()
 ```
