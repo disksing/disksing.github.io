@@ -1,4 +1,4 @@
-baseURL = "http://disksing.com/"
+baseURL = "https://disksing.com/"
 languageCode = "zh-cn"
 title = "硬盘在歌唱"
 theme = "archie"
