@@ -1,10 +1,11 @@
 baseURL = "http://disksing.com/"
 languageCode = "zh-cn"
 title = "硬盘在歌唱"
-theme = "minimal"
+theme = "archie"
 disqusShortname = "disksing"
 googleAnalytics = "UA-154774927-1"
 rssLimit = 20
+hasCJKLanguage = true
 
 [markup]
   [markup.highlight]
@@ -42,20 +43,20 @@ url = "/post/"
 name = "文章"
 weight = 2
 
-[[menu.main]]
-url = "/tip/"
-name = "知识点"
-weight = 3
+# [[menu.main]]
+# url = "/tip/"
+# name = "知识点"
+# weight = 3
 
 [[menu.main]]
 url = "/project/"
 name = "开源项目"
 weight = 4
 
-[[menu.main]]
-url = "/activity/"
-name = "动态"
-weight = 5
+# [[menu.main]]
+# url = "/activity/"
+# name = "动态"
+# weight = 5
 
 [[menu.main]]
 url = "/about/"
