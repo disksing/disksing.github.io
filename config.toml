@@ -48,10 +48,10 @@ weight = 2
 # name = "知识点"
 # weight = 3
 
-[[menu.main]]
-url = "/project/"
-name = "开源项目"
-weight = 4
+# [[menu.main]]
+# url = "/project/"
+# name = "开源项目"
+# weight = 4
 
 # [[menu.main]]
 # url = "/activity/"
