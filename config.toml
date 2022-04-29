@@ -63,38 +63,21 @@ url = "/about/"
 name = "关于"
 weight = 6
 
-
 # Social icons to be shown on the right-hand side of the navigation bar.
 # The "name" field should match the name of the icon in Font Awesome.
 # The list of available icons can be found at http://fontawesome.io/icons.
 
-[[menu.icon]]
-url = "mailto:i@disksing.com"
-name = "envelope-o"
-weight = 1
-
-[[menu.icon]]
+[[params.social]]
+name = "GitHub"
+icon = "github"
 url = "https://github.com/disksing/"
-name = "github"
-weight = 2
 
-[[menu.icon]]
-url = "http://weibo.com/539523448"
-name = "weibo"
-weight = 3
+[[params.social]]
+name = "Twitter"
+icon = "twitter"
+url = "https://github.com/disksing/"
 
-[[menu.icon]]
-url = "http://shang.qq.com/wpa/qunwpa?idkey=ade2895067e4105ce59e0c56863d650543b4448245f179574c6684fe1cb7b5d5"
-name = "qq"
-weight = 4
-
-[[menu.icon]]
+[[params.social]]
+name = "Bilibili"
+icon = "tv"
 url = "https://space.bilibili.com/2207710"
-name = "tv"
-weight = 5
-
-[[menu.icon]]
-url = "https://twitter.com/disksing/"
-name = "twitter"
-weight = 6
-
