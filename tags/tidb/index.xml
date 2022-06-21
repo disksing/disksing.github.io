@@ -1,1 +1,132 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>TiDB on 硬盘在歌唱</title><link>https://disksing.com/tags/tidb/</link><description>Recent content in TiDB on 硬盘在歌唱</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Wed, 10 Feb 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://disksing.com/tags/tidb/index.xml" rel="self" type="application/rss+xml"/><item><title>TrueTime和原子钟</title><link>https://disksing.com/truetime/</link><pubDate>Wed, 10 Feb 2021 00:00:00 +0000</pubDate><guid>https://disksing.com/truetime/</guid><description>如果你关注分布式数据库，相信多少听说过Google的分布式数据库Spanner，以及Spanner使用原子钟搞了一套TrueTime来实现跨</description></item><item><title>价值6万元的TiDB Hackathon创意</title><link>https://disksing.com/ya-hackathon-idea/</link><pubDate>Thu, 17 Dec 2020 00:00:00 +0000</pubDate><guid>https://disksing.com/ya-hackathon-idea/</guid><description>前两天发表了价值10万元的TiDB Hackathon创意，反响还不错。可惜这个项目最大的问题是投入成本过大，至今没有天使投资人出现。所以只好</description></item><item><title>价值10万元的TiDB Hackathon创意</title><link>https://disksing.com/hackathon-idea/</link><pubDate>Tue, 15 Dec 2020 00:00:00 +0000</pubDate><guid>https://disksing.com/hackathon-idea/</guid><description>今天，PingCAP官方又高调宣布了2020年的Hackathon计划，头奖奖金高达10万，相信各路大神也是蠢蠢欲动了。其实我有个创意第一届</description></item><item><title>TiDB1024谜题解题报告</title><link>https://disksing.com/tidb-puzzle/</link><pubDate>Sat, 24 Oct 2020 00:00:00 +0000</pubDate><guid>https://disksing.com/tidb-puzzle/</guid><description>今天（10月24日）被大家称为程序员节，PingCAP也凑热闹发布了一个谜题。其实是很简单，不过借助这题，我也是学习了一些 linux 命令的使用方法，</description></item><item><title>消除 TSO 单点</title><link>https://disksing.com/tso/</link><pubDate>Wed, 27 May 2020 00:00:00 +0000</pubDate><guid>https://disksing.com/tso/</guid><description>在 TiDB 中，分布式事务的一致性需要依赖 PD 作为 TSO (Timestamp Oracle，时间戳分配器) 分配的严格单调递增的 ts。这里一个很显然的问题就是，作为一个分布式系</description></item><item><title>分布式事务的 Commit Point</title><link>https://disksing.com/txn-commit-point/</link><pubDate>Sat, 22 Feb 2020 00:00:00 +0000</pubDate><guid>https://disksing.com/txn-commit-point/</guid><description>要说这个数据库事务啊，讲究的是 ACID。在分布式场景下，这四个没有一个是简单的，今天我们的话题主要涉及到 A(tomic)。 一、分布式环境的复</description></item><item><title>PD leader 切换耗时分析</title><link>https://disksing.com/pd-leader-change/</link><pubDate>Wed, 19 Feb 2020 00:00:00 +0000</pubDate><guid>https://disksing.com/pd-leader-change/</guid><description>本文首发在AskTUG.com。 我们知道，TiDB 集群中的多个 PD 提供的服务的方式是选出一个 PD 作为 leader 来提供服务的，当 leader 出现故障或者网络隔离后，</description></item><item><title>TiKV 的多副本机制</title><link>https://disksing.com/tikv-replica/</link><pubDate>Sun, 02 Feb 2020 00:00:00 +0000</pubDate><guid>https://disksing.com/tikv-replica/</guid><description>TiKV 使用了多副本的机制来保证一定程度的高可用（high availability）和数据安全（data safety)。值得注意的是，这里讲“一定</description></item><item><title>理解 Google F1: Schema 变更算法</title><link>https://disksing.com/understanding-f1-schema-change/</link><pubDate>Wed, 18 Nov 2015 00:00:00 +0000</pubDate><guid>https://disksing.com/understanding-f1-schema-change/</guid><description>注：本文已被《从零开始写分布式数据库》一书收录。 背景 F1 是 Google 开发的分布式关系数据库，主要服务于 Google 的广告系统，它提供强一致性、高可用性，并支持传</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>TiDB on 硬盘在歌唱</title><link>http://disksing.com/tags/tidb/</link><description>Recent content in TiDB on 硬盘在歌唱</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Wed, 10 Feb 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://disksing.com/tags/tidb/index.xml" rel="self" type="application/rss+xml"/><item><title>TrueTime和原子钟</title><link>http://disksing.com/truetime/</link><pubDate>Wed, 10 Feb 2021 00:00:00 +0000</pubDate><guid>http://disksing.com/truetime/</guid><description>如果你关注分布式数据库，相信多少听说过Google的分布式数据库Spanner，以及Spanner使用原子钟搞了一套TrueTime来实现跨数据中心的分布式事务。
+而Spanner的后继者们，却都采用了不使用原子钟替代方案，比如TiDB的TSO，CockroachDB的HLC。对此很多人的印象就是Google财大气粗，所以有能力搞原子钟这种精密高端设备。这个说法不能说全错，但至少不是完全准确的。
+网络时钟同步 上面提到的3种取时间戳的方式的底层逻辑是迥然不同的。TiDB的TSO是中心授时，每一个时间戳都要从中心服务器获取；CockroachDB的HLC本质上是逻辑时钟，依赖于消息交换时去推进时钟计数器；Spanner的TrueTime是时钟同步，通过定期交换消息，把本地时钟与源时钟进行同步。
+时钟同步的模式跟我们日常用手表的方法是类似的，我们隔一段时间把手表跟新闻联播同步一下，期间的时间直接从手表上读出来。
+计算机里面最常见的时钟同步就是NTP了，通过网络同步时钟有个问题就是延迟导致的误差。
+网络同步时钟
+比如客户端在12:00:00发起查询请求，2秒钟后收到服务器的消息，返回的时间也是12:00:00。这时并不意味着本地时钟是准确的，因为消息发到服务器要花费时间，本地时钟实际上是快了一点。但是具体快了多少是没法知道的，我们只知道消息一来一回花了2秒，却不知道来回分别花了多长时间。因此只能大概估摸着取个中间值，把时间往回拨1秒，这时误差范围就是±1秒了。
+Marzullo算法 只从单一时间源同步时间是不够靠谱的。除了有可能发生故障或者网络中断，更可怕的是时间源本身就出了问题。Marzullo算法就是用来从多个时间源来估算准确时间的算法。
+Marzullo算法
+如图，我们通过向ABCD四个时间源查询时间分别得到时钟偏差及误差范围，算法的大体思路就是选被尽可能多时间源所覆盖的区间（缩小误差范围），并排除掉有问题的区间（如A）。
+不过，在对时序有严格要求的场景（比如分布式事务），Marzullo算法还要进行一些改良。例如比较明显的缺陷是，当有问题的时间源offset区间与正常的区间有交叠时，可能导致误差范围被估算得过小。如果想了解相关细节，可以去研究下相关资料，这里不展开了。
+时钟漂移 跟服务器对上时间了还没完，通常对时的过程都要周期性地触发。正如我们的手表用着用着就不准了，CPU的晶振周期也不是完全精确的，会受温度和电压的影响，时间一长也会“跑偏”。
+Spanner假设他家服务器的误差不超过每秒钟200μs。按最大值去计算，30秒不同步，误差最多会累计到6ms，如果1天不同步，最大误差达到约为17s。要注意这里的误差范围是非常非常保守的，实际情况CPU远不可能这么糟糕，举个例子对比一下，我国石英电子表的行业标准是，一类月差10-15秒，二类月差20-30秒。
+原子钟 原子钟，是一种利用原子、分子能级差为基准信号来校准晶体振荡器或激光器频率，以使其输出标准频率信号的一种装置。它的工作原理是：利用原子吸收或释放能量时发出的电磁波来计时的。由于这种电磁波非常稳定，再加上利用一系列精密的仪器进行控制，原子钟的计时就可以非常准确了，可以达到千万年仅差一秒或者更好的水平。
+—— 时间频率：5G 叠加自主可控， 被忽视的高精尖领域
+看上去确实很高端，那么假如想买这样一个原子钟要多少钱呢？实际情况是原子钟比听上去亲民的多，我们直接在东哥的网站上就能搜到：
+京东商城售卖的原子钟
+售价大约是几万到十几万不等，并非承受不起的昂贵，和一台高端点的服务器是差不多的价位，如果降低精度的要求还能更便宜。
+说白了原子钟和计算机上面随处可见的晶振就是同一类东西，只不过精度高了好几个数量级。
+不同硬件的计时精确度
+需要注意有些同学误认为TrueTime需要每台机器都要给配一个原子钟，其实不用，一个数据中心有几个就完全足够了，具体先按下不表后面再说。
+GPS授时 GPS不仅提供定位服务，还可以授时。每个GPS卫星都携带了数个高精度原子钟，并不断广播星历（运行轨迹）和时间。地面装置从至少4颗卫星接收到信号后，解开以三维空间+一维时间为变量的四元方程组，就能同时拿到时间空间信息了。
+GPS的精度非常之高，可以把误差控制在数纳秒以内。这是因为电磁波信号基本上是直线传播，路径上受到的干扰很小，根据距离可以很准确地计算出信号传递延时。而网络消息会受中继和多层网络层层封包的影响，而且即便在光纤中，信号也不是沿直线传播的。
+TrueTime 背景知识介绍完毕，下面我们就来看看TrueTime到底是怎么做的。
+机房内的TrueTime组件部署
+TrueTime组件按角色分成 time master 和 time daemon。time master 可以认为是 TrueTime 的服务端，部署在一些独立的机器上，time daemon 是客户端，以进程的形式部署在每个实际运行业务的主机上。
+time master 又分成两类。一类安装 GPS 模块，分散在机房的不同位置，每个GPS节点都使用独立的天线，避免因为信号干扰的原因一起失效了。另一类安装的是原子钟，原子钟也是多台来防止故障产生不可用。
+各种 time master 周期性地使用Marzullo算法相互对时，每个 time daemon 也会以 30 秒为周期跟多个 time master 进行对时（同样使用Marzullo算法）。
+之前介绍过，GPS 的精度是纳秒级别的，这个误差跟机房内的网络延迟比起来都可以忽略不计了，直接计作0ms。这样time daemon进行时钟同步之后的误差就仅仅取决于网络延迟了，一般机房内不超过1ms。
+我们还要考虑到完成时钟同步之后，到下一次同步期间time daemon的时钟漂移，也就是前面计算过的，30秒内最大误差可能累计到6ms。于是，time daemon上的时钟误差范围就在1ms到7ms之间不断涨落，画出来是这样的锯齿状：
+time daemon误差范围变化示意
+那么问题来了，原子钟是干啥用的？</description></item><item><title>价值6万元的TiDB Hackathon创意</title><link>http://disksing.com/ya-hackathon-idea/</link><pubDate>Thu, 17 Dec 2020 00:00:00 +0000</pubDate><guid>http://disksing.com/ya-hackathon-idea/</guid><description>前两天发表了价值10万元的TiDB Hackathon创意，反响还不错。可惜这个项目最大的问题是投入成本过大，至今没有天使投资人出现。所以只好再发一个，这次的特点就是成本低，见效快，投入产出比高！
+先说问题。
+TiKV并不单纯是给TiDB用的，作为CNCF的开源项目，是Cloud Native基础设施的一块重要拼图。如果想以各种有趣的姿势来玩耍TiKV，我们首先需要有客户端来跟TiKV进行交互，这是绕不过去的。
+遗憾的是，到目前为止，我们只有一个功能完备，生产环境验证的TiKV客户端——就是内嵌在TiDB里的那一个。如果要使用的话，需要引入庞大的TiDB依赖，更要命的是，只支持Go一种语言。
+虽然我们有一些其他语言的port版本，比如 Java，Rust，C，不过大多数功能有缺失。而且没经过充分验证，生产环境也不太敢上。不得不说，这对社区很不友好了。
+所以Hackathon项目就是搞多种语言的客户端呗？
+并非如此，实际上我怀疑两天时间写一个客户端都是完成不了的，因为开发一个TiKV客户端其实很难。主要体现在：
+客户端是分布式事务的协调者，需要处理大量微妙的事务逻辑 客户端需要从PD查Region元信息，并维护一部分缓存 客户端要处理各种错误和异常 需要port大量的单元测试和集成测试来保证正确性 我想做的是充分利用现有的资源，做一个TiKV客户端测试框架，让客户端的测试验证变得更容易。开发客户端的时候，不用再写测试了，这不仅可以节省工作量，而且使用标准的流程来验证客户端，可以让我们对不同实现的质量更有信心。
+我们看图说话，描述一下工作原理。
+客户测试框架宏伟蓝图
+TestAdapter 为了接入测试框架，用户需要为开发中的客户端写一点简单的胶水层代码来跟测试框架交互，也就是TestAdapter。TestAdapter需要按照协议启动一个HTTP服务，本质上就是一个创建和调用Client的代理。
+MockTiKV / MockPD 客户端的测试经常依赖于TiKV/PD的特殊状态，比如Region发生leader切换，或者Region在特定的位置分裂，或者TiKV宕机，等等。
+但是我们在测试的过程中，不太可能去启动一套真正的集群，而且更不太可能去精细地控制集群的内部状态。所以目前TiDB的做法是用Go写了个假集群，也就是MockTiKV/MockPD，它们提供跟真正集群一样的gRPC服务，同时暴露一些接口来设置内部状态。
+测试的启动（蓝色箭头） 开发者把TestAdapter的URI填入测试框架的网页输入框，点击开始测试。
+测试框架在后台开启测试任务，并依次运行准备好的所有测试用例。
+测试运行（黄色箭头） 每个测试在运行过程中会先创建Mock集群，然后把Mock集群的服务地址交给TestAdapter，创建一个或多个Client实例。随后，测试用例不断地给TestAdapter和Mock集群发消息来完成测试。
+举个例子吧，比如测RawPut这个功能，过程就是先通过TestAdapter调用Client的RawPut接口，随后再调用Mock集群的RawGet接口看看是不是被写入了。
+测试的过程中通过Admin API来控制Mock集群的状态，甚至通过failpoint注入一些错误。
+测试报告（紫色箭头） 每个测试用例的结果返回给测试任务，汇总后生成测试报告展示在网页上。
+客户端可以选择只支持部分功能，比如只支持RawKV，或者只支持2PC TxnKV。测试报告也做一个分门别类，分别指明客户端对于每种功能是通过，不支持，或者有bug。对于有bug的情况，可以提供相关的运行日志供检查。
+这一套框架长期来看收益应该是很好的。在减轻客户端开发者负担的同时，最大的好处就是测试用例可以复用，当我们发现新bug后，可以做到一次添加就测试所有客户端的效果。后面我们还可以在官网上做一个大的客户端Dashboard，方便开发者进行选择。
+与此同时，这个项目做起来工作量也不大。MockTiKV和MockPD可以复用之前的代码，只是要封装网络层。测试用例也可以从TiDB现有的代码移植，同样用Go语言的话移植成本也会比较低。
+最后还有个彩蛋，就是这个项目其实之前我跟几个小伙伴已经做了一些微小工作了（tikv/client-validator，tikv/mock-tikv），后来由于个人原因（主要是懒）没有继续。当时的进展其实已经不错了，可以以命令行的方式运行并输出简单的报告，不过测试用例是很缺的，只有rawkv的简单功能测试。
+大体上就是这样了，有兴趣的话，记得来联系我啊。</description></item><item><title>价值10万元的TiDB Hackathon创意</title><link>http://disksing.com/hackathon-idea/</link><pubDate>Tue, 15 Dec 2020 00:00:00 +0000</pubDate><guid>http://disksing.com/hackathon-idea/</guid><description>今天，PingCAP官方又高调宣布了2020年的Hackathon计划，头奖奖金高达10万，相信各路大神也是蠢蠢欲动了。其实我有个创意第一届就想做了，各种原因吧，没能搞成。今年其实也不太可能搞，主要是项目投入成本有点高，所以干脆写出来，要是有人看上的话可以联系我啊哈哈。
+缘起很简单，就是想优化一下我们TiDB技术支持的体验。我们先分析一下，我们DBA在支持客户的时候，最大的痛点是什么呢？
+是频繁的扩容缩容吗？ 是复杂冗长的运维操作步骤吗？ 是繁琐漫长的问题诊断吗？ 显然对于现在的TiDB来说，这些都不是事儿。
+根据马斯洛需求层次理论，当基本的生理和安全需求被满足了之后，人们就需要去满足更高级别的精神级别的需求。
+因此，我大胆断定，现在对于TiDB的DBA来说，运维TiDB最大的问题就是：不够酷炫，不够嗨！
+所以我们来搞一些设施，让运维体验嗨皮起来！
+项目的名字叫“TiDB驾驶舱”，大致就是一个座舱，要运维集群的时候就直接坐进去，大家可以想象一下下面这两张图的结合形态。
+驾驶舱示意图
+TiDB驾驶舱，让你运维TiDB集群有如在开歼-20的感觉！
+想象一下，你坐进驾驶舱，然后一条命令连上集群。此时：
+终端自动接入堡垒机 屏幕开始显示关键metrics 空速表和高度表显示的是集群的QPS和latency 油量表显示集群剩余存储空间 姿态仪显示的是集群的balance状况 闪烁的LED矩阵指示着集群里各个节点的健康状况和负载情况 各种开关根据集群配置情况初始化至对应的状态 突然，警报器发出刺耳的蜂鸣音，终端提示你：有节点发生了故障。你冷静地扫了眼LED矩阵，发现一个红灯，原来是TiKV故障了。按下对应的按钮，登录上了对应的节点，查日志发现是磁盘损坏了。
+你熟练地拨动着开关，很快就做完了下线处理。最后，你观察到补副本的速度有些慢，于是你轻推节流阀，慢慢提升调度速度，同时密切注视着集群状态的变化……
+是不是很嗨皮？是不是很朋克？
+这还没完，我还设计了一个扩展包，可以让朋克升级成赛博朋克。
+扩展包要解决的是另外一个很现实的问题。
+随着TiDB的兼容性和稳定性不断提升，慢慢地也开始进入一些银行金融的核心场景。而这些客户的运维支持有一个很麻烦的问题，就是因为安全级别比较高，他们一般是不允许远程接入的，只能是去现场人肉排查问题。这也在一定程度上增加了DBA们的工作负担，降低了嗨皮度。
+针对这个问题，我设计了远程oncall机器，在遇到这种情况的时候，我们就不用DBA跑去客户现场了，直接叫个闪送把oncall机器人给送过去，我们还是坐在驾驶舱，远程操纵。
+我画了个示意图，大家将就看下吧……
+oncall机器人示意图
+说是机器人，其实也很简单了，就是一个三脚架，加上一个摄像头和一个能操作键盘鼠标的机械手，再接上能连移动网的4G模块。当然也能加一些比如语音扩展包啥的，不是事儿。
+此时我们跟客户的生产环境是纯物理接触的，安全级别足够高，而且客户把机器人放在电脑面前了它就动不了了，也不怕乱跑乱看，甚至比真人过去更让人放心……
+好了，大体就是这样了，我觉得这个做出这个来拿个头奖真不过分。感兴趣的话，快来联系我啊！
+卖萌</description></item><item><title>TiDB1024谜题解题报告</title><link>http://disksing.com/tidb-puzzle/</link><pubDate>Sat, 24 Oct 2020 00:00:00 +0000</pubDate><guid>http://disksing.com/tidb-puzzle/</guid><description>今天（10月24日）被大家称为程序员节，PingCAP也凑热闹发布了一个谜题。其实是很简单，不过借助这题，我也是学习了一些 linux 命令的使用方法，还是很有意义的。不想关注公众号的话，题目也能在asktug直接看到。
+首先谜面看形式像是摩尔斯电码，但肯定不是，因为摩尔斯电码不是定长的，但是这里每组长度都是8，大概率是ASCII。
+这里-和.想必是0和1（所以提示的莱布尼茨是二进制的意思？），又因为ASCII第一位总是0，所以我们把-换成0，.换成1，再按ASCII转成拉丁字母。
+先用 tr 做简单的字符替换，同时把空格换成空行方便后续处理。
+cat CODE | tr &amp;#39;-&amp;#39; &amp;#39;0&amp;#39; | tr &amp;#39;.&amp;#39; &amp;#39;1&amp;#39; | tr &amp;#39; &amp;#39; &amp;#39;\n&amp;#39; 输出是
+00100000 01110101 00110101 00110100 00111000 ... 接下来我们用bc来做个进制转换，方法是设置ibase和obase：echo &amp;quot;ibase=2;obase=10000;00100000&amp;quot; | bc。注意这里我们先设置ibase=2，接着设置obase的时候要按ibase的格式，也就是二进制的16（10000）。
+在把之前的结果交给bc之前，先用sed整理下格式。
+sed &amp;#34;s/^/ibase=2;obase=10000;/g&amp;#34; | bc 输出：
+20 75 35 34 38 ... 然后我们用xxd工具，这个一般是用来做hex dump的，不过给它加上-r参数后，可以把hex形式给转回去。在hex之前，我们要整理下格式，把换行符删掉。
+tr -d &amp;#39;\n&amp;#39; | xxd -p -r 输出：
+u548c u0020 u0054 u0069 u0044 u0042 ... 看上去是固定的u后跟4个字符，显然是unicode了。我随便找了个在线转unicode的网站，发现它要的输入格式是\uXXX。这好说，再用tr把空格换成\，然后填到网站上就出结果了：
+和 TiDB 一起用代码.... 看上去这就是答案了，用一行脚本的话就是：
+cat CODE | tr &amp;#39;-&amp;#39; &amp;#39;0&amp;#39; | tr &amp;#39;.</description></item><item><title>消除 TSO 单点</title><link>http://disksing.com/tso/</link><pubDate>Wed, 27 May 2020 00:00:00 +0000</pubDate><guid>http://disksing.com/tso/</guid><description>在 TiDB 中，分布式事务的一致性需要依赖 PD 作为 TSO (Timestamp Oracle，时间戳分配器) 分配的严格单调递增的 ts。这里一个很显然的问题就是，作为一个分布式系统，唯独 TSO 是单点的，看上去总让人觉得哪里不对。
+好在大多数情况下，这里的担心是多余的。比如 TSO 在实现上做了大量的并发和 batch 优化，几乎不会遇到性能问题（出了问题往往是因为客户端并发太高，Go runtime 调度不过来）。另外，PD 虽然只有一个在工作，但是也有多个 PD 作为 standby，出了状况随时顶替上来，实际上也没有高可用的问题。
+有一种情况确实是受制于 TSO 单点的，就是在跨数据中心的场景。很多时候，本地事务只会访问本地数据，但是由于要去远程获取 ts，这会导致延迟降不下来。因此在这种场景下，消除 TSO 单点还是有意义的。
+问题范围界定 单一 TiDB 集群部署在多个数据中心，每个数据中心承载不同的业务，大多数情况下，业务都只访问对应数据中心的数据，另有一些跨多个数据中心的业务。
+要求：
+只涉及单个数据中心的事务，不用付出跨数据中心取 ts 的代价。 跨数据中心的事务，可以接受较高的延迟，但是必须要保证事务一致性，特别是外部一致性（参阅数据库的外部一致性）。 使用 RPC 同步 ts 要满足第一条，显然我们要赋予每个 PD 节点分配 ts 的能力，每个数据中心各自维护一个 ts。
+真正棘手的是第二条，为了满足外部一致性，全局事务所拿到的 ts 需要满足：
+大于所有数据中心曾经分配过的最大 ts（足够大） 小于所有数据中心未来将分配的最小 ts（足够小） 不难看出，取全局 ts 时涉及到与所有数据中心的 PD 进行同步的过程，鉴于全局事务本身没那么在乎延迟（无论如何都要跨数据中心读写数据了），可以直接通过发 RPC 的方式完成同步。
+比如最直接的，类似逻辑时钟的两阶段方案：
+client 从所有 PD 取一个最新 ts 收到所有回复后，client 取所有回复中最大的值 Tmax client 把 Tmax 发送给所有 PD PD 收到 Tmax 后，更新自己的内存状态保证后续分配的 ts 一定大于 Tmax client 收到所有 PD 的回复后，把 Tmax 返回 其中，2 保证了 Tmax 足够大，4 保证了 Tmax 足够小，故而返回的 Tmax 是能满足外部一致性的。</description></item><item><title>分布式事务的 Commit Point</title><link>http://disksing.com/txn-commit-point/</link><pubDate>Sat, 22 Feb 2020 00:00:00 +0000</pubDate><guid>http://disksing.com/txn-commit-point/</guid><description>要说这个数据库事务啊，讲究的是 ACID。在分布式场景下，这四个没有一个是简单的，今天我们的话题主要涉及到 A(tomic)。
+一、分布式环境的复杂性 在单机环境下，实现事务原子性并不复杂。一般的做法是事务提交之前的写入被存放在 预写式日志 中，然后在事务提交时，往磁盘追加一条 提交记录，完成事务的提交。
+所谓 Commit Point，在这个场景下指的是 提交记录 被持久化到磁盘的一瞬间。在此之前，整个事务的写入都是未生效的状态，事务提交可能被回滚或中止（即使客户端已经发送了 Commit 命令，数据库可能在 Commit Point 之前崩溃）；而在 Commit Point 之后，整个事务就被提交成功了（即使由于数据库崩溃没来得及把结果返回给客户端）。
+本质上，Commit Point 通过把事务内的多条 SQL 语句或者说多个对象的更新是否被提交“归约”到一个单点，也就是事务的 提交记录，从而确保了“要么同时提交，要么同时回滚”。
+在分布式事务中，一个事务会同时牵扯到多个节点。这可能是因为事务本身要更新保存在不同节点的多个对象，也可能因为数据和索引保存在不同的节点（Global Index）。如果沿用单机数据库的经验，通过存储引擎中的 提交记录 来照葫芦画瓢，很容易出现原子性被破坏的情况：
+部分节点成功提交，而部分节点由于冲突等原因需要回滚 部分节点成功提交，部分节点由于网络中断或崩溃无法提交 客户端与部分节点网络中断 客户端在向部分节点发送请求后崩溃 二、两阶段提交 两阶段提交（2PC）引入了 协调者（coordinator） 的角色，它通常以库的形式嵌入在发起事务的进程中，也可以以单独的进程或服务存在——这种情况下通常被称为 事务管理器（transaction manager）。同时我们把持有数据的存储节点称为 参与者（participant）。
+两阶段提交（来源：设计数据密集型应用）
+所谓两阶段，是 协调者 在提交的过程中，分两个步骤分别与 参与者 交互：
+发送 准备（prepare） 请求给所有 参与者 ，询问是否可能提交。 如果所有 参与者 都回复YES，则发起第 2 阶段的 提交（commit） 真正提交；如果任意一个 参与者 回复NO或者超时无响应，则第 2 阶段改为 中止（abort） 回滚之前的操作。 这个过程类似西方婚礼时的流程。神父在第一阶段询问新娘和新郎是否要结婚，如果新娘和新郎都回复YES，神父才进入第二阶段，宣布二人结为夫妻。如果任意一个人说NO，结婚就中止了。
+很显然，这个流程能防止“部分节点由于冲突等原因需要回滚”，但是并不能防住由于崩溃或者网络中断导致的不同步。好比神父在宣布二人结为夫妻时，新郎由于心情激动晕倒了没有听到，他醒来以后结婚还是未完成的状态，原子性就这样被破坏了。
+解决这种“不同步”的关键正是 Commit Point，正如前面所说，我们需要把多个对象的更新归约到一个单点。实践中，Commit Point 可以有多种选择，下面我们来逐一分析：</description></item><item><title>PD leader 切换耗时分析</title><link>http://disksing.com/pd-leader-change/</link><pubDate>Wed, 19 Feb 2020 00:00:00 +0000</pubDate><guid>http://disksing.com/pd-leader-change/</guid><description>本文首发在AskTUG.com。
+我们知道，TiDB 集群中的多个 PD 提供的服务的方式是选出一个 PD 作为 leader 来提供服务的，当 leader 出现故障或者网络隔离后，其余的节点会自动通过 raft 选出新的 leader 继续服务。
+从旧 leader 故障，到新 leader 选出并开始提供服务，这个过程服务是不可用的（比如 TSO 服务不可用，导致事务被 block），所以有必要分析这个过程的耗时并尽量使其缩短。
+值得注意的是，PD 的配置有个相关的参数叫 lease，也就是 leader 的租约期限，默认值是 3s。那么，是否 leader 切换的耗时就是 3 秒呢？
+实际我们观察到的往往比这个配置值要长不少，可能要 10 多秒甚至好几十秒，下面我们就来分析一下，时间都去哪儿了。
+流程分析 1. etcd Leader 选举
+PD 的 leader 选举并非自己实现 raft，而是直接内嵌了 embedded etcd，然后基于 etcd 提供的 lease 机制来实现 leader 选举。
+内嵌 etcd 的好处是部署上比较简单，但是也带来了负面效果：如果 etcd 的 leader 在故障的节点上，PD 需要先等 etcd 选举出 leader 并恢复服务。
+PD 配置中的 election-interval 用于控制 etcd 的选举超时时间，默认配置也是 3s。通常情况下，这一步耗时约为 3s，如果选举时出现分票的情况，可能还会稍长一些。</description></item><item><title>TiKV 的多副本机制</title><link>http://disksing.com/tikv-replica/</link><pubDate>Sun, 02 Feb 2020 00:00:00 +0000</pubDate><guid>http://disksing.com/tikv-replica/</guid><description>TiKV 使用了多副本的机制来保证一定程度的高可用（high availability）和数据安全（data safety)。值得注意的是，这里讲“一定程度”，意味着多副本也不能保证万无一失，极端情况下也是有一定不可用或丢失数据的风险的。
+本文将从一些常见的误区着手，简要介绍 TiDB / TiKV 中多副本工作机制，探讨不同配置下、发生各种故障时数据所能得到的保障。
+误解一：3 副本配置下，只要还有一个副本存活，就能正常工作。
+引起这个误会的关键应该是把 3 副本想象成同样数据的 3 份复制了，实际上 TiKV 实现多副本所使用的 Raft 是一种基于多节点投票选举机制的共识算法，简单地说，当需要写入数据时，当且只要当超过半数的节点成功写入后，逻辑上来说数据就成功写入了。
+注意“超过半数”这一点对于数据安全至关重要——它保证了只要有一半以上副本存活，则其中一定包含最新的数据，即不发生数据丢失。
+了解了这些原理后，我们就能推断出假如 3 副本中只有一个副本存活，那么它一定不应该正常工作。原因其一，3 副本中可能只有 2 副本包含最新数据，只有 1 副本存活时无从得知其数据是否完整。其二，只有 1 副本存活的情况下无法达成超过半数节点写入。
+当然了，不可用不代表不可恢复或者一定发生数据丢失。如果是主机断电之类的故障，只要重新启动后接入集群，凑够一半以上副本数就能恢复服务了。即便是极端情况下有多数副本同时发生不可恢复的磁盘故障，我们也可以通过强行重置副本数来恢复服务，虽然这种情况要承担一定数据不完整的风险，但是已经优于大多数基于备份或半同步复制的方案了。
+误解二：3 副本配置下，尽量多部署一些 tikv 节点，只要还有一半以上节点存活，就能正常工作。
+先了解一点背景知识。为了更好地做水平扩展和负载均衡，TiKV 会把数据拆分成很多段首尾相接的分片，每个分片称作 Region，集群运行过程中数据的移动、复制、平衡都是以 Region 为单位进行的，每个 Region 的多个副本构成 Raft group，并散落在多个不同的 TiKV 节点上。
+为了数据的移动更高效，通常 Region 的尺寸会控制得比较小，目前默认配置是 96M。在一个典型的生产环境集群中，TiKV 节点可能有数十个或几十个，而 Region 数可能有数万个甚至数十万个，每个 TiKV 节点需维护约几千个 Region 的副本。
+考虑 3 副本集群中某一个节点故障，直接后果就是数千个 Region 同时少了一个副本，而这数千个 Region 的其他副本通常是均匀地散落在集群的其他节点上的，如果不巧这时有另外一个节点也发生故障，一旦这两个节点包含了相同的 Region，这个 Region 就会因为丢失多数副本而不可用了。
+那么结论就是，在配置为 3 副本的集群中，只要有 2 个节点同时掉线，很可能就会有 Region 不能工作；只要有 2 块磁盘同时损坏，很可能会造成数据丢失。根据概率知识我们知道，如果把不同节点故障看做独立事件，那么集群中的节点数越多，发生 2 个节点同时故障的概率也就越大，从而整个集群的可用性反而越低，这真是一个悲伤的事实！因此，3 副本配置只能提供比较基本的数据安全保障，对于核心业务的关键数据，建议使用 5 副本甚至 7 副本。</description></item><item><title>理解 Google F1: Schema 变更算法</title><link>http://disksing.com/understanding-f1-schema-change/</link><pubDate>Wed, 18 Nov 2015 00:00:00 +0000</pubDate><guid>http://disksing.com/understanding-f1-schema-change/</guid><description>注：本文已被《从零开始写分布式数据库》一书收录。
+背景 F1 是 Google 开发的分布式关系数据库，主要服务于 Google 的广告系统，它提供强一致性、高可用性，并支持传统 SQL 查询，近来也常常被称之为所谓的 NewSQL。
+F1 是构建于 Spanner 之上的。Spanner 是 Google 开发的全球级数据存储引擎，它保证了数据存储的一致性和可用性，还通过 2PC（两阶段提交）提供了分布式事务读写。在分析 F1 时，我们可以简单地认为 Spanner 是一个全球分布的 kv 数据库。
+F1 系统运行时由多台独立的 F1 服务器组成，为了保证整个系统的高可用性，F1 服务器被设计为无状态的，而且不存储数据——节点可以随时上线下线，客户端可以连接至任意节点发送请求。F1 服务器主要职能是将 RDBMS 中的结构化数据映射为可存储于 Spanner 的 kv 对，同时将客户端的 SQL 请求翻译成 get, set, del 等简单的 kv 操作。
+Schema 也就是关系数据库中表、列、索引、约束等定义，对应于 SQL 中的 DDL。很显然，Schema 决定了 F1 服务器的具体工作方式，客户端请求的解析和验证由 Schema 决定，之后如何翻译成 kv 操作也由 Schema 决定，Schema 可以被认为是 F1 服务器运行时所依赖的元信息。实践中，F1 服务器运行时自身会缓存一份 Schema 并有一定的机制保持定时更新。
+F1 中的 Schema 变更是在线的、异步的，Schema 变更的过程中所有数据保持可用，保持数据一致性，并最大限度的减小对性能的影响。最大的难点在于所有 F1 服务器的 Schema 变更是无法同步的，也就是说不同的 F1 服务器会在不同的时间点切换至新 Schema。</description></item></channel></rss>

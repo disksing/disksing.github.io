@@ -1,1 +1,12 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>算法 on 硬盘在歌唱</title><link>https://disksing.com/tags/%E7%AE%97%E6%B3%95/</link><description>Recent content in 算法 on 硬盘在歌唱</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Tue, 16 Jun 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://disksing.com/tags/%E7%AE%97%E6%B3%95/index.xml" rel="self" type="application/rss+xml"/><item><title>如何快速检测新冠病毒</title><link>https://disksing.com/ncov-testing/</link><pubDate>Tue, 16 Jun 2020 00:00:00 +0000</pubDate><guid>https://disksing.com/ncov-testing/</guid><description>这几天，北京迎来了第二波新冠疫情。由于这一波疫情爆发在人流量大而密集的新发地市场，感染人群的排查上也遇到了严峻挑战。其中一个很突出的问题就是</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>算法 on 硬盘在歌唱</title><link>http://disksing.com/tags/%E7%AE%97%E6%B3%95/</link><description>Recent content in 算法 on 硬盘在歌唱</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Tue, 16 Jun 2020 00:00:00 +0000</lastBuildDate><atom:link href="http://disksing.com/tags/%E7%AE%97%E6%B3%95/index.xml" rel="self" type="application/rss+xml"/><item><title>如何快速检测新冠病毒</title><link>http://disksing.com/ncov-testing/</link><pubDate>Tue, 16 Jun 2020 00:00:00 +0000</pubDate><guid>http://disksing.com/ncov-testing/</guid><description>这几天，北京迎来了第二波新冠疫情。由于这一波疫情爆发在人流量大而密集的新发地市场，感染人群的排查上也遇到了严峻挑战。其中一个很突出的问题就是北京市每天能承载的核酸检测量是有限的，无法承受大量检测需求带来的冲击。
+核酸检查72小时才能出结果的通知
+联想到之前武汉10天检测了1000万人的新闻，平均每天的检查量是恐怖的 100 万。在当时也有一些报道，介绍了检测方式是把多份样本混合在一起进行检测，从而总体上增快了检测速度。
+混检的原理是这样的，把多个人的样本混合在一起送到实验室进行核酸扩增检测，如果样本没有被检测出病毒，那么说明这些人都没有被感染，反之说明这些人中至少有一个人被感染，再对这些疑似人群再进行第二轮检查（不多人样本混合）。在感染比例不高的情况下，只有极少数的人需要检查第二轮，因此总体上大大减少了实验室需要检查的样本数量，提升了检测速度。
+根据之前流传的小道消息，这次北京待检测的总人数可能有几十万之多。这个消息不一定准确，不过根据官方公开的资料，北京一天的检查数量是 70000 多，加上上面的图片说需要等 3 天才能出检测结果，也算是侧面验证了总检测量几十万人的说法。
+那么，如果北京这一次也参照武汉的方式进行样本混合检测，是否会是更好的选择呢？
+为了简化讨论，我们假设北京需要检测的总人数是 30 万，每天最大能承载的检测量是 10 万，阳性比例我们假定是 0.1%，也就是说有共约 300 人感染。
+我们用下面几个指标来评价检测方法的优劣，好的检测方法应该要能：
+尽快找到感染人群。 尽快排除未感染的疑似人群。 使用尽量少的总检查样本数。 先来看一人一样本的传统方法。检查完 30 万人需要满负荷检测 3 天，平均每天检出 100 人，总检测量是 30 万。
+/ Day0 Day1 Day2 Day3 确诊 0 100 200 300 疑似 300,000 200,000 100,000 0 总检测 0 100,000 200,000 300,000 再来看使用样本混合的方法。根据现有资料，专家建议混检不宜超过 10 人样本，我们就以每 10 人样本混合来分析。
+第一天采集所有 30 万人的样本，并混合成 3 万个瓶子，其中有 300 个瓶子会被检测出病毒（注：这里忽略掉多个感染样本混入一个瓶子的情况），这 300 个瓶子对应的 3000 人就是第一天查完之后的疑似。
+/ Day0 Day1 Day2 确诊 0 0 300 疑似 300,000 3,000 0 总检测 0 30,000 33,000 这个方法比前一种要好。它提前 1 天排查出全部 300 个病例，第二就能将疑似降到 3000 人的水平，这对尽早进行流行病学排查和防控非常有利，而且总体检测量只有前者的约 1/10，节约了实验室的成本和压力。</description></item></channel></rss>
