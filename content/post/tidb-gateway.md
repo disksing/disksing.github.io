@@ -2,7 +2,7 @@
 title: "给TiDB（MySQL）写一个代理网关"
 date: "2022-08-24"
 tags: ["TiDB", "MySQL", "serverless"]
-description: "引入数据库网关来优化TiDB Cloud云服务的故事，以及处理MySQL协议的糟心细节"
+description: "引入数据库网关来优化TiDB Cloud服务运营成本的故事，以及处理MySQL协议的糟心细节"
 ---
 
 转到cloud团队（主要做TiDB Cloud DevTier）后，这几个月大部分时间都在tidb-gateway这么个项目上折腾。现在一期功能算是上线了，准备开始做二期，趁这个机会简单总结一下。
