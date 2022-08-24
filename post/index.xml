@@ -1,4 +1,44 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>文章 - 硬盘在歌唱 on 硬盘在歌唱</title><link>http://disksing.com/post/</link><description>Recent content in 文章 - 硬盘在歌唱 on 硬盘在歌唱</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Fri, 01 Apr 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://disksing.com/post/index.xml" rel="self" type="application/rss+xml"/><item><title>论怎么与基层干部打成一片</title><link>http://disksing.com/country-story/</link><pubDate>Fri, 01 Apr 2022 00:00:00 +0000</pubDate><guid>http://disksing.com/country-story/</guid><description>下午发了条推特，讲与基层干部的斗争经验，看起来感兴趣的网友还不少。
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>文章 - 硬盘在歌唱 on 硬盘在歌唱</title><link>http://disksing.com/post/</link><description>Recent content in 文章 - 硬盘在歌唱 on 硬盘在歌唱</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Wed, 24 Aug 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://disksing.com/post/index.xml" rel="self" type="application/rss+xml"/><item><title>给TiDB（MySQL）写一个代理网关</title><link>http://disksing.com/tidb-gateway/</link><pubDate>Wed, 24 Aug 2022 00:00:00 +0000</pubDate><guid>http://disksing.com/tidb-gateway/</guid><description>转到cloud团队（主要做TiDB Cloud DevTier）后，这几个月大部分时间都在tidb-gateway这么个项目上折腾。现在一期功能算是上线了，准备开始做二期，趁这个机会简单总结一下。
+因为TiDB是兼容MySQL协议的，所以主要其实就是折腾MySQL协议，然后如果你想做一个MySQL Gateway，大部分内容应该也是兼容的。我把相关代码整理了一下放在 tidb-gateway项目。
+项目背景 先简单说下为什么需要做网关。由于TiDB Cloud是没有多租户或者serverless支持的，这就是说，用户每创建一个集群（包括免费的DevTier），我们在后台就会真给创建一个独立的集群。
+跟友商的serverless方案相比，我们这么做的好处大概就是开发速度快，不用为上云做特别的改动，然后缺点就是贵。
+为了降低成本，我们在DevTier上做了一定的“体验降级”：当用户的集群在连续一段时间不使用之后，我们会保存数据并把集群休眠，下次用户再需要使用的时候，需要先进行一个手动唤醒操作。
+这么做完了有一定效果，至少对于已经“跑路”的集群，我们不用无限期地付出成本了。但是要继续优化，我们遇到两个障碍：
+由于MySQL协议的限制，客户端通过TCP连接到服务器后，是由服务器首先发送第一个消息，同时因为是裸TCP连接，不像HTTP有请求Header可以知道客户访问的域名来进行路由。这样我们不得不为每个用户集群创建独立公网LB——据说这个还挺贵的。
+临时关停的集群需要在网站上手动开启，用户体验负分，这导致我们权衡之下只针对静默7天以上（基本判定是跑路了）的集群做休眠处理，这样对每个集群都额外付出了7天的成本。
+解决这两个问题的方法自然就是在TiDB前端引入一个网关服务了。
+网关负责接受客户端连接并与之交换消息，等拿到用户信息之后，以代理的方式去连接真正的用户集群。同时，如果用户集群处于休眠状态，网关可以把连接阻塞，然后通知K8s唤醒，这样一来用户在休眠后第一次连接时等待一段时间，不需要在网页端做额外操作了。
+MySQL建立连接过程 我们先简单分析一下MySQL的连接建立流程。
+客户端向服务端建立TCP连接。
+服务端返回InitialHandshake消息，其中包括版本号和一些兼容性标记（比如是否支持TLS等）
+客户端返回HandshakeResponse消息，其中包括兼容性标记、连接使用的用户名及数据库名。
+服务端和客户端根据AuthMethod交换若干次消息，直到服务端返回Ok或者Err消息，说明连接成功建立或者失败。
+TLS连接建立过程 如果需要启用安全连接，步骤3中，Client会先发送半个HandshakeResponse消息包，其中携带了ClientSSL标记，服务端读到此标记后，会发起将TCP连接升级为TLS连接，升级完成后，Client会再次发送HandshakeResponse消息回归到常规流程。
+鉴权FastPath及AuthMethod磋商 为了减少建立连接过程种消息交换的次数，MySQL Protocol有一个鉴权的快速通道。
+在服务端发送InitialHandshake消息时，会先默认猜一个AuthMethod，并随机生成8字节或者更长的challenge payload，放在InitialHandshake消息中一起发给客户端。（为什么说是“猜”呢，因为不同用户可能设置不同的AuthMethod，然而在这一阶段，服务端还不知道要连接的用户是哪一个，自然不知道正确的AuthMethod应该是什么了）
+客户端根据AuthMethod定义的方法对密码+payload加以计算，计算结果连同AuthMethod一起放在HandshakeResponse里一起发给服务端。
+如果服务端读取对应的用户表之后，发现AuthMethod跟猜测的一致，那么就可以直接验证客户端的计算结果了，成功后直接返回Ok，这样就完成连接建立了。否则，服务端需要发送AuthMethodSwitchRequest来重新进行鉴权。
+tidb-gateway的实现 Gateway的实现基本上就是经典的man-in-the-middle，在客户端和后端TiDB之间相互转发消息，顺便在中间做一些手脚。不过，首先需要解决的问题是，怎么获得连接对应的是哪个用户集群来进行路由。
+传递cluster id 对客户端来说，它仍然是以连接MySQL Server的方式在连接Gateway，所以我们需要想办法在协议中插入集群信息。
+MySQL的HandshakeResponse中有个Attrs字段可以用来插入一些自定义信息，可惜不是所有的DB Driver都支持设置。权衡之下，我们最后决定直接把集群id跟用户id拼接在一起，比如默认的root用户改成{clusterid}.root，这样虽然看上去有点怪，但是能保证兼容所有的客户端。
+连接建立过程 这个过程比较显然了：
+客户端向Gateway建立TCP连接。
+Gateway构造一个默认的InitialHandshake消息返回给客户端。
+客户端发送HandshakeResponse消息给Gateway。
+Gateway解开HandshakeResponse，如果设置了ClientSSL此处将连接升级成TLS连接。
+Gateway根据UserName设置的clusterid找到用户集群发起TCP连接，此处如果集群处于休眠状态要先唤醒。
+TiDB向Gateway发送InitialHandshake。
+Gateway把从客户端收到的HandshakeResponse发送给TiDB。
+Gateway把两个连接串连起来对拷数据。
+AuthMethod的特殊处理 由于MySQL协议中鉴权FastPath的存在，这个过程是有问题的：客户端收到的challenge payload是一开始由Gateway生成的，它跟后端TiDB发给Gateway的显然不一致，这将导致后端TiDB在收到HandshakeResponse后校验失败报错。
+不过，校验失败的前提条件是FastPath被成功激活，即TiDB初始猜测的AuthMethod是正确的，否则TiDB不会激活FastPath，而是发送AuthMethodSwitchRequest尝试重新鉴权。
+解决这个问题的方法也很简单，我们把转发给TiDB的HandshakeResponse篡改一下，改成一个TiDB不认识的AuthMehod，这样FastPath就不会激活了。
+TLS的特殊处理 因为Gatway和TiDB的连接是在足够安全的内网，从节约能源的角度考虑，我们希望避免在Gateway和TiDB使用安全连接。
+这样就带来一些问题：在客户端看来，它跟服务器之间是安全连接，但是在TiDB看来，连接是非安全的，会产生一些不一致的现象。比如require_secure_transport功能（这个选项限制TiDB只接受安全连接）就不能用了，还有系统表中Ssl相关的信息显示也都不正常。
+解决办法是利用了MySQL Protocol的那个可以在插入自定义Attrs的功能，由Gateway把客户端连接的TLS相关信息通过Attrs发送给TiDB，然后我们给TiDB打了个小补丁，让它可以把TLS信息解析出来，并设置上安全连接的标记。
+数据压缩和sequence number MySQL协议支持设置数据压缩，可以在进行导入导出等场景下显著节约流量。与TLS类似的，我们也希望数据压缩只在客户端和Gateway之间启用，Gateway和TiDB之间保持关闭以减少TiDB的CPU消耗。
+不过，MySQL Protocol中有一个sequence number的概念，它需要被携带在每个消息包中，并且在一次客户端服务器交互过程中保持+1递增。譬如，客户端向服务器发送一个查询，拆分成2个消息包，sequence number就分别是0、1，服务器返回2次result，拆分成3个消息外，sequence number分别是2、3、4，然后客户端发送下一轮查询，再从0开始重新计数。
+当Gateway两端的压缩方式不一致时，拆分包的粒度不一样，会产生sequence number对不上的情况。所以这种情况下，就不能简单地做data stream拷贝了，而是要认认真真把每个消息包解出来，并在两端分别维护sequence number。</description></item><item><title>论怎么与基层干部打成一片</title><link>http://disksing.com/country-story/</link><pubDate>Fri, 01 Apr 2022 00:00:00 +0000</pubDate><guid>http://disksing.com/country-story/</guid><description>下午发了条推特，讲与基层干部的斗争经验，看起来感兴趣的网友还不少。
 谈一下与小地方基层干部的斗争经验。他们最忌惮的主要3点：怕上级，怕舆情，怕有背景的人。
 所以我们遇事绝对不能怂，讲道理讲不明白就直接问对方哪个部门的，上级是谁，让他相信你有可能把事情往上捅，尽量说普通话，有单反相机的话可以挂身上，平时背几句党员的群众路线啥的备着，保准势如破竹。
 &amp;mdash; 象牙山刘能🔑 (@disksing) April 1, 2022 干脆借着兴致简单讲两个小故事，就图一乐，大家别当真哈哈。
@@ -333,8 +373,4 @@ CockroachDB 的外部一致性 CockroachDB 用的是 HLC（混合逻辑时钟）
 流程分析 1. etcd Leader 选举
 PD 的 leader 选举并非自己实现 raft，而是直接内嵌了 embedded etcd，然后基于 etcd 提供的 lease 机制来实现 leader 选举。
 内嵌 etcd 的好处是部署上比较简单，但是也带来了负面效果：如果 etcd 的 leader 在故障的节点上，PD 需要先等 etcd 选举出 leader 并恢复服务。
-PD 配置中的 election-interval 用于控制 etcd 的选举超时时间，默认配置也是 3s。通常情况下，这一步耗时约为 3s，如果选举时出现分票的情况，可能还会稍长一些。</description></item><item><title>五句话理解 Rust 所有权</title><link>http://disksing.com/understanding-rust-ownership/</link><pubDate>Sat, 08 Feb 2020 00:00:00 +0000</pubDate><guid>http://disksing.com/understanding-rust-ownership/</guid><description>先免责声明一下哈，我是 Rust 新手入门，也没研究过 Rust 编译器。本文只是我自己学习 Rust 所有权时的一些思路，或者说对相关概念的一种解释吧，仅供参考，有谬误在所难免，还请指正。
-1. 所有权检查在编译期约束变量名如何访问资源。 所有权检查是编译期的静态检查。这意味着它将不会带来任何运行时的开销。但同时需注意编译器通常不会考虑你的程序将怎样运行，而是基于代码结构做出判断，这使得它经常看上去不那么聪明。
-比如你依次写两个条件互斥的 if，编译器可不想那么多，直接告诉你不能 move x 两次。
-1fn foobar(n: isize, x: Box&amp;lt;i32&amp;gt;) { 2 if n &amp;gt; 1 { 3 let y = x; 4 } 5 if n &amp;lt; 1 { 6 let z = x; // error[E0382]: use of moved value: `x` 7 } 8} 甚至你把 move 操作放在循环次数固定为 1 的 for 循环里面，编译器也傻傻看不出来：
-1fn foobar(x: Box&amp;lt;i32&amp;gt;) { 2 for _ in 0.</description></item></channel></rss>
+PD 配置中的 election-interval 用于控制 etcd 的选举超时时间，默认配置也是 3s。通常情况下，这一步耗时约为 3s，如果选举时出现分票的情况，可能还会稍长一些。</description></item></channel></rss>
