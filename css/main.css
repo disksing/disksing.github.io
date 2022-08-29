@@ -152,14 +152,14 @@ table {
 
 .intro > h1 {
     color: #212121;
-    font-size: 12vh;
+    font-size: calc(min(5vw, 300px));
     font-weight: normal;
     margin: 0 0 0 0;
 }
 
 .intro > h2 {
     color: #757575;
-    font-size: 3vmin;
+    font-size: calc(0.3*min(5vw, 300px));
     font-weight: normal;
     margin: 0 0 0 0;
 }
