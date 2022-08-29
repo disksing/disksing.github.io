@@ -26,7 +26,6 @@ rssLimit = 20
     accent = "red"
     showBorder = true
     backgroundColor = "white"
-    font = "Noto Serif SC" # should match the name on Google Fonts!
     favicon = "favicon.png"
 
 [permalinks]
