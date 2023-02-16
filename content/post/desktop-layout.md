@@ -43,7 +43,7 @@ end)
 
 最后还有一个问题，就是我平时需要启动的 IM 太多了，虽然大部分消息都是不需要实时处理的，但是为了不错过重要消息，不得不隔一段时间手动检查一遍。解决这个问题我还是用 HammerSpoon 脚本，我会把各种不需要实时关心的IM窗口全扔到4号格子里，然后用脚本开个定时器，隔一段时间就把这一坨里在最下面的窗口给捞到最前面。3号窗口是固定不切换的，预留给比较重要的IM窗口，比如飞书。
 
-这个切换窗口的 HammerSpoon 脚本也分享一下：
+这个切换窗口的 HammerSpoon 脚本也分享一下。Hammerspoon的lua引擎似乎有点问题，定时器跑一段时间就跑没了，所以干脆直接在每次触发后把脚本重载一下。
 
 ```lua
 local myTimer = hs.timer.new(120, function()
@@ -60,6 +60,7 @@ local myTimer = hs.timer.new(120, function()
         end
     end
     if bottom_win ~= nil then bottom_win:raise() end
+    hs.reload() // timer will be lost after a while, reload script here to fix
 end)
 myTimer:start()
 ```
