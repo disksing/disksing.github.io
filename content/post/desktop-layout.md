@@ -60,7 +60,7 @@ local myTimer = hs.timer.new(120, function()
         end
     end
     if bottom_win ~= nil then bottom_win:raise() end
-    hs.reload() // timer will be lost after a while, reload script here to fix
+    hs.reload()
 end)
 myTimer:start()
 ```
