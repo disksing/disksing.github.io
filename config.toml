@@ -52,8 +52,8 @@ name = "开源项目"
 weight = 4
 
 [[menu.main]]
-url = "/activity/"
-name = "动态"
+url = "/story/"
+name = "故事"
 weight = 5
 
 [[menu.main]]
