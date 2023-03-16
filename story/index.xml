@@ -1,4 +1,34 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>故事 - 硬盘在歌唱 on 硬盘在歌唱</title><link>http://disksing.com/story/</link><description>Recent content in 故事 - 硬盘在歌唱 on 硬盘在歌唱</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Tue, 07 Mar 2023 00:00:00 +0000</lastBuildDate><atom:link href="http://disksing.com/story/index.xml" rel="self" type="application/rss+xml"/><item><title>离婚推文合订本</title><link>http://disksing.com/story/divorce/</link><pubDate>Tue, 07 Mar 2023 00:00:00 +0000</pubDate><guid>http://disksing.com/story/divorce/</guid><description>收到了终审判决，即日正式离婚，如释重负。
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>故事 - 硬盘在歌唱 on 硬盘在歌唱</title><link>http://disksing.com/story/</link><description>Recent content in 故事 - 硬盘在歌唱 on 硬盘在歌唱</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Wed, 15 Mar 2023 00:00:00 +0000</lastBuildDate><atom:link href="http://disksing.com/story/index.xml" rel="self" type="application/rss+xml"/><item><title>热门推文合订本(51-100)</title><link>http://disksing.com/story/hot-tweets-2/</link><pubDate>Wed, 15 Mar 2023 00:00:00 +0000</pubDate><guid>http://disksing.com/story/hot-tweets-2/</guid><description>职业生涯见过的最脑洞大开的代码是在10多年前的一个C++网络游戏项目。
+大致情况是在服务端new一结构体，设置好相关字段后把指针放在消息包里传给客户端。
+刚毕业的我直接被惊掉下巴：指针是服务器的内存地址，发到客户端怎么能用呢？而且指针也没留副本，那个结构体不会内存泄漏吗？
+👇评论区揭晓答案
+&amp;mdash; 象牙山刘能 (@disksing) August 5, 2022 更新一下离婚进展，抚养权诉讼一案，一审胜诉！
+赢的特别艰难，我们前期准备不充分，而对方暗暗花了大量时间搜集对我不得的证据，加之法官也是4岁小孩的母亲，开庭前一天跟我说的是到时候肯定不会判给我。幸好我们稳扎稳打不放弃，认真对待每一步流程，光是给法庭的陈述意见我就写了好几份大几千字的。
+&amp;mdash; 象牙山刘能 (@disksing) December 16, 2022 朋友们，大结局要来了！悲剧还是喜剧就看我的嘴炮能力了。 pic.twitter.com/NV4ASgWACX
+&amp;mdash; 象牙山刘能 (@disksing) February 23, 2023 天灭Kubernetes 退云原生保平安
+人在做 天在看 声明式API留祸患
+故障一出天地灭 格式化etcd保平安
+诚信诚念裸机好 虚拟主机平安保
+开源弟子说真相 教你脱险莫拒绝
+网上搜 ⑨评Kubernetes 有 真 相
+&amp;mdash; 象牙山刘能 (@disksing) June 8, 2022 外卖定律：好吃，便宜，卫生这3项最多只能选2个。
+&amp;mdash; 象牙山刘能 (@disksing) October 11, 2022 王小波和习近平是同龄人，早年经历也颇为相似。
+他们都在北京出生，年龄相差仅1岁，几乎同时在上山下乡运动中下放农村插队，后来都回到北京上大学，之后相隔一年先后结婚。
+1982年，李银河赴美国留学，2年之后王也同往美国。
+1982年，习选择放弃移民英国跟柯玲玲离婚，赴河北上任，从此正式走上仕途。
+&amp;mdash; 象牙山刘能 (@disksing) October 18, 2022 我这收藏了一篇很有意思的文章 https://t.co/LxZeb03tkA https://t.co/KC7dnNVjv9
+&amp;mdash; 象牙山刘能 (@disksing) October 9, 2022 在AI的智能终于超过人类的时候，人们发现AI模型并没有发展到之前想象的那般复杂，然后才意识到原来人类思维的本质也不过是机械的模仿、生成、变换、随机组合……</description></item><item><title>热门推文合订本(1-50)</title><link>http://disksing.com/story/hot-tweets-1/</link><pubDate>Tue, 14 Mar 2023 00:00:00 +0000</pubDate><guid>http://disksing.com/story/hot-tweets-1/</guid><description>{{ &amp;lt; tweet user=&amp;ldquo;disksing&amp;rdquo; id=&amp;ldquo;1523631198375129089&amp;rdquo; &amp;gt;}}
+{{ &amp;lt; tweet user=&amp;ldquo;disksing&amp;rdquo; id=&amp;ldquo;1594905218126589954&amp;rdquo; &amp;gt;}}
+{{ &amp;lt; tweet user=&amp;ldquo;disksing&amp;rdquo; id=&amp;ldquo;1624956690121789440&amp;rdquo; &amp;gt;}}
+{{ &amp;lt; tweet user=&amp;ldquo;disksing&amp;rdquo; id=&amp;ldquo;1536578138020270080&amp;rdquo; &amp;gt;}}
+{{ &amp;lt; tweet user=&amp;ldquo;disksing&amp;rdquo; id=&amp;ldquo;1579497994843750400&amp;rdquo; &amp;gt;}}
+{{ &amp;lt; tweet user=&amp;ldquo;disksing&amp;rdquo; id=&amp;ldquo;1508277445958328323&amp;rdquo; &amp;gt;}}
+{{ &amp;lt; tweet user=&amp;ldquo;disksing&amp;rdquo; id=&amp;ldquo;1574931899037798400&amp;rdquo; &amp;gt;}}
+{{ &amp;lt; tweet user=&amp;ldquo;disksing&amp;rdquo; id=&amp;ldquo;1591359352056999937&amp;rdquo; &amp;gt;}}
+{{ &amp;lt; tweet user=&amp;ldquo;disksing&amp;rdquo; id=&amp;ldquo;1582017780294946817&amp;rdquo; &amp;gt;}}
+{{ &amp;lt; tweet user=&amp;ldquo;disksing&amp;rdquo; id=&amp;ldquo;1631528475009105922&amp;rdquo; &amp;gt;}}
+{{ &amp;lt; tweet user=&amp;ldquo;disksing&amp;rdquo; id=&amp;ldquo;1599331148219678720&amp;rdquo; &amp;gt;}}
+{{ &amp;lt; tweet user=&amp;ldquo;disksing&amp;rdquo; id=&amp;ldquo;1626426615432609801&amp;rdquo; &amp;gt;}}</description></item><item><title>离婚推文合订本</title><link>http://disksing.com/story/divorce/</link><pubDate>Tue, 07 Mar 2023 00:00:00 +0000</pubDate><guid>http://disksing.com/story/divorce/</guid><description>收到了终审判决，即日正式离婚，如释重负。
 &amp;mdash; 象牙山刘能 (@disksing) March 6, 2023 经历过离婚诉讼之后，我在生活习惯上最大的改进就是每天携带录音笔，早上一起床就打开录音，一直到晚上睡觉前摘下来充电，每天产生约1GB数据，我说过的每一句话都有据可查。
 &amp;mdash; 象牙山刘能 (@disksing) March 1, 2023 家人们，今天离婚大战迎来始料未及的转折。
 我来到法庭踌躇满志准备大干一场，却发现我那不走寻常路的准前妻直接没来。
