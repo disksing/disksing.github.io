@@ -43,7 +43,7 @@ h6:hover a.anchor {
 h1 {
     text-align: center;
     padding-bottom: .3em;
-    font-size: 1.75em;
+    font-size: 2em;
     line-height: 1.2;
     margin: 1em auto 1.2em;
     text-decoration: dashed var(--accent) underline 3px;
@@ -51,13 +51,13 @@ h1 {
 
 
 h2 {
-    font-size: 1.5em;
+    font-size: 1.75em;
     padding-left: 9px;
     line-height: 1.4;
     border-left: 6px solid var(--accent)
 }
 h3 {
-    font-size: 1.25em;
+    font-size: 1.6em;
     line-height: 1.43
 }
 .content h3:before {
@@ -72,7 +72,7 @@ h3 {
     margin-right: 8px
 }
 h4 {
-    font-size: 1.25em
+    font-size: 1.5em
 }
 .content h4:before {
     background-color: var(--accent);
@@ -85,27 +85,27 @@ h4 {
     margin-right: 8px
 }
 h5 {
-    font-size: 1em;
+    font-size: 1.5em;
     color: #333
 }
 h6 {
-    font-size: 1em;
+    font-size: 1.5em;
     color: #777
 }
 
 p, ul, ol {
-    font-size: 1.2em;
+    font-size: 1.4em;
 }
 
 blockquote > p {
-    font-size: 1em;
+    font-size: 1.4em;
 }
 
 main {
     margin: auto;
     padding: 25px;
     flex: 1 0 auto;
-    max-width: 750px;
+    max-width: 1050px;
 }
 
 img {
