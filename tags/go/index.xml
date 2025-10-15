@@ -6,4 +6,4 @@
 在 Rust 里面有一个 Self 来解决这个种问题。在 impl 的时候，你的具体类型是啥，就返回啥。
 1trait Copyable { 2 fn copy(&amp;amp;self) -&amp;gt; Self 3} 在 Go 里面，没有泛型之前，我们一般是这么干的：
 1type Copyable interface { 2 Copy() Copyable 3} 不过这不是泛型，只是一个常规的 interface。我们在实现具体 struct 的时候，Copy() 只能返回 Copyable 而不能用具体类型，在使用的时候还需要强转一下。
-1type myType struct{} 2 3func (t myType) Copy() Copyable { 4	return myType{} 5} 6 7func main() { 8	x := myType{} 9	y := x.</description></item></channel></rss>
+1type myType struct{} 2 3func (t myType) Copy() Copyable { 4 return myType{} 5} 6 7func main() { 8 x := myType{} 9 y := x.</description></item></channel></rss>

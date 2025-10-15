@@ -43,7 +43,8 @@
 小朋友：那它跑1光年需要多长时间？
 我：4万多年。
 小朋友（震惊）：1光年这么远啊！</description></item><item><title>都2024了，你还没随身带录音笔吗？</title><link>http://disksing.com/life-recording/</link><pubDate>Fri, 29 Dec 2023 00:00:00 +0000</pubDate><guid>http://disksing.com/life-recording/</guid><description>2023年我最满意的数码产品就是索尼ICD-TX660录音笔，我几乎每天使用它的时间都在15小时以上，它已然成为了我生活的一部分。
-ICD-TX660为什么要录音 一开始，我的需求源于一次惨痛的经历——离婚过程中，我被前妻用捏造的证据陷害。这给我敲响了警钟，让我开始逐渐意识到保存生活中的数字资料的重要性。生活中的每一次对话，都可能成为日后的关键证据。
+ICD-TX660
+为什么要录音 一开始，我的需求源于一次惨痛的经历——离婚过程中，我被前妻用捏造的证据陷害。这给我敲响了警钟，让我开始逐渐意识到保存生活中的数字资料的重要性。生活中的每一次对话，都可能成为日后的关键证据。
 经历过离婚诉讼之后，我在生活习惯上最大的改进就是每天携带录音笔，早上一起床就打开录音，一直到晚上睡觉前摘下来充电，每天产生约1GB数据，我说过的每一句话都有据可查。
 &amp;mdash; 象牙山刘能 (@disksing) March 1, 2023 这就是带录音笔进行全天候录音的最主要作用了：保留证据，规避法律风险和纠纷。无论是在商业交易中确认谈话内容，还是在私人生活中避免被误解或诬告，录音都提供了一个强有力的保障，可以作为证据的备份，减少不必要的麻烦。
 可能有人会觉得，这样做太过极端，法庭和诉讼离自己很远，自己在生活中也没遇到过什么恶人，似乎并不值得这样做。但是，当我自己开始这样做之后，我发现每天看到的社会新闻有好大一部分，只要身上有录音笔在录着音，都是可以避免的，比如：
@@ -195,7 +196,8 @@ Beancount —— 命令行复式簿记 by wzyboy beancount 起步 by MoreFreeze 
 这段代码是在单测里虚拟一个集群添加一些节点，原来的代码是这样的（无关细节略作调整）：
 1testCluster := mockcluster.NewCluster(opt) 2testCluster.AddLabelsStore(1, 1, map[string]string{&amp;#34;zone&amp;#34;: &amp;#34;z1&amp;#34;}) 3testCluster.AddLabelsStore(2, 1, map[string]string{&amp;#34;zone&amp;#34;: &amp;#34;z1&amp;#34;}) 4testCluster.AddLabelsStore(3, 1, map[string]string{&amp;#34;zone&amp;#34;: &amp;#34;z2&amp;#34;}) 5testCluster.AddLabelsStore(4, 1, map[string]string{&amp;#34;zone&amp;#34;: &amp;#34;z2&amp;#34;}) 6testCluster.AddLabelsStore(5, 1, map[string]string{&amp;#34;zone&amp;#34;: &amp;#34;z3&amp;#34;}) 优化过之后的代码是这样的：
 1testCluster := mockcluster.NewCluster(opt) 2allStores := []struct { 3 storeID uint64 4 regionCount int 5 labels map[string]string 6}{ 7 {1, 1, map[string]string{&amp;#34;zone&amp;#34;: &amp;#34;z1&amp;#34;}}, 8 {2, 1, map[string]string{&amp;#34;zone&amp;#34;: &amp;#34;z1&amp;#34;}}, 9 {3, 1, map[string]string{&amp;#34;zone&amp;#34;: &amp;#34;z2&amp;#34;}}, 10 {4, 1, map[string]string{&amp;#34;zone&amp;#34;: &amp;#34;z2&amp;#34;}}, 11 {5, 1, map[string]string{&amp;#34;zone&amp;#34;: &amp;#34;z3&amp;#34;}}, 12} 13for _, store := range allStores { 14 testCluster.</description></item><item><title>如何快速检测新冠病毒</title><link>http://disksing.com/ncov-testing/</link><pubDate>Tue, 16 Jun 2020 00:00:00 +0000</pubDate><guid>http://disksing.com/ncov-testing/</guid><description>这几天，北京迎来了第二波新冠疫情。由于这一波疫情爆发在人流量大而密集的新发地市场，感染人群的排查上也遇到了严峻挑战。其中一个很突出的问题就是北京市每天能承载的核酸检测量是有限的，无法承受大量检测需求带来的冲击。
-核酸检查72小时才能出结果的通知联想到之前武汉10天检测了1000万人的新闻，平均每天的检查量是恐怖的 100 万。在当时也有一些报道，介绍了检测方式是把多份样本混合在一起进行检测，从而总体上增快了检测速度。
+核酸检查72小时才能出结果的通知
+联想到之前武汉10天检测了1000万人的新闻，平均每天的检查量是恐怖的 100 万。在当时也有一些报道，介绍了检测方式是把多份样本混合在一起进行检测，从而总体上增快了检测速度。
 混检的原理是这样的，把多个人的样本混合在一起送到实验室进行核酸扩增检测，如果样本没有被检测出病毒，那么说明这些人都没有被感染，反之说明这些人中至少有一个人被感染，再对这些疑似人群再进行第二轮检查（不多人样本混合）。在感染比例不高的情况下，只有极少数的人需要检查第二轮，因此总体上大大减少了实验室需要检查的样本数量，提升了检测速度。
 根据之前流传的小道消息，这次北京待检测的总人数可能有几十万之多。这个消息不一定准确，不过根据官方公开的资料，北京一天的检查数量是 70000 多，加上上面的图片说需要等 3 天才能出检测结果，也算是侧面验证了总检测量几十万人的说法。
 那么，如果北京这一次也参照武汉的方式进行样本混合检测，是否会是更好的选择呢？

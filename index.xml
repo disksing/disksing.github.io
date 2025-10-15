@@ -1,4 +1,26 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>硬盘在歌唱</title><link>http://disksing.com/</link><description>Recent content on 硬盘在歌唱</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Wed, 06 Mar 2024 00:00:00 +0000</lastBuildDate><atom:link href="http://disksing.com/index.xml" rel="self" type="application/rss+xml"/><item><title>iter</title><link>http://disksing.com/project/iter/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://disksing.com/project/iter/</guid><description/></item><item><title>PD</title><link>http://disksing.com/project/pd/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://disksing.com/project/pd/</guid><description/></item><item><title>mok</title><link>http://disksing.com/project/mok/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://disksing.com/project/mok/</guid><description/></item><item><title>jsonp</title><link>http://disksing.com/project/jsonp/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://disksing.com/project/jsonp/</guid><description/></item><item><title>region-dist-cli</title><link>http://disksing.com/project/region-dist-cli/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://disksing.com/project/region-dist-cli/</guid><description/></item><item><title>父子对谈30则</title><link>http://disksing.com/father-son-chats/</link><pubDate>Wed, 06 Mar 2024 00:00:00 +0000</pubDate><guid>http://disksing.com/father-son-chats/</guid><description>推文合订本。
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>硬盘在歌唱</title><link>http://disksing.com/</link><description>Recent content on 硬盘在歌唱</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Wed, 15 Oct 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://disksing.com/index.xml" rel="self" type="application/rss+xml"/><item><title>iter</title><link>http://disksing.com/project/iter/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://disksing.com/project/iter/</guid><description/></item><item><title>PD</title><link>http://disksing.com/project/pd/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://disksing.com/project/pd/</guid><description/></item><item><title>mok</title><link>http://disksing.com/project/mok/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://disksing.com/project/mok/</guid><description/></item><item><title>jsonp</title><link>http://disksing.com/project/jsonp/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://disksing.com/project/jsonp/</guid><description/></item><item><title>region-dist-cli</title><link>http://disksing.com/project/region-dist-cli/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://disksing.com/project/region-dist-cli/</guid><description/></item><item><title>从认知心理学看代码可读性</title><link>http://disksing.com/cognitive-code-readability/</link><pubDate>Wed, 15 Oct 2025 00:00:00 +0000</pubDate><guid>http://disksing.com/cognitive-code-readability/</guid><description>最近我发现，讨论代码可读性时，认知心理学提供了一个很好的视角。那些我们熟知的最佳实践背后都有共同的心理学基础。
+代码是给人读的，而人脑处理信息的方式是有规律的。理解这些规律，就能明白为什么有些代码读起来轻松，有些代码读起来费劲；就能在面对具体问题时做出更好的判断，而不是机械地遵循教条。
+认知负荷理论：理解代码复杂度的本质 认知负荷理论（Cognitive Load Theory）由 John Sweller 在 1980 年代提出，最初用于教学设计。核心观点很简单：人的工作记忆容量有限，当认知负荷超过容量时，学习和理解效率会急剧下降。
+三种认知负荷 这个理论把认知负荷分成三种：**内在负荷（Intrinsic Load）**来自问题本身的固有复杂度，**外在负荷（Extraneous Load）**来自信息呈现方式不当带来的额外负担，**相关负荷（Germane Load）**来自构建和强化心智模型的过程。这三种负荷有个总的限制：内在负荷 + 外在负荷 + 相关负荷 ≤ 工作记忆容量。
+应用到读代码的场景：内在负荷对应问题本身的复杂度，比如分布式事务的一致性、复杂的业务逻辑；外在负荷对应代码写得烂带来的额外负担，比如糟糕的命名、混乱的结构、不一致的风格；相关负荷对应理解代码的过程，包括理解抽象、建立心智模型、学习领域知识。
+外在负荷完全可以消除，且应该尽量消除。这是我们优化代码可读性的主战场。同样的逻辑，写法不同，理解难度可能相差几倍。而相关负荷是&amp;quot;好的&amp;quot;负荷，好代码应该帮助读者高效地建立正确的心智模型。如果外在负荷太高，留给理解真正问题的容量就不够了。所以好代码的目标是最小化外在负荷，优化相关负荷。
+为什么我们需要抽象 在读代码这个任务上，内在负荷并不是一成不变的。同样的需求可以有不同的设计，不同的设计带来不同的理解问题的视角。一个好的抽象能让复杂问题变简单，从而降低内在负荷。
+举个例子：假设你要管理一堆相互依赖的状态变化，直接去处理这些状态转换会很复杂（高内在负荷）。但如果引入&amp;quot;状态机&amp;quot;这个概念来理解，问题就清晰多了。虽然学习&amp;quot;状态机&amp;quot;需要一些时间（相关负荷），但理解问题本身变简单了（内在负荷降低）。这就是好的抽象的价值：用相关负荷（学习抽象）来换取更低的内在负荷（问题变简单了）。
+从代码可读性的角度看，这解释了为什么设计模式有价值。它们提供理解复杂问题的&amp;quot;心智工具&amp;quot;，降低问题的内在复杂度。比如 Observer 模式让&amp;quot;多对多的依赖关系&amp;quot;变得容易理解。领域驱动设计（DDD）的价值也在这里：找到合适的领域抽象，让复杂的业务逻辑从&amp;quot;一团乱麻&amp;quot;变成&amp;quot;清晰的概念组合&amp;quot;。当然，设计模式和DDD还有其他方面的价值，这里只讨论它们对代码可读性的贡献。
+理解了内在负荷和相关负荷可以相互转化，我们就能明白什么是好抽象，什么是过度抽象。好抽象是降低的内在负荷大于引入的相关负荷，总认知负荷降低了。而过度抽象恰恰相反：内在负荷没降低，相关负荷却增加了，比如把简单的 5 行代码拆成 3 个函数需要跳来跳去才能理解，为了&amp;quot;可扩展性&amp;quot;引入根本用不到的复杂设计模式，为了避免&amp;quot;可能的&amp;quot;重复搞出过于通用的抽象。
+工作记忆容量限制：代码可读性的核心挑战 认知心理学的一个有趣的发现是 Miller&amp;rsquo;s Law（7±2 法则），它告诉我们：人的工作记忆容量有限，一次只能处理 5-9 个信息单元。
+这个工作记忆有点像 CPU 的寄存器：容量很小，但处理速度很快。而长期记忆更像硬盘：容量大，但访问速度慢。读代码时，我们主要依赖工作记忆来理解逻辑，如果工作记忆装不下，就得频繁去&amp;quot;硬盘&amp;quot;（长期记忆）里翻找之前看过的内容，效率就低了。
+读代码时，我们需要在脑海中记住：变量的值、状态、分支条件、上下文等。如果超过了工作记忆容量，就会忘记前面的内容，需要回头翻看，思维流程被打断，理解效率急剧下降。
+这法则可以用来解释许多常见的代码编写规范。
+比如一个函数不应该太长。原因很简单：信息太多时，工作记忆不够用，读到后面就忘了前面的内容，需要回头翻看。
+再比如为什么要拆分函数，为什么要封装类。它们的作用就是信息压缩，把占用多个工作记忆单元的信息压缩成 1 个信息单元，显著减少工作记忆占用。
+命名为什么如此重要？当命名足够准确时，我们只要看到变量名或者函数名就能直接判断它的行为，这样可以做到完全不占用工作记忆。
+不要使用过深的嵌套。这是因为在阅读过程中每进入一层嵌套时，外层的信息作为 context 需要保存在工作记忆中，嵌套过深很容易导致工作记忆不够用。而 early return 模式能很好的解决这个问题，它的价值在于：处理完某种情况后立即 return，该分支占用的记忆单元被释放，不用继续记住。
+互相调用的函数要放在一起。一方面避免读到调用函数的时候，被调用的函数信息已经因为工作记忆不够用而忘记了；另一方面被调用的函数读完很快就被用掉了，可以安全地从工作记忆中释放掉，快速腾出空间。
+其他的还有诸如减少变量的作用域、函数参数列表不要过长、变量的定义和使用不要离太远，都是类似的道理，不多说了。
+格式塔理论 格式塔揭示了代码格式的重要性：大脑会自动把零散信息组织成有意义的整体。我们可以利用这个特性来减少工作记忆占用。
+比如接近性原则：大脑会自动根据东西的间隔将它们分组。我们在编码代码时相关代码放在一起，用空行分隔不同的逻辑组。效果很明显：
+1// 没分组：20 个独立信息单元 2func handleRequest(req Request) { 3 validateAuth(req) 4 validateInput(req) 5 validatePermission(req) 6 user := getUser(req.</description></item><item><title>父子对谈30则</title><link>http://disksing.com/father-son-chats/</link><pubDate>Wed, 06 Mar 2024 00:00:00 +0000</pubDate><guid>http://disksing.com/father-son-chats/</guid><description>推文合订本。
 1 小朋友：蛇的英语是snake，那小蛇用英语怎么说？（注：上次跟他讲过cat/kitten，dog/puppy）
 我：小蛇应该没有单独的说法，不过英语里有很多种单词都指蛇，比如 Python、Anaconda、Mamba、Cobra、Viper、Asp……
 小朋友：你怎么知道这么多！
@@ -43,7 +65,8 @@
 小朋友：那它跑1光年需要多长时间？
 我：4万多年。
 小朋友（震惊）：1光年这么远啊！</description></item><item><title>都2024了，你还没随身带录音笔吗？</title><link>http://disksing.com/life-recording/</link><pubDate>Fri, 29 Dec 2023 00:00:00 +0000</pubDate><guid>http://disksing.com/life-recording/</guid><description>2023年我最满意的数码产品就是索尼ICD-TX660录音笔，我几乎每天使用它的时间都在15小时以上，它已然成为了我生活的一部分。
-ICD-TX660为什么要录音 一开始，我的需求源于一次惨痛的经历——离婚过程中，我被前妻用捏造的证据陷害。这给我敲响了警钟，让我开始逐渐意识到保存生活中的数字资料的重要性。生活中的每一次对话，都可能成为日后的关键证据。
+ICD-TX660
+为什么要录音 一开始，我的需求源于一次惨痛的经历——离婚过程中，我被前妻用捏造的证据陷害。这给我敲响了警钟，让我开始逐渐意识到保存生活中的数字资料的重要性。生活中的每一次对话，都可能成为日后的关键证据。
 经历过离婚诉讼之后，我在生活习惯上最大的改进就是每天携带录音笔，早上一起床就打开录音，一直到晚上睡觉前摘下来充电，每天产生约1GB数据，我说过的每一句话都有据可查。
 &amp;mdash; 象牙山刘能 (@disksing) March 1, 2023 这就是带录音笔进行全天候录音的最主要作用了：保留证据，规避法律风险和纠纷。无论是在商业交易中确认谈话内容，还是在私人生活中避免被误解或诬告，录音都提供了一个强有力的保障，可以作为证据的备份，减少不必要的麻烦。
 可能有人会觉得，这样做太过极端，法庭和诉讼离自己很远，自己在生活中也没遇到过什么恶人，似乎并不值得这样做。但是，当我自己开始这样做之后，我发现每天看到的社会新闻有好大一部分，只要身上有录音笔在录着音，都是可以避免的，比如：
@@ -264,7 +287,8 @@ TLS的特殊处理 因为Gatway和TiDB的连接是在足够安全的内网，从
 总结 感觉其实不怎么难，有时间可以考虑做个原型，先挖个坑。</description></item><item><title>适合程序员的桌面窗口管理方案</title><link>http://disksing.com/desktop-layout/</link><pubDate>Tue, 15 Mar 2022 00:00:00 +0000</pubDate><guid>http://disksing.com/desktop-layout/</guid><description>介绍下我在办公室使用的桌面窗口管理方案。
 先说下硬件：我的工作电脑是一台 13 英寸的 Macbook Pro，外接了一个 27 英寸的显示器，使用了一个电脑支架把笔记本架起来了，这样两个显示器差不多是并排的样子。
 然后看下我的窗口布局规划，可能会比较特殊一点，不过是经过精心考虑的。
-桌面布局示意右边的大显示器我按 1:2 分成两列，左边这一列是最大的显示空间，我把它当作“主空间”来使用，一般我在编码状态下会把编辑器放在这个位置，非编码状态下这里通常就是浏览器了。因为本来两个显示器的大小是不一样的，这样进行划分，主空间两侧的空间反而是比较均衡的状态了。显示器和电脑屏幕在桌子上的摆放也是非对称的，当我坐下时，正对着的是这个“主空间”的正中央，这样也避免一个常见问题：两个一样大的显示器对称排布时，正对着的位置恰好是两个显示器中间的缝，于是工作中几乎时刻是扭着头的，时间一长脖子就受不了了。
+桌面布局示意
+右边的大显示器我按 1:2 分成两列，左边这一列是最大的显示空间，我把它当作“主空间”来使用，一般我在编码状态下会把编辑器放在这个位置，非编码状态下这里通常就是浏览器了。因为本来两个显示器的大小是不一样的，这样进行划分，主空间两侧的空间反而是比较均衡的状态了。显示器和电脑屏幕在桌子上的摆放也是非对称的，当我坐下时，正对着的是这个“主空间”的正中央，这样也避免一个常见问题：两个一样大的显示器对称排布时，正对着的位置恰好是两个显示器中间的缝，于是工作中几乎时刻是扭着头的，时间一长脖子就受不了了。
 左边笔记本的屏幕没有做切分，这块空间一般在编码的时候放浏览器看文档资料，或者放个 Terminal 调试，也可以是另一份代码，使用完整的屏幕保证它总是够用的，不至于不得不把窗口拉大然后频繁切换窗口。
 大显示器右边的 1/3 被一分为二，这两块空间主要用来放IM软件，包括飞书、Telegram、微信、QQ、Twitter桌面版……IM软件也平铺出来也是为了减少切换窗口，我只需要在干正事的时候时不时瞟一眼就行了，有需要关注的消息时再去处理。必要的时候这个小格也可以临时放一下 Terminal 之类的小窗口。
 再说窗口管理软件方面，可能我的搞法比较变态，我也没找到合适的软件，最后使用的方案是 HammerSpoon 一点脚本，HammerSpoon 大体上就是 Mac 版的 AHK，功能是弱了很多，不过在窗口管理这一块还是完全够用的。我的脚本很简单，使用 4 个快捷键，分别把窗口移动到 4 个格子：
@@ -276,7 +300,7 @@ TLS的特殊处理 因为Gatway和TiDB的连接是在足够安全的内网，从
 在 Rust 里面有一个 Self 来解决这个种问题。在 impl 的时候，你的具体类型是啥，就返回啥。
 1trait Copyable { 2 fn copy(&amp;amp;self) -&amp;gt; Self 3} 在 Go 里面，没有泛型之前，我们一般是这么干的：
 1type Copyable interface { 2 Copy() Copyable 3} 不过这不是泛型，只是一个常规的 interface。我们在实现具体 struct 的时候，Copy() 只能返回 Copyable 而不能用具体类型，在使用的时候还需要强转一下。
-1type myType struct{} 2 3func (t myType) Copy() Copyable { 4	return myType{} 5} 6 7func main() { 8	x := myType{} 9	y := x.</description></item><item><title>双中心主从模式</title><link>http://disksing.com/dual-datacenter-master-slave/</link><pubDate>Sat, 11 Sep 2021 00:00:00 +0000</pubDate><guid>http://disksing.com/dual-datacenter-master-slave/</guid><description>在之前的Paxos从入门到学会Raft一文中，为了引入paxos/raft共识算法，简单地讨论了一下主从模式以及为什么主从模式不能最大限度地同时保证高可用和一致性。不过在现实场景中，常常因为基础设施不足，网络成本控制等原因，无法使用需要三中心的paxos/raft，所以我想再详细讨论下只有两中心的场景下的妥协方案。
+1type myType struct{} 2 3func (t myType) Copy() Copyable { 4 return myType{} 5} 6 7func main() { 8 x := myType{} 9 y := x.</description></item><item><title>双中心主从模式</title><link>http://disksing.com/dual-datacenter-master-slave/</link><pubDate>Sat, 11 Sep 2021 00:00:00 +0000</pubDate><guid>http://disksing.com/dual-datacenter-master-slave/</guid><description>在之前的Paxos从入门到学会Raft一文中，为了引入paxos/raft共识算法，简单地讨论了一下主从模式以及为什么主从模式不能最大限度地同时保证高可用和一致性。不过在现实场景中，常常因为基础设施不足，网络成本控制等原因，无法使用需要三中心的paxos/raft，所以我想再详细讨论下只有两中心的场景下的妥协方案。
 简单回顾下上次的讨论：在两中心主从模式下，我们如果想要主从切换时不丢数据，就必须使用同步模式，即主中心写入的数据，需要同步到从中心落盘，再给客户端返回写入成功。
 同步模式的困境在于，从任何一个中心的视角来看，都无法区分出“另一个中心故障”和“两中心网络断连”这两种异常情况。这导致主从模式下的failover是一定无法由程序自动进行的：
 如果主中心在发现从中心故障（或断连）时自动切换至独立运行（异步）模式，那么当主中心发生故障时，从中心无法切换至独立运行模式，因为从中心无从判断主中心是真故障了，还是网络断连了（这种情况下主中心可能已切换至独立运行模式）。
@@ -294,29 +318,4 @@ TLS的特殊处理 因为Gatway和TiDB的连接是在足够安全的内网，从
 我们可以在第三个数据中心部署一个简单的etcd服务来扮演“仲裁者”的角色，在主从中心正常工作的时候，不需要与etcd作任何消息交换，发生故障时，哪边能连上etcd，哪边就有权切换成独立服务模式。假如主从网络断连，同时它们又同时能连接到etcd，那么主中心切换成异步模式并把状态信息通过etcd传递到从中心。
 由于跟第三个数据中心之间只需要传递简单的状态信息，可以考虑使用移动网络、无线电或者卫星通信（如北斗短报文）来进一步减少成本。
 另一个思路成本更低一些，不使用第三个数据中心，直接在主从中心之间建立低成本旁路通信同步状态。这时因为没有“仲裁者”了，在出现整个数据中心故障时仍然会陷入“两难”的境地，不过在发生网络故障时，主从中心可以通过旁路进行状态交换然后迅速进行异步模式切换。
-最后来点主题升华哈。权衡是软件工程架构设计的最经典命题之一，绝大部分情况下都没有完美的设计，只有特定约束条件下最平衡的设计。诚然，一个又一个“不可能三角”告诉我们完美的系统是不存在的，但换个角度来看，不可逾越的鸿沟也是可以去不断逼近的极限，这就是工程师的浪漫呀！</description></item><item><title>TrueTime和原子钟</title><link>http://disksing.com/truetime/</link><pubDate>Wed, 10 Feb 2021 00:00:00 +0000</pubDate><guid>http://disksing.com/truetime/</guid><description>如果你关注分布式数据库，相信多少听说过Google的分布式数据库Spanner，以及Spanner使用原子钟搞了一套TrueTime来实现跨数据中心的分布式事务。
-而Spanner的后继者们，却都采用了不使用原子钟替代方案，比如TiDB的TSO，CockroachDB的HLC。对此很多人的印象就是Google财大气粗，所以有能力搞原子钟这种精密高端设备。这个说法不能说全错，但至少不是完全准确的。
-网络时钟同步 上面提到的3种取时间戳的方式的底层逻辑是迥然不同的。TiDB的TSO是中心授时，每一个时间戳都要从中心服务器获取；CockroachDB的HLC本质上是逻辑时钟，依赖于消息交换时去推进时钟计数器；Spanner的TrueTime是时钟同步，通过定期交换消息，把本地时钟与源时钟进行同步。
-时钟同步的模式跟我们日常用手表的方法是类似的，我们隔一段时间把手表跟新闻联播同步一下，期间的时间直接从手表上读出来。
-计算机里面最常见的时钟同步就是NTP了，通过网络同步时钟有个问题就是延迟导致的误差。
-网络同步时钟比如客户端在12:00:00发起查询请求，2秒钟后收到服务器的消息，返回的时间也是12:00:00。这时并不意味着本地时钟是准确的，因为消息发到服务器要花费时间，本地时钟实际上是快了一点。但是具体快了多少是没法知道的，我们只知道消息一来一回花了2秒，却不知道来回分别花了多长时间。因此只能大概估摸着取个中间值，把时间往回拨1秒，这时误差范围就是±1秒了。
-Marzullo算法 只从单一时间源同步时间是不够靠谱的。除了有可能发生故障或者网络中断，更可怕的是时间源本身就出了问题。Marzullo算法就是用来从多个时间源来估算准确时间的算法。
-Marzullo算法如图，我们通过向ABCD四个时间源查询时间分别得到时钟偏差及误差范围，算法的大体思路就是选被尽可能多时间源所覆盖的区间（缩小误差范围），并排除掉有问题的区间（如A）。
-不过，在对时序有严格要求的场景（比如分布式事务），Marzullo算法还要进行一些改良。例如比较明显的缺陷是，当有问题的时间源offset区间与正常的区间有交叠时，可能导致误差范围被估算得过小。如果想了解相关细节，可以去研究下相关资料，这里不展开了。
-时钟漂移 跟服务器对上时间了还没完，通常对时的过程都要周期性地触发。正如我们的手表用着用着就不准了，CPU的晶振周期也不是完全精确的，会受温度和电压的影响，时间一长也会“跑偏”。
-Spanner假设他家服务器的误差不超过每秒钟200μs。按最大值去计算，30秒不同步，误差最多会累计到6ms，如果1天不同步，最大误差达到约为17s。要注意这里的误差范围是非常非常保守的，实际情况CPU远不可能这么糟糕，举个例子对比一下，我国石英电子表的行业标准是，一类月差10-15秒，二类月差20-30秒。
-原子钟 原子钟，是一种利用原子、分子能级差为基准信号来校准晶体振荡器或激光器频率，以使其输出标准频率信号的一种装置。它的工作原理是：利用原子吸收或释放能量时发出的电磁波来计时的。由于这种电磁波非常稳定，再加上利用一系列精密的仪器进行控制，原子钟的计时就可以非常准确了，可以达到千万年仅差一秒或者更好的水平。
-—— 时间频率：5G 叠加自主可控， 被忽视的高精尖领域
-看上去确实很高端，那么假如想买这样一个原子钟要多少钱呢？实际情况是原子钟比听上去亲民的多，我们直接在东哥的网站上就能搜到：
-京东商城售卖的原子钟售价大约是几万到十几万不等，并非承受不起的昂贵，和一台高端点的服务器是差不多的价位，如果降低精度的要求还能更便宜。
-说白了原子钟和计算机上面随处可见的晶振就是同一类东西，只不过精度高了好几个数量级。
-不同硬件的计时精确度需要注意有些同学误认为TrueTime需要每台机器都要给配一个原子钟，其实不用，一个数据中心有几个就完全足够了，具体先按下不表后面再说。
-GPS授时 GPS不仅提供定位服务，还可以授时。每个GPS卫星都携带了数个高精度原子钟，并不断广播星历（运行轨迹）和时间。地面装置从至少4颗卫星接收到信号后，解开以三维空间+一维时间为变量的四元方程组，就能同时拿到时间空间信息了。
-GPS的精度非常之高，可以把误差控制在数纳秒以内。这是因为电磁波信号基本上是直线传播，路径上受到的干扰很小，根据距离可以很准确地计算出信号传递延时。而网络消息会受中继和多层网络层层封包的影响，而且即便在光纤中，信号也不是沿直线传播的。
-TrueTime 背景知识介绍完毕，下面我们就来看看TrueTime到底是怎么做的。
-机房内的TrueTime组件部署TrueTime组件按角色分成 time master 和 time daemon。time master 可以认为是 TrueTime 的服务端，部署在一些独立的机器上，time daemon 是客户端，以进程的形式部署在每个实际运行业务的主机上。
-time master 又分成两类。一类安装 GPS 模块，分散在机房的不同位置，每个GPS节点都使用独立的天线，避免因为信号干扰的原因一起失效了。另一类安装的是原子钟，原子钟也是多台来防止故障产生不可用。
-各种 time master 周期性地使用Marzullo算法相互对时，每个 time daemon 也会以 30 秒为周期跟多个 time master 进行对时（同样使用Marzullo算法）。
-之前介绍过，GPS 的精度是纳秒级别的，这个误差跟机房内的网络延迟比起来都可以忽略不计了，直接计作0ms。这样time daemon进行时钟同步之后的误差就仅仅取决于网络延迟了，一般机房内不超过1ms。
-我们还要考虑到完成时钟同步之后，到下一次同步期间time daemon的时钟漂移，也就是前面计算过的，30秒内最大误差可能累计到6ms。于是，time daemon上的时钟误差范围就在1ms到7ms之间不断涨落，画出来是这样的锯齿状：
-time daemon误差范围变化示意那么问题来了，原子钟是干啥用的？</description></item></channel></rss>
+最后来点主题升华哈。权衡是软件工程架构设计的最经典命题之一，绝大部分情况下都没有完美的设计，只有特定约束条件下最平衡的设计。诚然，一个又一个“不可能三角”告诉我们完美的系统是不存在的，但换个角度来看，不可逾越的鸿沟也是可以去不断逼近的极限，这就是工程师的浪漫呀！</description></item></channel></rss>
