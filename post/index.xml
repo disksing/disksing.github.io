@@ -1,4 +1,11 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>文章 - 硬盘在歌唱 on 硬盘在歌唱</title><link>http://disksing.com/post/</link><description>Recent content in 文章 - 硬盘在歌唱 on 硬盘在歌唱</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Wed, 15 Oct 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://disksing.com/post/index.xml" rel="self" type="application/rss+xml"/><item><title>从认知心理学看代码可读性</title><link>http://disksing.com/cognitive-code-readability/</link><pubDate>Wed, 15 Oct 2025 00:00:00 +0000</pubDate><guid>http://disksing.com/cognitive-code-readability/</guid><description>最近我发现，讨论代码可读性时，认知心理学提供了一个很好的视角。那些我们熟知的最佳实践背后都有共同的心理学基础。
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>文章 - 硬盘在歌唱 on 硬盘在歌唱</title><link>http://disksing.com/post/</link><description>Recent content in 文章 - 硬盘在歌唱 on 硬盘在歌唱</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Mon, 03 Nov 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://disksing.com/post/index.xml" rel="self" type="application/rss+xml"/><item><title>AI 辅助编程时代，哪些编程语言会更流行？</title><link>http://disksing.com/ai-era-languages/</link><pubDate>Mon, 03 Nov 2025 00:00:00 +0000</pubDate><guid>http://disksing.com/ai-era-languages/</guid><description>最近用 AI 辅助写代码的时候，我注意到一个有意思的现象：写 Go 的时候，AI 生成的代码通常很靠谱，风格也一致；但写 Python 的时候，AI 经常给出好几种写法，有时候还会搞出些奇奇怪怪的&amp;quot;聪明&amp;quot;代码。
+这让我开始思考一个问题：AI 辅助编程会不会改变编程语言的流行趋势？
+评价标准变了 以前我们选编程语言，主要考虑的是&amp;quot;写起来爽不爽&amp;quot;。语法糖多、表达简洁、少打几个字，这些都是加分项。Python 能一行搞定的事，凭什么要写五行 Java？
+但现在情况变了。AI 帮我们写代码，&amp;ldquo;写起来爽&amp;quot;这个优势基本没了。反而，那些让人&amp;quot;写起来爽&amp;quot;的特性，可能成了 AI 的负担。
+我总结了几个在 AI 时代变得更重要的语言特性。
+语法糖越少越好 语法糖的本质是让程序员少打字。但 AI 不在乎多打几个字，它在乎的是&amp;quot;这段代码应该怎么写&amp;rdquo;。
+Python 里实现一个简单的过滤和映射，至少有四五种写法：
+1# 列表推导 2result = [x * 2 for x in items if x &amp;gt; 0] 3 4# map + filter 5result = list(map(lambda x: x * 2, filter(lambda x: x &amp;gt; 0, items))) 6 7# 传统循环 8result = [] 9for x in items: 10 if x &amp;gt; 0: 11 result.</description></item><item><title>从认知心理学看代码可读性</title><link>http://disksing.com/cognitive-code-readability/</link><pubDate>Wed, 15 Oct 2025 00:00:00 +0000</pubDate><guid>http://disksing.com/cognitive-code-readability/</guid><description>最近我发现，讨论代码可读性时，认知心理学提供了一个很好的视角。那些我们熟知的最佳实践背后都有共同的心理学基础。
 代码是给人读的，而人脑处理信息的方式是有规律的。理解这些规律，就能明白为什么有些代码读起来轻松，有些代码读起来费劲；就能在面对具体问题时做出更好的判断，而不是机械地遵循教条。
 认知负荷理论：理解代码复杂度的本质 认知负荷理论（Cognitive Load Theory）由 John Sweller 在 1980 年代提出，最初用于教学设计。核心观点很简单：人的工作记忆容量有限，当认知负荷超过容量时，学习和理解效率会急剧下降。
 三种认知负荷 这个理论把认知负荷分成三种：**内在负荷（Intrinsic Load）**来自问题本身的固有复杂度，**外在负荷（Extraneous Load）**来自信息呈现方式不当带来的额外负担，**相关负荷（Germane Load）**来自构建和强化心智模型的过程。这三种负荷有个总的限制：内在负荷 + 外在负荷 + 相关负荷 ≤ 工作记忆容量。
@@ -442,13 +449,4 @@ Beancount —— 命令行复式簿记 by wzyboy beancount 起步 by MoreFreeze 
 尽快找到感染人群。 尽快排除未感染的疑似人群。 使用尽量少的总检查样本数。 先来看一人一样本的传统方法。检查完 30 万人需要满负荷检测 3 天，平均每天检出 100 人，总检测量是 30 万。
 / Day0 Day1 Day2 Day3 确诊 0 100 200 300 疑似 300,000 200,000 100,000 0 总检测 0 100,000 200,000 300,000 再来看使用样本混合的方法。根据现有资料，专家建议混检不宜超过 10 人样本，我们就以每 10 人样本混合来分析。
 第一天采集所有 30 万人的样本，并混合成 3 万个瓶子，其中有 300 个瓶子会被检测出病毒（注：这里忽略掉多个感染样本混入一个瓶子的情况），这 300 个瓶子对应的 3000 人就是第一天查完之后的疑似。
-/ Day0 Day1 Day2 确诊 0 0 300 疑似 300,000 3,000 0 总检测 0 30,000 33,000 这个方法比前一种要好。它提前 1 天排查出全部 300 个病例，第二就能将疑似降到 3000 人的水平，这对尽早进行流行病学排查和防控非常有利，而且总体检测量只有前者的约 1/10，节约了实验室的成本和压力。</description></item><item><title>消除 TSO 单点</title><link>http://disksing.com/tso/</link><pubDate>Wed, 27 May 2020 00:00:00 +0000</pubDate><guid>http://disksing.com/tso/</guid><description>在 TiDB 中，分布式事务的一致性需要依赖 PD 作为 TSO (Timestamp Oracle，时间戳分配器) 分配的严格单调递增的 ts。这里一个很显然的问题就是，作为一个分布式系统，唯独 TSO 是单点的，看上去总让人觉得哪里不对。
-好在大多数情况下，这里的担心是多余的。比如 TSO 在实现上做了大量的并发和 batch 优化，几乎不会遇到性能问题（出了问题往往是因为客户端并发太高，Go runtime 调度不过来）。另外，PD 虽然只有一个在工作，但是也有多个 PD 作为 standby，出了状况随时顶替上来，实际上也没有高可用的问题。
-有一种情况确实是受制于 TSO 单点的，就是在跨数据中心的场景。很多时候，本地事务只会访问本地数据，但是由于要去远程获取 ts，这会导致延迟降不下来。因此在这种场景下，消除 TSO 单点还是有意义的。
-问题范围界定 单一 TiDB 集群部署在多个数据中心，每个数据中心承载不同的业务，大多数情况下，业务都只访问对应数据中心的数据，另有一些跨多个数据中心的业务。
-要求：
-只涉及单个数据中心的事务，不用付出跨数据中心取 ts 的代价。 跨数据中心的事务，可以接受较高的延迟，但是必须要保证事务一致性，特别是外部一致性（参阅数据库的外部一致性）。 使用 RPC 同步 ts 要满足第一条，显然我们要赋予每个 PD 节点分配 ts 的能力，每个数据中心各自维护一个 ts。
-真正棘手的是第二条，为了满足外部一致性，全局事务所拿到的 ts 需要满足：
-大于所有数据中心曾经分配过的最大 ts（足够大） 小于所有数据中心未来将分配的最小 ts（足够小） 不难看出，取全局 ts 时涉及到与所有数据中心的 PD 进行同步的过程，鉴于全局事务本身没那么在乎延迟（无论如何都要跨数据中心读写数据了），可以直接通过发 RPC 的方式完成同步。
-比如最直接的，类似逻辑时钟的两阶段方案：
-client 从所有 PD 取一个最新 ts 收到所有回复后，client 取所有回复中最大的值 Tmax client 把 Tmax 发送给所有 PD PD 收到 Tmax 后，更新自己的内存状态保证后续分配的 ts 一定大于 Tmax client 收到所有 PD 的回复后，把 Tmax 返回 其中，2 保证了 Tmax 足够大，4 保证了 Tmax 足够小，故而返回的 Tmax 是能满足外部一致性的。</description></item></channel></rss>
+/ Day0 Day1 Day2 确诊 0 0 300 疑似 300,000 3,000 0 总检测 0 30,000 33,000 这个方法比前一种要好。它提前 1 天排查出全部 300 个病例，第二就能将疑似降到 3000 人的水平，这对尽早进行流行病学排查和防控非常有利，而且总体检测量只有前者的约 1/10，节约了实验室的成本和压力。</description></item></channel></rss>
