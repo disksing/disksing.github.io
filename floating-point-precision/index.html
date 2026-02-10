@@ -13,13 +13,13 @@ deltaB = b - lastB
 report(deltaA, deltaB)
 lastA = a
 lastB = b
-</code></pre><p>那么问题来了，服务端收到的 deltaA 和 deltaB 有没有可能出现 deltaA &lt; deltaB 的情况呢？这里我们只考虑浮点数的精度问题，不考虑其他因素，比如线程调度等等。</p><p>显然既然写这个，答案肯定是有可能。</p><p>不过这看起来很奇怪，因为 a 和 b 的增量都是非负的，而且 a 每次的增量只会比 b 大不可能比 b 小。但是，浮点数的精度问题可能会导致这种情况发生。</p><p>问题就出在每次上报的差值运算。lastA 和 a 都是不断累加出来的，可能都有精度误差，并且误差舍入的方向可能不同，如果lastA 的误差方向是向上的，而 a 的误差方向是向下的，那么 deltaA 就可能比 deltaB 小。</p><p>直观的例子：
-lastA = 2000000.300000000005
-lastB = 1000000.0</p><p>执行操作 2，a 和 b 同时加上 120.0 后
-a = 2000120.300000000004
-b = 1000120.0</p><p>此时计算 delta 理应都是 120，但由于精度丢失 deltaA 会偏小。
-deltaA = a - lastA = 119.999999999999
-deltaB = b - lastB = 120.0</p></div><hr><b>欢迎加入技术讨论 QQ 群：</b> 745157974<h4 class=page-header>Related</h4><div class=item><h4><a href=/ai-era-languages/>AI 辅助编程时代，哪些编程语言会更流行？</a></h4><h5>2025-11-03</h5><a href=http://disksing.com/tags/%E7%BC%96%E7%A8%8B><kbd class=item-tag>编程</kbd></a>
+</code></pre><p>那么问题来了，服务端收到的 deltaA 和 deltaB 有没有可能出现 deltaA &lt; deltaB 的情况呢？这里我们只考虑浮点数的精度问题，不考虑其他因素，比如线程调度等等。</p><p>显然既然写这个，答案肯定是有可能。</p><p>不过这看起来很奇怪，因为 a 和 b 的增量都是非负的，而且 a 每次的增量只会比 b 大不可能比 b 小。但是，浮点数的精度问题可能会导致这种情况发生。</p><p>问题就出在每次上报的差值运算。lastA 和 a 都是不断累加出来的，可能都有精度误差，并且误差舍入的方向可能不同，如果lastA 的误差方向是向上的，而 a 的误差方向是向下的，那么 deltaA 就可能比 deltaB 小。</p><p>直观的例子：</p><pre tabindex=0><code>lastA = 2000000.300000000005
+lastB = 1000000.0
+</code></pre><p>执行操作 2，a 和 b 同时加上 120.0 后</p><pre tabindex=0><code>a = 2000120.300000000004
+b = 1000120.0
+</code></pre><p>此时计算 delta 理应都是 120，但由于精度丢失 deltaA 会偏小。</p><pre tabindex=0><code>deltaA = a - lastA = 119.999999999999
+deltaB = b - lastB = 120.0
+</code></pre></div><hr><b>欢迎加入技术讨论 QQ 群：</b> 745157974<h4 class=page-header>Related</h4><div class=item><h4><a href=/ai-era-languages/>AI 辅助编程时代，哪些编程语言会更流行？</a></h4><h5>2025-11-03</h5><a href=http://disksing.com/tags/%E7%BC%96%E7%A8%8B><kbd class=item-tag>编程</kbd></a>
 <a href=http://disksing.com/tags/ai><kbd class=item-tag>AI</kbd></a></div><div class=item><h4><a href=/cognitive-code-readability/>从认知心理学看代码可读性</a></h4><h5>2025-10-15</h5><a href=http://disksing.com/tags/%E7%BC%96%E7%A8%8B><kbd class=item-tag>编程</kbd></a></div></main><footer></footer><p class="copyright text-muted">&copy; 2014-2026 ALL RIGHTS RESERVED
 |
 本站由 <a href=https://gohugo.io>Hugo</a> 和 <a href=https://github.com/calintat/minimal>Minimal</a> 强力驱动

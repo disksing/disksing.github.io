@@ -5,7 +5,8 @@ deltaA = a - lastA deltaB = b - lastB report(deltaA, deltaB) lastA = a lastB = b
 显然既然写这个，答案肯定是有可能。
 不过这看起来很奇怪，因为 a 和 b 的增量都是非负的，而且 a 每次的增量只会比 b 大不可能比 b 小。但是，浮点数的精度问题可能会导致这种情况发生。
 问题就出在每次上报的差值运算。lastA 和 a 都是不断累加出来的，可能都有精度误差，并且误差舍入的方向可能不同，如果lastA 的误差方向是向上的，而 a 的误差方向是向下的，那么 deltaA 就可能比 deltaB 小。
-直观的例子： lastA = 2000000.</description></item><item><title>AI 辅助编程时代，哪些编程语言会更流行？</title><link>http://disksing.com/ai-era-languages/</link><pubDate>Mon, 03 Nov 2025 00:00:00 +0000</pubDate><guid>http://disksing.com/ai-era-languages/</guid><description>最近用 AI 辅助写代码的时候，我注意到一个有意思的现象：写 Go 的时候，AI 生成的代码通常很靠谱，风格也一致；但写 Python 的时候，AI 经常给出好几种写法，有时候还会搞出些奇奇怪怪的&amp;quot;聪明&amp;quot;代码。
+直观的例子：
+lastA = 2000000.</description></item><item><title>AI 辅助编程时代，哪些编程语言会更流行？</title><link>http://disksing.com/ai-era-languages/</link><pubDate>Mon, 03 Nov 2025 00:00:00 +0000</pubDate><guid>http://disksing.com/ai-era-languages/</guid><description>最近用 AI 辅助写代码的时候，我注意到一个有意思的现象：写 Go 的时候，AI 生成的代码通常很靠谱，风格也一致；但写 Python 的时候，AI 经常给出好几种写法，有时候还会搞出些奇奇怪怪的&amp;quot;聪明&amp;quot;代码。
 这让我开始思考一个问题：AI 辅助编程会不会改变编程语言的流行趋势？
 评价标准变了 以前我们选编程语言，主要考虑的是&amp;quot;写起来爽不爽&amp;quot;。语法糖多、表达简洁、少打几个字，这些都是加分项。Python 能一行搞定的事，凭什么要写五行 Java？
 但现在情况变了。AI 帮我们写代码，&amp;ldquo;写起来爽&amp;quot;这个优势基本没了。反而，那些让人&amp;quot;写起来爽&amp;quot;的特性，可能成了 AI 的负担。
