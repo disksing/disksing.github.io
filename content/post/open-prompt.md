@@ -1,6 +1,6 @@
 ---
 title: "Open Prompt：AI 时代的 PR 协作新范式"
-date: 2026-03-17
+date: 2026-03-16
 tags: ["AI", "Open Source", "协作"]
 ---
 
