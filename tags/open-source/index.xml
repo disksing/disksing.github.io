@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Open Source on 硬盘在歌唱</title><link>http://disksing.com/tags/open-source/</link><description>Recent content in Open Source on 硬盘在歌唱</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Mon, 16 Mar 2026 00:00:00 +0000</lastBuildDate><atom:link href="http://disksing.com/tags/open-source/index.xml" rel="self" type="application/rss+xml"/><item><title>Open Prompt：AI 时代的 PR 协作新范式</title><link>http://disksing.com/open-prompt/</link><pubDate>Mon, 16 Mar 2026 00:00:00 +0000</pubDate><guid>http://disksing.com/open-prompt/</guid><description>最近大家都在感慨：“Code is cheap，Markdown 才是新时代的源代码。”
+我就想，传统的基于源代码的 Open Source 协作方式显然已经不太奏效了。因为源代码相当于是新时代的 Binary，围绕程序生成出来的东西该怎么协作？
+我感受到最明显的痛点是代码 Review 的瘫痪。
+写代码的时候，Claude/Codex “一把梭”又快又稳；Review 的时候，一个 PR 动辄大几千行，根本没法看。Reviewer 往往只能硬着头皮让 AI 检查一遍，再把结果复制粘贴回去交差。
+既然传统的代码协作已经走不通，要解决这个问题，多人协作的基础就必须回到真正的源头——也就是 Prompt。
+我们不妨把这个流派叫作 Open Prompt。
+而且这套工作流实现起来并不复杂，也不需要发明什么全新的平台。GitHub、PR、Comment、CI、Agent 这些基础设施其实都已经现成了，真正要变的只是使用方式：不再把 PR 当成“展示最终结果”的地方，而是当成“公开协作生成过程”的地方。
+PR 的重构：从“检视结果”到“协作生成” 在 Open Prompt 的范式下，PR 不再是开发完成后的检视窗口，而是一个实时协作的“在线工作台”。
+具体的工作流会变成这样：
+空 PR 启动：我们不再从本地秘密开发开始，而是直接先开一个公开的空 PR。
+公开的 Agent 会话：在 PR 页面通过 Comment 指挥 Coding Agent 写代码。每个 PR 背后都绑定着一个长期的 Agent Session，Agent 读取指令、修改代码并自动推送到当前分支。Agent 的输出、试错和代码变更都在评论区全公开。
+过程即代码：写得差不多了就把 Reviewer 拉进来。Reviewer 看到的不只是 Diff，更是整个生成代码的过程。
+这里的实现甚至可以很朴素：随便找个地方跑一个长期运行的 Coding Agent Session，让它不断处理这个 PR 下面的新 Comment 并推送代码就行。再做细一点的话，可以加个 Watcher 去监听 GitHub 事件，有新的评论或变更请求时就自动把 Agent 唤醒，整个链路也就顺起来了。</description></item></channel></rss>

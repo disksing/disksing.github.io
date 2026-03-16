@@ -1,4 +1,16 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>文章 - 硬盘在歌唱 on 硬盘在歌唱</title><link>http://disksing.com/post/</link><description>Recent content in 文章 - 硬盘在歌唱 on 硬盘在歌唱</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Tue, 10 Feb 2026 00:00:00 +0000</lastBuildDate><atom:link href="http://disksing.com/post/index.xml" rel="self" type="application/rss+xml"/><item><title>记一例浮点数精度问题</title><link>http://disksing.com/floating-point-precision/</link><pubDate>Tue, 10 Feb 2026 00:00:00 +0000</pubDate><guid>http://disksing.com/floating-point-precision/</guid><description>说，内存中有两个不断递增的浮点数，我们记作 a 和 b。
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>文章 - 硬盘在歌唱 on 硬盘在歌唱</title><link>http://disksing.com/post/</link><description>Recent content in 文章 - 硬盘在歌唱 on 硬盘在歌唱</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Mon, 16 Mar 2026 00:00:00 +0000</lastBuildDate><atom:link href="http://disksing.com/post/index.xml" rel="self" type="application/rss+xml"/><item><title>Open Prompt：AI 时代的 PR 协作新范式</title><link>http://disksing.com/open-prompt/</link><pubDate>Mon, 16 Mar 2026 00:00:00 +0000</pubDate><guid>http://disksing.com/open-prompt/</guid><description>最近大家都在感慨：“Code is cheap，Markdown 才是新时代的源代码。”
+我就想，传统的基于源代码的 Open Source 协作方式显然已经不太奏效了。因为源代码相当于是新时代的 Binary，围绕程序生成出来的东西该怎么协作？
+我感受到最明显的痛点是代码 Review 的瘫痪。
+写代码的时候，Claude/Codex “一把梭”又快又稳；Review 的时候，一个 PR 动辄大几千行，根本没法看。Reviewer 往往只能硬着头皮让 AI 检查一遍，再把结果复制粘贴回去交差。
+既然传统的代码协作已经走不通，要解决这个问题，多人协作的基础就必须回到真正的源头——也就是 Prompt。
+我们不妨把这个流派叫作 Open Prompt。
+而且这套工作流实现起来并不复杂，也不需要发明什么全新的平台。GitHub、PR、Comment、CI、Agent 这些基础设施其实都已经现成了，真正要变的只是使用方式：不再把 PR 当成“展示最终结果”的地方，而是当成“公开协作生成过程”的地方。
+PR 的重构：从“检视结果”到“协作生成” 在 Open Prompt 的范式下，PR 不再是开发完成后的检视窗口，而是一个实时协作的“在线工作台”。
+具体的工作流会变成这样：
+空 PR 启动：我们不再从本地秘密开发开始，而是直接先开一个公开的空 PR。
+公开的 Agent 会话：在 PR 页面通过 Comment 指挥 Coding Agent 写代码。每个 PR 背后都绑定着一个长期的 Agent Session，Agent 读取指令、修改代码并自动推送到当前分支。Agent 的输出、试错和代码变更都在评论区全公开。
+过程即代码：写得差不多了就把 Reviewer 拉进来。Reviewer 看到的不只是 Diff，更是整个生成代码的过程。
+这里的实现甚至可以很朴素：随便找个地方跑一个长期运行的 Coding Agent Session，让它不断处理这个 PR 下面的新 Comment 并推送代码就行。再做细一点的话，可以加个 Watcher 去监听 GitHub 事件，有新的评论或变更请求时就自动把 Agent 唤醒，整个链路也就顺起来了。</description></item><item><title>记一例浮点数精度问题</title><link>http://disksing.com/floating-point-precision/</link><pubDate>Tue, 10 Feb 2026 00:00:00 +0000</pubDate><guid>http://disksing.com/floating-point-precision/</guid><description>说，内存中有两个不断递增的浮点数，我们记作 a 和 b。
 程序不断运行的过程中，有两种操作会递增这两个数：
 给 a 加上一个非负浮点数 给 a 和 b 同时加上一个非负整数 同时，后台有一个线程在不断向服务器以差值的形式上报 a 和 b 的增量。流程是：
 deltaA = a - lastA deltaB = b - lastB report(deltaA, deltaB) lastA = a lastB = b 那么问题来了，服务端收到的 deltaA 和 deltaB 有没有可能出现 deltaA &amp;lt; deltaB 的情况呢？这里我们只考虑浮点数的精度问题，不考虑其他因素，比如线程调度等等。
@@ -443,7 +455,4 @@ Beancount —— 命令行复式簿记 by wzyboy beancount 起步 by MoreFreeze 
 房贷 房贷上面也提过了，记账的时候注意要把交的钱拆成本金和利息，如果直接全还到负债里面，是平不了账的。利息部分我是记成花费（Expenses）的，貌似也有别的记法，不过我觉得记成花费没什么毛病，不深究了。
 报销 报销跟前面那个买车卖车的例子有些类似。看似是我花了钱，但是因为这个钱后面公司是给报销的，所以记成花费就不太合适了。我的做法是在资产里用公司的名字建一项应收款账户，花钱的时候，不记花费而是记入应收款，到时候公司给报销了，再把钱从应收款里转出来就行了。同时，检查应收款就能很方便地知道还有多少钱没报销。
 信用卡 信用卡一度让我相当凌乱，主要是信用卡本身就有对账日和还款日，然后我每个月的对账日还跟这两个都不一样，在对账日当天很难搞明白我到底应该欠银行多少钱。
-后来我重新整理了思路，意识到账目的建模应该跟信用卡本身的内在逻辑是匹配的，信用卡其实同时是存在两个账户的：一个是上月账单一个是本月账单。因此我照葫芦画瓢，给每张信用卡建个应付款子账户。同时，记账当天不对信用卡进行对账了，而是在信用卡的对账日来对账，具体过程是先检查负债是否能对上银行的账单，确认后把所有的钱从信用卡主账户转进应付款，而每当记到还款日时，则清空应付款。</description></item><item><title>重复的代码都应该被消除吗？</title><link>http://disksing.com/dry/</link><pubDate>Wed, 22 Jul 2020 00:00:00 +0000</pubDate><guid>http://disksing.com/dry/</guid><description>昨天，我们项目组同事给测试代码做了些重构和梳理，总体上是很好的，不过有一个地方我觉得其实不如原本的好。
-这段代码是在单测里虚拟一个集群添加一些节点，原来的代码是这样的（无关细节略作调整）：
-1testCluster := mockcluster.NewCluster(opt) 2testCluster.AddLabelsStore(1, 1, map[string]string{&amp;#34;zone&amp;#34;: &amp;#34;z1&amp;#34;}) 3testCluster.AddLabelsStore(2, 1, map[string]string{&amp;#34;zone&amp;#34;: &amp;#34;z1&amp;#34;}) 4testCluster.AddLabelsStore(3, 1, map[string]string{&amp;#34;zone&amp;#34;: &amp;#34;z2&amp;#34;}) 5testCluster.AddLabelsStore(4, 1, map[string]string{&amp;#34;zone&amp;#34;: &amp;#34;z2&amp;#34;}) 6testCluster.AddLabelsStore(5, 1, map[string]string{&amp;#34;zone&amp;#34;: &amp;#34;z3&amp;#34;}) 优化过之后的代码是这样的：
-1testCluster := mockcluster.NewCluster(opt) 2allStores := []struct { 3 storeID uint64 4 regionCount int 5 labels map[string]string 6}{ 7 {1, 1, map[string]string{&amp;#34;zone&amp;#34;: &amp;#34;z1&amp;#34;}}, 8 {2, 1, map[string]string{&amp;#34;zone&amp;#34;: &amp;#34;z1&amp;#34;}}, 9 {3, 1, map[string]string{&amp;#34;zone&amp;#34;: &amp;#34;z2&amp;#34;}}, 10 {4, 1, map[string]string{&amp;#34;zone&amp;#34;: &amp;#34;z2&amp;#34;}}, 11 {5, 1, map[string]string{&amp;#34;zone&amp;#34;: &amp;#34;z3&amp;#34;}}, 12} 13for _, store := range allStores { 14 testCluster.</description></item></channel></rss>
+后来我重新整理了思路，意识到账目的建模应该跟信用卡本身的内在逻辑是匹配的，信用卡其实同时是存在两个账户的：一个是上月账单一个是本月账单。因此我照葫芦画瓢，给每张信用卡建个应付款子账户。同时，记账当天不对信用卡进行对账了，而是在信用卡的对账日来对账，具体过程是先检查负债是否能对上银行的账单，确认后把所有的钱从信用卡主账户转进应付款，而每当记到还款日时，则清空应付款。</description></item></channel></rss>
