@@ -93,12 +93,28 @@ h6 {
     color: #777
 }
 
-p, ul, ol {
+p {
     font-size: 1.4em;
 }
 
 blockquote > p {
     font-size: 1.4em;
+}
+
+ul, ol {
+    font-size: 1.4em;
+    line-height: 1.65;
+}
+
+li {
+    line-height: 1.65;
+}
+
+/* Loose-list paragraphs should match the list text instead of scaling again. */
+li > p,
+li > ul,
+li > ol {
+    font-size: 1em;
 }
 
 main {
@@ -162,6 +178,17 @@ table {
 
 .content {
     padding-top: 20px;
+}
+
+.content pre,
+.content .highlight pre {
+    font-size: 1.4em;
+    line-height: 1.7;
+}
+
+.content pre code,
+.content .highlight pre code {
+    font-size: inherit;
 }
 
 /* Profile picture */
