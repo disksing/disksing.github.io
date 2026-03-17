@@ -2,7 +2,6 @@
 
 .content ul,
 .content ol {
-  font-size: 1.22em;
   line-height: 1.65;
 }
 
@@ -12,7 +11,7 @@
 
 .content pre,
 .content .highlight pre {
-  font-size: 1.08em;
+  font-size: 1em;
   line-height: 1.7;
 }
 
@@ -22,5 +21,5 @@
 }
 
 .content :not(pre) > code {
-  font-size: 0.95em;
+  font-size: 1em;
 }
