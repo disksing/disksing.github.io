@@ -1,9 +1,8 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>浮点数 on 硬盘在歌唱</title><link>http://disksing.com/tags/%E6%B5%AE%E7%82%B9%E6%95%B0/</link><description>Recent content in 浮点数 on 硬盘在歌唱</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Tue, 10 Feb 2026 00:00:00 +0000</lastBuildDate><atom:link href="http://disksing.com/tags/%E6%B5%AE%E7%82%B9%E6%95%B0/index.xml" rel="self" type="application/rss+xml"/><item><title>记一例浮点数精度问题</title><link>http://disksing.com/floating-point-precision/</link><pubDate>Tue, 10 Feb 2026 00:00:00 +0000</pubDate><guid>http://disksing.com/floating-point-precision/</guid><description>说，内存中有两个不断递增的浮点数，我们记作 a 和 b。
-程序不断运行的过程中，有两种操作会递增这两个数：
-给 a 加上一个非负浮点数 给 a 和 b 同时加上一个非负整数 同时，后台有一个线程在不断向服务器以差值的形式上报 a 和 b 的增量。流程是：
-deltaA = a - lastA deltaB = b - lastB report(deltaA, deltaB) lastA = a lastB = b 那么问题来了，服务端收到的 deltaA 和 deltaB 有没有可能出现 deltaA &amp;lt; deltaB 的情况呢？这里我们只考虑浮点数的精度问题，不考虑其他因素，比如线程调度等等。
-显然既然写这个，答案肯定是有可能。
-不过这看起来很奇怪，因为 a 和 b 的增量都是非负的，而且 a 每次的增量只会比 b 大不可能比 b 小。但是，浮点数的精度问题可能会导致这种情况发生。
-问题就出在每次上报的差值运算。lastA 和 a 都是不断累加出来的，可能都有精度误差，并且误差舍入的方向可能不同，如果lastA 的误差方向是向上的，而 a 的误差方向是向下的，那么 deltaA 就可能比 deltaB 小。
-直观的例子：
-lastA = 2000000.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>浮点数</title><link>http://disksing.com/tags/%E6%B5%AE%E7%82%B9%E6%95%B0/</link><description>我编程三日，两耳不闻人声，只有硬盘在歌唱。</description><language>zh-cn</language><generator>Hugo -- gohugo.io</generator><managingEditor>i@disksing.com (disksing)</managingEditor><webMaster>i@disksing.com (disksing)</webMaster><lastBuildDate>Mon, 16 Mar 2026 00:00:00 +0000</lastBuildDate><atom:link href="http://disksing.com/tags/%E6%B5%AE%E7%82%B9%E6%95%B0/" rel="self" type="application/rss+xml"/><item><title>记一例浮点数精度问题</title><link>http://disksing.com/floating-point-precision/</link><pubDate>Tue, 10 Feb 2026 00:00:00 +0000</pubDate><guid isPermaLink="true">http://disksing.com/floating-point-precision/</guid><description>&lt;![CDATA[<p>说，内存中有两个不断递增的浮点数，我们记作 a 和 b。</p><p>程序不断运行的过程中，有两种操作会递增这两个数：</p><ol><li>给 a 加上一个非负浮点数</li><li>给 a 和 b 同时加上一个非负整数</li></ol><p>同时，后台有一个线程在不断向服务器以差值的形式上报 a 和 b 的增量。流程是：</p><pre tabindex="0"><code>deltaA = a - lastA
+deltaB = b - lastB
+report(deltaA, deltaB)
+lastA = a
+lastB = b</code></pre><p>那么问题来了，服务端收到的 deltaA 和 deltaB 有没有可能出现 deltaA &lt; deltaB 的情况呢？这里我们只考虑浮点数的精度问题，不考虑其他因素，比如线程调度等等。</p><p>显然既然写这个，答案肯定是有可能。</p><p>不过这看起来很奇怪，因为 a 和 b 的增量都是非负的，而且 a 每次的增量只会比 b 大不可能比 b 小。但是，浮点数的精度问题可能会导致这种情况发生。</p><p>问题就出在每次上报的差值运算。lastA 和 a 都是不断累加出来的，可能都有精度误差，并且误差舍入的方向可能不同，如果lastA 的误差方向是向上的，而 a 的误差方向是向下的，那么 deltaA 就可能比 deltaB 小。</p><p>直观的例子：</p><pre tabindex="0"><code>lastA = 2000000.300000000005
+lastB = 1000000.0</code></pre><p>执行操作 2，a 和 b 同时加上 120.0 后</p><pre tabindex="0"><code>a = 2000120.300000000004
+b = 1000120.0</code></pre><p>此时计算 delta 理应都是 120，但由于精度丢失 deltaA 会偏小。</p><pre tabindex="0"><code>deltaA = a - lastA = 119.999999999999
+deltaB = b - lastB = 120.0</code></pre>]]></description></item></channel></rss>
