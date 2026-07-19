@@ -5,7 +5,9 @@
     <div>
         <h1>{{ .Title }}</h1>
         {{ if not .Date.IsZero }}
-            <h5>{{ .Date.Format (.Site.Params.dateFormat | default "2006-01-02") }}{{ if .ReadingTime }} · 约 {{ .ReadingTime }} 分钟读完{{ end }}</h5>
+            {{ $cjk := len (findRE `\p{Han}` .Plain) }}
+            {{ $minutes := math.Max 1 (math.Round (div (float (add .WordCount $cjk)) 400)) }}
+            <h5>{{ .Date.Format (.Site.Params.dateFormat | default "2006-01-02") }} · 约 {{ $minutes }} 分钟读完</h5>
         {{ end }}
         {{ partial "tags" . }}
     </div>
