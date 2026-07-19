@@ -4,7 +4,7 @@
 
     <div>
         <h1>{{ .Title }}</h1>
-        <h5>{{ .Date.Format (.Site.Params.dateFormat | default "2006-01-02") }}</h5>
+        <h5>{{ .Date.Format (.Site.Params.dateFormat | default "2006-01-02") }} · 约 {{ .ReadingTime }} 分钟读完</h5>
         {{ partial "tags" . }}
     </div>
 

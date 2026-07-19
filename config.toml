@@ -3,7 +3,6 @@ languageCode = "zh-cn"
 title = "硬盘在歌唱"
 theme = "minimal"
 disqusShortname = ""
-googleAnalytics = "UA-154774927-1"
 rssLimit = 20
 
 [markup]

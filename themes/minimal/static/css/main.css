@@ -441,6 +441,15 @@ footer {
     font-weight: normal;
 }
 
+.archive-year {
+    color: var(--muted);
+    font-size: 1.2em;
+    font-weight: normal;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0.2em;
+    margin: 1.5em 0 0.5em;
+}
+
 /* Navigation */
 
 .site-nav {

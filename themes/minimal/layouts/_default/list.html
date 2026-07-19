@@ -2,7 +2,10 @@
 
 <main>
 
-    {{ range .Pages.ByDate.Reverse }} {{ partial "list-item" . }} {{ end }}
+    {{ range .Pages.ByDate.Reverse.GroupByDate "2006" }}
+        <h3 class="archive-year">{{ .Key }}</h3>
+        {{ range .Pages }} {{ partial "list-item" . }} {{ end }}
+    {{ end }}
 
 </main>
 {{ partial "footer" . }}

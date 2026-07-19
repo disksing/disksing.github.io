@@ -4,7 +4,9 @@
 
     <div>
         <h1>{{ .Title }}</h1>
-        <h5>{{ .Description }}</h5>
+        {{ if not .Date.IsZero }}
+            <h5>{{ .Date.Format (.Site.Params.dateFormat | default "2006-01-02") }}{{ if .ReadingTime }} · 约 {{ .ReadingTime }} 分钟读完{{ end }}</h5>
+        {{ end }}
         {{ partial "tags" . }}
     </div>
 

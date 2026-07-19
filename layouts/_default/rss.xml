@@ -1,0 +1,27 @@
+{{- printf "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>" | safeHTML }}
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>{{ if eq .Title .Site.Title }}{{ .Site.Title }}{{ else }}{{ .Title }} - {{ .Site.Title }}{{ end }}</title>
+    <link>{{ .Permalink }}</link>
+    <description>{{ .Site.Params.description }}</description>
+    <language>zh-cn</language>
+    <generator>Hugo -- gohugo.io</generator>
+    <managingEditor>i@disksing.com ({{ .Site.Params.author }})</managingEditor>
+    <webMaster>i@disksing.com ({{ .Site.Params.author }})</webMaster>
+    {{ with .Site.Lastmod }}<lastBuildDate>{{ .Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</lastBuildDate>{{ end }}
+    <atom:link href="{{ .Permalink }}" rel="self" type="application/rss+xml" />
+    {{ $pages := .Pages.ByDate.Reverse }}
+    {{ if eq .Kind "home" }}{{ $pages = .Site.RegularPages.ByDate.Reverse }}{{ end }}
+    {{ $limit := site.Config.Services.RSS.Limit | default 20 }}
+    {{ if gt $limit 0 }}{{ $pages = $pages | first $limit }}{{ end }}
+    {{ range $pages }}
+    <item>
+      <title>{{ .Title }}</title>
+      <link>{{ .Permalink }}</link>
+      <pubDate>{{ .Date.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</pubDate>
+      <guid isPermaLink="true">{{ .Permalink }}</guid>
+      <description><![CDATA[{{ .Content }}]]></description>
+    </item>
+    {{ end }}
+  </channel>
+</rss>
