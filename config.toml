@@ -32,11 +32,6 @@ rssLimit = 20
     post = "/:contentbasename"
 
 [[menu.main]]
-url = "/"
-name = "主页"
-weight = 1
-
-[[menu.main]]
 url = "/post/"
 name = "文章"
 weight = 2
