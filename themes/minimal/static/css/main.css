@@ -297,7 +297,10 @@ pre, code {
     background: var(--code-bg);
     border-radius: 6px;
     padding: 12px 18px;
-    margin: 1.5em 0;
+    max-width: 880px;
+    margin: 1.5em auto;
+    box-sizing: border-box;
+    text-align: left;
 }
 
 .toc .toc-title {
