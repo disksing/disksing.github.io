@@ -180,6 +180,23 @@ blockquote > p:last-child {
     margin-bottom: 0;
 }
 
+/* Embedded tweets: full content width, neutralize quote styling. */
+blockquote.twitter-tweet {
+    background: none;
+    border-left: none;
+    padding: 0;
+    border-radius: 0;
+}
+
+.twitter-tweet,
+.twitter-tweet-rendered,
+iframe[id^="twitter-widget"] {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
 ul, ol {
     font-size: 1.3em;
     line-height: 1.65;
