@@ -385,6 +385,7 @@ a:hover {
 /* Footer */
 
 footer {
+    background: var(--code-bg);
     border-bottom: var(--border-width) solid var(--accent);
 }
 
