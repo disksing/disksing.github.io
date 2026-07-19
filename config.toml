@@ -42,16 +42,6 @@ name = "文章"
 weight = 2
 
 [[menu.main]]
-url = "/tip/"
-name = "知识点"
-weight = 3
-
-[[menu.main]]
-url = "/project/"
-name = "开源项目"
-weight = 4
-
-[[menu.main]]
 url = "/story/"
 name = "故事"
 weight = 5
