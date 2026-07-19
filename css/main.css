@@ -9,7 +9,7 @@
 }
 
 @media (prefers-color-scheme: dark) {
-    :root {
+    :root:not(.light) {
         --bg: #1f1c19;
         --text: #d6d1c8;
         --heading: #ece7dd;
@@ -21,9 +21,29 @@
     }
 }
 
+:root.dark {
+    --bg: #1f1c19;
+    --text: #d6d1c8;
+    --heading: #ece7dd;
+    --muted: #9a948a;
+    --code-bg: #2a2622;
+    --border: #423c34;
+    --accent: #e0705c;
+    --nav-shadow: rgba(0, 0, 0, 0.4);
+}
+
 ::selection {
     background: var(--accent);
     color: #fff;
+}
+
+html {
+    scrollbar-width: none;
+}
+
+::-webkit-scrollbar {
+    width: 0;
+    height: 0;
 }
 
 html, body {
@@ -84,7 +104,7 @@ h2 {
     border-left: 3px solid var(--accent)
 }
 h3 {
-    font-size: 1.45em;
+    font-size: 1.3em;
     line-height: 1.43
 }
 .content h3:before {
@@ -99,7 +119,7 @@ h3 {
     margin-right: 8px
 }
 h4 {
-    font-size: 1.3em
+    font-size: 1.15em
 }
 .content h4:before {
     background-color: var(--accent);
@@ -112,12 +132,12 @@ h4 {
     margin-right: 8px
 }
 h5 {
-    font-size: 1.15em;
+    font-size: 1.05em;
     color: var(--muted);
     font-weight: normal
 }
 h6 {
-    font-size: 1.15em;
+    font-size: 1.05em;
     color: var(--muted)
 }
 
@@ -150,9 +170,32 @@ em {
 
 blockquote {
     margin: 1.2em 0;
-    padding: 0 1em;
-    border-left: 4px solid var(--border);
-    color: var(--muted);
+    padding: 12px 18px;
+    border-left: 4px solid var(--accent);
+    border-radius: 0 6px 6px 0;
+    background: var(--code-bg);
+}
+
+blockquote > p:last-child {
+    margin-bottom: 0;
+}
+
+/* Embedded tweets: full content width, neutralize quote styling. */
+blockquote.twitter-tweet {
+    background: none;
+    border-left: none;
+    padding: 0;
+    border-radius: 0;
+}
+
+.twitter-tweet,
+.twitter-tweet-rendered,
+iframe[id^="twitter-widget"] {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    display: block !important;
 }
 
 ul, ol {
@@ -204,6 +247,18 @@ img {
     border-radius: 6px;
 }
 
+/* Image caption: an italic-only paragraph right after an image-only paragraph. */
+.content p:has(> img:only-child) {
+    margin-bottom: 0.4em;
+}
+
+.content p:has(> img:only-child) + p:has(> em:only-child) {
+    text-align: center;
+    color: var(--muted);
+    font-size: 1em;
+    margin-top: 0;
+}
+
 table {
     padding: 0;
     margin: 1em auto;
@@ -239,7 +294,7 @@ table {
 
 .intro > h1 {
     color: var(--heading);
-    font-size: calc(min(5vw, 300px));
+    font-size: clamp(2.5rem, 5vw, 300px);
     font-weight: normal;
     margin: 0 0 0 0;
     text-decoration: none;
@@ -247,7 +302,7 @@ table {
 
 .intro > h2 {
     color: var(--muted);
-    font-size: calc(0.3*min(5vw, 300px));
+    font-size: clamp(1.1rem, 1.5vw, 90px);
     font-weight: normal;
     margin: 0 0 0 0;
     border-left: none;
@@ -353,6 +408,37 @@ a:has(> .item-tag):hover {
     text-decoration: none;
 }
 
+.tag {
+    color: var(--muted);
+    font-size: 0.85em;
+    margin-right: 0.6em;
+}
+
+.tag:hover {
+    text-decoration: none;
+}
+
+/* Post meta line (date, reading time, tags) */
+
+.post-meta {
+    color: var(--muted);
+    font-size: 1.05em;
+    margin: -0.8em auto 1em;
+}
+
+.post-meta .meta-sep {
+    margin: 0 0.5em;
+}
+
+/* End-of-article ornament */
+
+.end-mark {
+    text-align: center;
+    color: var(--muted);
+    font-size: 1.3em;
+    margin: 2.5em 0 1em;
+}
+
 .page-header {
     border-bottom: 1px solid var(--border);
     padding-bottom: .3em;
@@ -379,6 +465,18 @@ a.icon:hover {
 
 a:hover {
     color: var(--accent) !important;
+    text-decoration: underline;
+}
+
+/* Article body links: ink with a cinnabar underline, red on hover. */
+.content a:link, .content a:visited {
+    color: var(--heading);
+    text-decoration: underline;
+    text-decoration-color: var(--accent);
+    text-underline-offset: 3px;
+}
+
+.content a:hover {
     text-decoration: underline;
 }
 
@@ -443,8 +541,9 @@ footer {
 
 .archive-year {
     color: var(--muted);
-    font-size: 1.2em;
+    font-size: 1.05em;
     font-weight: normal;
+    text-align: left;
     border-bottom: 1px solid var(--border);
     padding-bottom: 0.2em;
     margin: 1.5em 0 0.5em;
@@ -453,9 +552,6 @@ footer {
 /* Navigation */
 
 .site-nav {
-    position: sticky;
-    top: 0;
-    z-index: 100;
     background: var(--bg);
     border-top: var(--border-width) solid var(--accent);
     box-shadow: 0 1px 4px var(--nav-shadow);
@@ -502,6 +598,23 @@ footer {
 
 .nav-links a:hover {
     text-decoration: none;
+}
+
+.nav-links a.active {
+    color: var(--accent);
+    font-weight: bold;
+}
+
+/* Reading progress bar */
+
+.reading-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    width: 0;
+    background: var(--accent);
+    z-index: 200;
 }
 
 .nav-icons a {
