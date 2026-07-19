@@ -8,7 +8,19 @@
         {{ partial "tags" . }}
     </div>
 
+    {{ if and (gt (len .TableOfContents) 400) (not .Params.disableToc) }}
+        <aside class="toc">
+            <span class="toc-title">目录</span>
+            {{ .TableOfContents }}
+        </aside>
+    {{ end }}
+
     <div align="start" class="content">{{ .Content }}</div>
+
+    <nav class="prev-next">
+        {{ with .NextInSection }}<a class="prev" href="{{ .RelPermalink }}">← {{ .Title }}</a>{{ end }}
+        {{ with .PrevInSection }}<a class="next" href="{{ .RelPermalink }}">{{ .Title }} →</a>{{ end }}
+    </nav>
 
 </main>
 

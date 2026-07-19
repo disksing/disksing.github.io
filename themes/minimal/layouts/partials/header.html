@@ -27,10 +27,6 @@
             </script>
         {{ end }}
 
-        {{ if .Site.Params.MathJax | default true }}
-            <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-        {{ end }}
-
         {{ partial "head-close" . }}
 
         <script data-ad-client="ca-pub-8963356574249468" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
@@ -38,31 +34,22 @@
 
     <body>
         {{ partial "body-open" . }}
-        <nav class="navbar navbar-default navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <a class="navbar-brand visible-xs" href="#">{{ .Title }}</a>
-                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                </div>
-                <div class="collapse navbar-collapse">
-                    {{ if .Site.Menus.main }}
-                        <ul class="nav navbar-nav">
-                            {{ range sort .Site.Menus.main }}
-                                <li><a href="{{ .URL }}">{{ .Name }}</a></li>
-                            {{ end }}
-                        </ul>
-                    {{ end }}
-                    {{ if .Site.Menus.icon }}
-                        <ul class="nav navbar-nav navbar-right">
-                            {{ range sort .Site.Menus.icon }}
-                                <li class="navbar-icon"><a href="{{ .URL }}"><i class="fa fa-{{ .Name }}"></i></a></li>
-                            {{ end }}
-                        </ul>
-                    {{ end }}
-                </div>
+        <nav class="site-nav">
+            <div class="nav-inner">
+                <a class="nav-brand" href="{{ "/" | relURL }}">{{ .Site.Title }}</a>
+                {{ if .Site.Menus.main }}
+                    <ul class="nav-links">
+                        {{ range sort .Site.Menus.main }}
+                            <li><a href="{{ .URL }}">{{ .Name }}</a></li>
+                        {{ end }}
+                    </ul>
+                {{ end }}
+                {{ if .Site.Menus.icon }}
+                    <ul class="nav-icons">
+                        {{ range sort .Site.Menus.icon }}
+                            <li><a href="{{ .URL }}" aria-label="{{ .Name }}"><i class="fa fa-{{ .Name }}"></i></a></li>
+                        {{ end }}
+                    </ul>
+                {{ end }}
             </div>
         </nav>
