@@ -541,8 +541,9 @@ footer {
 
 .archive-year {
     color: var(--muted);
-    font-size: 1.2em;
+    font-size: 1.05em;
     font-weight: normal;
+    text-align: left;
     border-bottom: 1px solid var(--border);
     padding-bottom: 0.2em;
     margin: 1.5em 0 0.5em;
