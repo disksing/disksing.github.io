@@ -1,23 +1,29 @@
 :root {
-    --bg: #ffffff;
-    --text: #333333;
-    --heading: #142331;
-    --muted: #777777;
-    --code-bg: #f5f7f9;
-    --border: #e2e2e2;
-    --nav-shadow: rgba(0, 0, 0, 0.08);
+    --bg: #faf8f4;
+    --text: #2f2b26;
+    --heading: #1d1a15;
+    --muted: #8a837a;
+    --code-bg: #f3efe7;
+    --border: #e4ddcf;
+    --nav-shadow: rgba(0, 0, 0, 0.06);
 }
 
 @media (prefers-color-scheme: dark) {
     :root {
-        --bg: #1a1d21;
-        --text: #d4d7db;
-        --heading: #e8eaed;
-        --muted: #9aa0a6;
-        --code-bg: #262a30;
-        --border: #3a3f45;
+        --bg: #1f1c19;
+        --text: #d6d1c8;
+        --heading: #ece7dd;
+        --muted: #9a948a;
+        --code-bg: #2a2622;
+        --border: #423c34;
+        --accent: #e0705c;
         --nav-shadow: rgba(0, 0, 0, 0.4);
     }
+}
+
+::selection {
+    background: var(--accent);
+    color: #fff;
 }
 
 html, body {
@@ -334,6 +340,7 @@ a:has(> .item-tag):hover {
     width: 10vh;
     height: 10vh;
     border-radius: 50%;
+    border: 2px solid var(--accent);
 }
 
 /* Colored links */
