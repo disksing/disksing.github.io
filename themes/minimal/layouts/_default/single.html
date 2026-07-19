@@ -5,11 +5,8 @@
     <div>
         <h1>{{ .Title }}</h1>
         {{ if not .Date.IsZero }}
-            {{ $cjk := len (findRE `\p{Han}` .Plain) }}
-            {{ $minutes := math.Max 1 (mul 3 (math.Round (div (float (add .WordCount $cjk)) 400))) }}
-            <h5>{{ .Date.Format (.Site.Params.dateFormat | default "2006-01-02") }} · 约 {{ $minutes }} 分钟读完</h5>
+            {{ partial "post-meta" . }}
         {{ end }}
-        {{ partial "tags" . }}
     </div>
 
     {{ if and (gt (len .TableOfContents) 400) (not .Params.disableToc) }}
@@ -20,6 +17,8 @@
     {{ end }}
 
     <div align="start" class="content">{{ .Content }}</div>
+
+    {{ if not .Date.IsZero }}<div class="end-mark">❦</div>{{ end }}
 
     <nav class="prev-next">
         {{ with .NextInSection }}<a class="prev" href="{{ .RelPermalink }}">← {{ .Title }}</a>{{ end }}

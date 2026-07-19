@@ -1,0 +1,11 @@
+{{ $cjk := len (findRE `\p{Han}` .Plain) }}
+{{ $minutes := math.Max 1 (mul 3 (math.Round (div (float (add .WordCount $cjk)) 400))) }}
+<div class="post-meta">
+    <span>{{ .Date.Format (.Site.Params.dateFormat | default "2006-01-02") }}</span>
+    <span class="meta-sep">·</span>
+    <span>约 {{ $minutes }} 分钟读完</span>
+    {{ with .Params.tags }}
+        <span class="meta-sep">·</span>
+        {{ range . }}<a class="tag" href="{{ $.Site.BaseURL }}tags/{{ . | urlize }}">#{{ . }}</a>{{ end }}
+    {{ end }}
+</div>

@@ -13,7 +13,7 @@ rssLimit = 20
     lineNoStart = 1
     lineNos = true
     lineNumbersInTable = false
-    noClasses = true
+    noClasses = false
     style = "colorful"
     tabWidth = 4
 
