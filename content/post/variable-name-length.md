@@ -7,7 +7,7 @@ draft: true
 
 变量名长度可能也是一个经久不衰的话题了，比如前几天刚看到的：
 
-{{< tweet user="jadetangcn" id="1494261395042430978" >}}
+{{< x user="jadetangcn" id="1494261395042430978" >}}
 
 Go语言推荐使用短变量名，这个不是空穴来风，[Go Code Review Comments][1]中明确说：
 

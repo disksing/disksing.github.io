@@ -5,6 +5,9 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>{{ .Title }}</title>
+        <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+        {{ template "_internal/opengraph.html" . }}
+        {{ template "_internal/twitter_cards.html" . }}
         {{ if .Site.Params.favicon }}
             <link rel="icon" href="{{ .Site.Params.favicon | absURL }}">
         {{ end }}
@@ -14,13 +17,13 @@
             <link href="{{ .RelPermalink }}" rel="feed" type="{{ .MediaType.Type }}" title="{{ $.Site.Title }}" />
         {{ end }}
 
-        {{ if .Site.GoogleAnalytics }}
-            <script async src="https://www.googletagmanager.com/gtag/js?id={{ .Site.GoogleAnalytics }}"></script>
+        {{ with site.Config.Services.GoogleAnalytics.ID }}
+            <script async src="https://www.googletagmanager.com/gtag/js?id={{ . }}"></script>
             <script>
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments)};
               gtag('js', new Date());
-              gtag('config', '{{ .Site.GoogleAnalytics }}');
+              gtag('config', '{{ . }}');
             </script>
         {{ end }}
 

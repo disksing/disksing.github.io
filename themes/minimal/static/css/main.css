@@ -178,6 +178,13 @@ table {
 
 .content {
     padding-top: 20px;
+    max-width: 780px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.content p {
+    line-height: 1.8;
 }
 
 .content pre,
@@ -211,6 +218,7 @@ a.icon:hover {
 
 a:hover {
     color: var(--accent) !important;
+    text-decoration: underline;
 }
 
 /* Copyright message */

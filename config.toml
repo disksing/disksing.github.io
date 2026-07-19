@@ -29,7 +29,7 @@ rssLimit = 20
     favicon = "favicon.png"
 
 [permalinks]
-    post = "/:filename"
+    post = "/:contentbasename"
 
 [[menu.main]]
 url = "/"
