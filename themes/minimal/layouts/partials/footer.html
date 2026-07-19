@@ -15,7 +15,7 @@
         document.addEventListener('scroll', function() {
             var h = document.documentElement;
             var max = h.scrollHeight - h.clientHeight;
-            document.getElementById('readingProgress').style.width = (max > 0 && h.scrollTop > 200 ? h.scrollTop / max * 100 : 0) + '%';
+            document.getElementById('readingProgress').style.width = (max > 0 ? h.scrollTop / max * 100 : 0) + '%';
         }, {passive: true});
 
         (function() {
