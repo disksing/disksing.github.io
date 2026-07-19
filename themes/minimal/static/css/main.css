@@ -382,12 +382,33 @@ a:hover {
     text-decoration: underline;
 }
 
-/* Copyright message */
+/* Footer */
 
-.copyright {
-    margin: 5px 0;
-    font-size: 75%;
+footer {
+    border-bottom: var(--border-width) solid var(--accent);
+}
+
+.footer-inner {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 25px 15px;
     color: var(--muted);
+    font-size: 0.9em;
+    line-height: 1.8;
+}
+
+.footer-inner p {
+    font-size: 1em;
+    margin: 0.2em 0;
+}
+
+.footer-title {
+    color: var(--text);
+    font-weight: bold;
+}
+
+.footer-links a {
+    margin: 0 0.4em;
 }
 
 /* Paginator */
@@ -485,10 +506,6 @@ a:hover {
 }
 
 /* Colored border at bottom of page */
-
-footer {
-    border-bottom: var(--border-width) solid var(--accent);
-}
 
 /* Mobile tweaks */
 

@@ -1,4 +1,13 @@
         <footer>
+            <div class="footer-inner">
+                <p class="footer-title">&copy; 2014-{{ now.Year }} {{ .Site.Params.author }} · {{ .Site.Title }}</p>
+                <p class="footer-links">
+                    <a href="{{ "post/index.xml" | absURL }}" target="_blank"><i class="fa fa-rss-square"></i> 订阅</a>
+                    <a href="https://github.com/disksing/disksing.github.io/issues/new" target="_blank"><i class="fa fa-bug"></i> 反馈</a>
+                    <a href="https://gohugo.io" target="_blank">Hugo</a> 强力驱动
+                </p>
+                <p class="footer-license">文章采用 <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> 许可 · 代码采用 <a rel="license" href="http://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0</a> 许可</p>
+            </div>
         </footer>
 
         {{ partial "body-close" . }}
