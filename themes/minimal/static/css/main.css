@@ -180,7 +180,7 @@ blockquote > p:last-child {
     margin-bottom: 0;
 }
 
-/* Embedded tweets: center the card (X caps width at 550px). */
+/* Embedded tweets: full content width, neutralize quote styling. */
 blockquote.twitter-tweet {
     background: none;
     border-left: none;
@@ -191,8 +191,10 @@ blockquote.twitter-tweet {
 .twitter-tweet,
 .twitter-tweet-rendered,
 iframe[id^="twitter-widget"] {
-    max-width: 550px !important;
-    margin: 1.5em auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
     display: block !important;
 }
 
