@@ -150,9 +150,14 @@ em {
 
 blockquote {
     margin: 1.2em 0;
-    padding: 0 1em;
-    border-left: 4px solid var(--border);
-    color: var(--muted);
+    padding: 12px 18px;
+    border-left: 4px solid var(--accent);
+    border-radius: 0 6px 6px 0;
+    background: var(--code-bg);
+}
+
+blockquote > p:last-child {
+    margin-bottom: 0;
 }
 
 ul, ol {
@@ -202,6 +207,18 @@ img {
     display: block;
     margin: 1.2em auto;
     border-radius: 6px;
+}
+
+/* Image caption: an italic-only paragraph right after an image-only paragraph. */
+.content p:has(> img:only-child) {
+    margin-bottom: 0.4em;
+}
+
+.content p:has(> img:only-child) + p:has(> em:only-child) {
+    text-align: center;
+    color: var(--muted);
+    font-size: 1em;
+    margin-top: 0;
 }
 
 table {
@@ -353,6 +370,16 @@ a:has(> .item-tag):hover {
     text-decoration: none;
 }
 
+.tag {
+    color: var(--muted);
+    font-size: 0.85em;
+    margin-right: 0.6em;
+}
+
+.tag:hover {
+    text-decoration: none;
+}
+
 .page-header {
     border-bottom: 1px solid var(--border);
     padding-bottom: .3em;
@@ -379,6 +406,18 @@ a.icon:hover {
 
 a:hover {
     color: var(--accent) !important;
+    text-decoration: underline;
+}
+
+/* Article body links: ink with a cinnabar underline, red on hover. */
+.content a:link, .content a:visited {
+    color: var(--heading);
+    text-decoration: underline;
+    text-decoration-color: var(--accent);
+    text-underline-offset: 3px;
+}
+
+.content a:hover {
     text-decoration: underline;
 }
 
@@ -502,6 +541,23 @@ footer {
 
 .nav-links a:hover {
     text-decoration: none;
+}
+
+.nav-links a.active {
+    color: var(--accent);
+    font-weight: bold;
+}
+
+/* Reading progress bar */
+
+.reading-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    width: 0;
+    background: var(--accent);
+    z-index: 200;
 }
 
 .nav-icons a {

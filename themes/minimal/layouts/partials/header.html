@@ -4,7 +4,7 @@
         {{ partial "head-open" . }}
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>{{ .Title }}</title>
+        <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }}{{ if not (in .Title .Site.Title) }} - {{ .Site.Title }}{{ end }}{{ end }}</title>
         <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
         {{ template "_internal/opengraph.html" . }}
         {{ template "_internal/twitter_cards.html" . }}
@@ -28,7 +28,8 @@
                 {{ if .Site.Menus.main }}
                     <ul class="nav-links">
                         {{ range sort .Site.Menus.main }}
-                            <li><a href="{{ .URL }}">{{ .Name }}</a></li>
+                            {{ $active := or ($.IsMenuCurrent "main" .) (and (ne .URL "/") (hasPrefix $.RelPermalink .URL)) }}
+                            <li><a href="{{ .URL }}"{{ if $active }} class="active"{{ end }}>{{ .Name }}</a></li>
                         {{ end }}
                     </ul>
                 {{ end }}
@@ -41,3 +42,4 @@
                 {{ end }}
             </div>
         </nav>
+        <div class="reading-progress" id="readingProgress"></div>
