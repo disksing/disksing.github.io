@@ -39,6 +39,7 @@ body {
     font-family: "LXGW WenKai Screen", "PingFang SC", "Microsoft YaHei", sans-serif;
     font-size: 15px;
     line-height: 1.42857143;
+    letter-spacing: 0.02em;
 }
 
 h1,
@@ -123,10 +124,28 @@ h6 {
 p {
     font-size: 1.3em;
     line-height: 1.8;
+    margin: 0 0 1.2em;
 }
 
 blockquote > p {
     font-size: 1.3em;
+}
+
+.content p,
+.content li {
+    text-align: justify;
+    text-justify: inter-ideograph;
+    hanging-punctuation: first allow-end;
+}
+
+strong {
+    color: var(--heading);
+    font-weight: bold;
+}
+
+em {
+    color: var(--accent);
+    font-style: italic;
 }
 
 blockquote {
@@ -139,10 +158,12 @@ blockquote {
 ul, ol {
     font-size: 1.3em;
     line-height: 1.65;
+    padding-left: 1.6em;
 }
 
 li {
     line-height: 1.65;
+    margin: 0.15em 0;
 }
 
 /* Loose-list paragraphs should match the list text instead of scaling again. */
@@ -244,9 +265,9 @@ table {
 
 .content code {
     background: var(--code-bg);
-    padding: 2px 6px;
+    padding: 1px 5px;
     border-radius: 4px;
-    font-size: 0.9em;
+    font-size: 0.88em;
 }
 
 .content pre,
