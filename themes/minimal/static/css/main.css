@@ -191,11 +191,19 @@ blockquote.twitter-tweet {
 .twitter-tweet,
 .twitter-tweet-rendered,
 iframe[id^="twitter-widget"] {
-    width: 100% !important;
-    max-width: 100% !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
+    width: 125% !important;
+    max-width: none !important;
+    margin: 1.5em 0 1.5em -12.5% !important;
     display: block !important;
+}
+
+@media (max-width: 768px) {
+    .twitter-tweet,
+    .twitter-tweet-rendered,
+    iframe[id^="twitter-widget"] {
+        width: 100% !important;
+        margin-left: 0 !important;
+    }
 }
 
 ul, ol {
