@@ -256,7 +256,7 @@ table {
 
 .intro > h1 {
     color: var(--heading);
-    font-size: calc(min(5vw, 300px));
+    font-size: clamp(2.5rem, 5vw, 300px);
     font-weight: normal;
     margin: 0 0 0 0;
     text-decoration: none;
@@ -264,7 +264,7 @@ table {
 
 .intro > h2 {
     color: var(--muted);
-    font-size: calc(0.3*min(5vw, 300px));
+    font-size: clamp(1.1rem, 1.5vw, 90px);
     font-weight: normal;
     margin: 0 0 0 0;
     border-left: none;
