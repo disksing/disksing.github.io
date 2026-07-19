@@ -72,11 +72,6 @@ name = "weibo"
 weight = 3
 
 [[menu.icon]]
-url = "http://shang.qq.com/wpa/qunwpa?idkey=ade2895067e4105ce59e0c56863d650543b4448245f179574c6684fe1cb7b5d5"
-name = "qq"
-weight = 4
-
-[[menu.icon]]
 url = "https://space.bilibili.com/2207710"
 name = "tv"
 weight = 5
