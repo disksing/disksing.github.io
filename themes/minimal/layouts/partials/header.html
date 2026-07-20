@@ -36,7 +36,6 @@
                 {{ end }}
                 {{ if .Site.Menus.icon }}
                     <ul class="nav-icons">
-                        <li><a href="#" id="themeToggle" aria-label="切换暗色模式"><i class="fa fa-moon-o"></i></a></li>
                         {{ range sort .Site.Menus.icon }}
                             <li><a href="{{ .URL }}" aria-label="{{ .Name }}"><i class="fa fa-{{ .Name }}"></i></a></li>
                         {{ end }}
@@ -45,3 +44,4 @@
             </div>
         </nav>
         <div class="reading-progress" id="readingProgress"></div>
+        <button id="themeToggle" aria-label="切换暗色模式"><i class="fa fa-moon-o"></i></button>

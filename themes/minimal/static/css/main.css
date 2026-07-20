@@ -617,6 +617,29 @@ footer {
     z-index: 200;
 }
 
+/* Dark mode toggle */
+
+#themeToggle {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    z-index: 200;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    background: var(--bg);
+    color: var(--muted);
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 1px 4px var(--nav-shadow);
+}
+
+#themeToggle:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+}
+
 .nav-icons a {
     display: block;
     padding: 14px 8px;

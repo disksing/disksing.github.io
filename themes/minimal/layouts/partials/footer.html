@@ -32,9 +32,10 @@
             setIcon();
             btn.addEventListener('click', function(e) {
                 e.preventDefault();
+                var next = isDark() ? 'light' : 'dark';
                 root.classList.remove('dark', 'light');
-                root.classList.add(isDark() ? 'light' : 'dark');
-                localStorage.setItem('theme', isDark() ? 'dark' : 'light');
+                root.classList.add(next);
+                localStorage.setItem('theme', next);
                 setIcon();
             });
         })();
