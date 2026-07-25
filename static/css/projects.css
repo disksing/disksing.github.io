@@ -1,0 +1,85 @@
+/* 开源项目列表页 */
+
+.project-list {
+    margin-top: 1.5em;
+    text-align: left;
+}
+
+.project-item {
+    display: flex;
+    gap: 1.2em;
+    align-items: flex-start;
+    padding: 1em 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.project-item:last-child {
+    border-bottom: none;
+}
+
+.project-shot {
+    flex: 0 0 240px;
+    display: block;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+    background: var(--code-bg);
+}
+
+.project-shot img {
+    display: block;
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    object-position: top;
+    margin: 0;
+    transition: transform 0.2s ease;
+}
+
+.project-shot:hover img {
+    transform: scale(1.03);
+}
+
+.project-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.project-name {
+    margin: 0 0 0.3em;
+    font-size: 1.15em;
+}
+
+.project-desc {
+    margin: 0 0 0.5em;
+    color: var(--muted);
+    font-size: 0.95em;
+    line-height: 1.6;
+}
+
+.project-link {
+    font-size: 0.9em;
+    color: var(--muted);
+    text-decoration: none;
+}
+
+.project-link:hover {
+    color: var(--accent);
+}
+
+@media (max-width: 600px) {
+    .project-item {
+        flex-direction: column;
+        gap: 0.6em;
+    }
+
+    .project-shot {
+        flex: none;
+        width: 100%;
+    }
+
+    .project-shot img {
+        height: auto;
+        max-height: 220px;
+    }
+}

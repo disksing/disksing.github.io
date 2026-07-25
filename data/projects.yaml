@@ -1,0 +1,28 @@
+# 开源项目列表页的数据源，每个项目对应页面上的一行。
+# name: 项目名；description: 简要说明；url: GitHub 地址；
+# image: 截图，文件放在 static/assets/img/projects/ 下。
+# 已归档（archived）的仓库不在此展示。
+- name: sao-gen-gen
+  description: 骚话生成器的生成器。自定义主题和话术模板，就能搭出一个自己的骚话生成器。
+  url: https://github.com/disksing/sao-gen-gen
+  image: assets/img/projects/sao-gen-gen.png
+
+- name: iter
+  description: 把 C++ STL 的迭代器和算法搬到 Go 里，泛型时代的 STL 风格算法库。
+  url: https://github.com/disksing/iter
+  image: assets/img/projects/iter.png
+
+- name: fake-screenshot
+  description: 字幕截图生成器。上传影视剧画面配上台词，生成以假乱真的字幕截图（仅供娱乐）。
+  url: https://github.com/disksing/fake-screenshot
+  image: assets/img/projects/fake-screenshot.png
+
+- name: coding-cat
+  description: 直播小工具，屏幕上的小猫会实时同步你的键盘鼠标操作，直播写代码专用。
+  url: https://github.com/disksing/coding-cat
+  image: assets/img/projects/coding-cat.png
+
+- name: opting-out
+  description: 躺平计算器，算算还要赚多少钱才能躺平。
+  url: https://github.com/disksing/opting-out
+  image: assets/img/projects/opting-out.png

@@ -1,0 +1,32 @@
+{{ partial "header" . }}
+
+<main>
+
+    <div>
+        <h1>{{ .Title }}</h1>
+    </div>
+
+    <div align="start" class="content">{{ .Content }}</div>
+
+    <div class="project-list">
+        {{ range hugo.Data.projects }}
+        <div class="project-item">
+            <a class="project-shot" href="{{ .url }}" target="_blank" rel="noopener">
+                <img src="{{ .image | relURL }}" alt="{{ .name }} 项目截图" loading="lazy">
+            </a>
+            <div class="project-info">
+                <h2 class="project-name">
+                    <a href="{{ .url }}" target="_blank" rel="noopener">{{ .name }}</a>
+                </h2>
+                <p class="project-desc">{{ .description }}</p>
+                <a class="project-link" href="{{ .url }}" target="_blank" rel="noopener">
+                    <i class="fa fa-github"></i>&nbsp;{{ .url | replaceRE "^https://github.com/" "" }}
+                </a>
+            </div>
+        </div>
+        {{ end }}
+    </div>
+
+</main>
+
+{{ partial "footer" . }}

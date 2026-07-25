@@ -26,6 +26,7 @@ rssLimit = 20
     showBorder = true
     backgroundColor = "white"
     favicon = "favicon.png"
+    css = ["css/projects.css"]
 
 [permalinks]
     post = "/:contentbasename"
@@ -34,6 +35,11 @@ rssLimit = 20
 url = "/post/"
 name = "文章"
 weight = 2
+
+[[menu.main]]
+url = "/projects/"
+name = "开源项目"
+weight = 4
 
 [[menu.main]]
 url = "/story/"
